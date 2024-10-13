@@ -1,0 +1,114 @@
+/* General page styling */
+* {
+    margin: 0; /* Remove all margins */
+    padding: 0; /* Remove all padding */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+body {
+    height: 100vh; /* Set to full viewport height */
+    font-family: 'Arial', sans-serif; /* Set a default font */
+}
+
+/* Flex container for the entire page */
+.container {
+    display: flex;
+    width: 100vw; /* Set to viewport width */
+    height: 100vh; /* Set to viewport height */
+}
+
+/* Left column styling (Form) */
+.form-container {
+    width: 50%; /* Left column takes up half of the width */
+    padding: 50px; /* Padding for the form */
+    background-color: #f9f9f9; /* Light background color for the form */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center contents vertically */
+    align-items: flex-start; /* Align contents to the left */
+}
+
+.logo {
+    font-size: 36px; /* Adjust the size as needed */
+    font-weight: bold; /* Make the logo bold */
+    color: black; /* Change color as desired */
+    margin-bottom: 20px; /* Add space below the logo */
+}
+
+.form-container h1 {
+    font-size: 36px; /* Size for the form heading */
+    margin-bottom: 10px; /* Space below the heading */
+    text-align: left; /* Align the heading to the left */
+}
+
+.form-container p {
+    font-size: 18px; /* Size for welcome text */
+    color: #888; /* Color for the welcome text */
+    margin-bottom: 30px; /* Space below the welcome text */
+    text-align: left; /* Align the paragraph text to the left */
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    width: 100%; /* Full width for the form */
+    max-width: 400px; /* Keep the form size manageable */
+}
+
+label {
+    font-size: 16px; /* Font size for labels */
+    margin-bottom: 5px; /* Space below labels */
+}
+
+input {
+    padding: 10px; /* Padding for input fields */
+    margin-bottom: 20px; /* Space below input fields */
+    border: 1px solid #ccc; /* Border for input fields */
+    border-radius: 5px; /* Rounded corners for input fields */
+    font-size: 16px; /* Font size for input text */
+}
+
+button {
+    padding: 12px; /* Padding for the button */
+    background-color: black; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* No border for button */
+    border-radius: 5px; /* Rounded corners for button */
+    font-size: 16px; /* Font size for button text */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+button:hover {
+    background-color: #333; /* Darker background on hover */
+}
+
+a {
+    text-decoration: none; /* Remove underline from links */
+    color: #007bff; /* Link color */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Right column styling (Image) */
+.image-container {
+    width: 50%; /* Right column takes up half of the width */
+    background-image: url('https://images.unsplash.com/photo-1511362483461-8795ba551506?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Replace with actual image path */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    height: 100vh; /* Ensure it covers full height */
+}
+
+/* Additional CSS to ensure the layout is fully responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .form-container,
+    .image-container {
+        width: 100%; /* Full width on small screens */
+        height: auto; /* Allow height to adjust */
+    }
+}

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import './Login.css';
 
 const LogIn = () => {
 
@@ -33,21 +34,40 @@ const LogIn = () => {
         }
     }
   return (
-    <div>
-        <h1>Welcome</h1>
-      <form onSubmit={handleSubmit}>
-    <h1>Sign In</h1>
-    <br />
-    <label>Email: </label>
-    <input type="email" placeholder='Enter your Email' name='email' value={data.email} onChange={handleChange}required/>
-    <br />
-    <label>Password: </label>
-    <input type="password" placeholder='Enter your Password' name='password' value={data.password} onChange={handleChange}required/>
-    <br />
-    {error && <div>{error}  </div>}
-    <button type="submit">Sign In</button>
-      </form>
-    </div>
+    <div className="container">
+            <div className="form-container">
+                <div className="logo">Isakay</div>
+                <div className="welcome-text"> {/* Centered welcome text container */}
+                    <h1>Hi there!</h1>
+                    <p>Welcome to Isakay.<br /> Car rental</p>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        placeholder='Enter your Email'
+                        name='email'
+                        value={data.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        placeholder='Enter your Password'
+                        name='password'
+                        value={data.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    {error && <div className="error">{error}</div>}
+                    <button type="submit">Sign In</button>
+                </form>
+                <p><Link to="#">Forgot password?</Link></p>
+                <p>Don't have an account? <Link to="/SignUp">Sign up</Link></p>
+            </div>
+            <div className="image-container"></div> {/* Right image container */}
+        </div>
   )
 
 }

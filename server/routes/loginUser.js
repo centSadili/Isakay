@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
         }
 
         const token = user.generateAuthToken();
-        return res.status(200).send({ message: 'Logged In Successfully!', token });
+        return res.status(200).send({ message: 'Logged In Successfully!',token:user  });
 
     } catch (error) {
         res.status(500).send({ message: 'Login Server Error' });

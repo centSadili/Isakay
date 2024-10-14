@@ -20,9 +20,19 @@ const LogIn = () => {
         e.preventDefault();
         try{
             const url = 'http://localhost:3000/api/loginUser';
-            const {data:res}=await axios.post(url,data);
-            localStorage.setItem("token",res.data)
-            window.location="/Home"
+            const response = await axios.post(url, data);
+    // Access the token directly from response.data
+    const token = response.data.token;
+
+    if (token) {
+        localStorage.setItem("token", token);
+        console.log('Token stored successfully:', token);
+    } else {
+        console.error('Token is undefined in the response:', response.data);
+    }
+    localStorage.setItem("firstName", token.firstName);
+    localStorage.setItem("lastName", token.lastName);
+    window.location="Home"
             console.log(res.message)
         }catch(error){
             if(error.response.status>=400 && 

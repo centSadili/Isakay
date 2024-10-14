@@ -43,12 +43,12 @@ const SignUp = () => {
                         <h1>Sign Up Here!</h1>
                         {error && <div className="error">{error}</div>}
                         <div className="input-box">
-                            <label>Firstname:</label>
+                            <label>First Name:</label>
                             <input type="text" placeholder='Enter your First Name' name='firstName' value={data.firstName} onChange={handleChange} required />
                             <FaUser className="icon" />
                         </div>
                         <div className="input-box">
-                            <label>Lastname:</label>
+                            <label>Last Name:</label>
                             <input type="text" placeholder='Enter your Last Name' name='lastName' value={data.lastName} onChange={handleChange} required />
                         </div>
                         <div className="input-box">

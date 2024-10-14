@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import './SignUp.css';
+import { FaUser, FaLock } from 'react-icons/fa';
 
 const SignUp = () => {
     const [data,setData]=useState({
@@ -33,28 +35,40 @@ const SignUp = () => {
         }
     }
   return (
-    <div>
-        <h1>Welcome</h1>
-      <form onSubmit={handleSubmit}>
-    <h1>Create an Account</h1>
-    <br />
-    <label>Firstname: </label>
-    <input type="text" placeholder='Enter your First Name' name='firstName' value={data.firstName} onChange={handleChange}required/>
-    <br />
-    <label>Lastname: </label>
-    <input type="text" placeholder='Enter your Last Name' name='lastName' value={data.lastName} onChange={handleChange}required/>
-    <br />
-    <label>Email: </label>
-    <input type="email" placeholder='Enter your Email' name='email' value={data.email} onChange={handleChange}required/>
-    <br />
-    <label>Password: </label>
-    <input type="password" placeholder='Enter your Password' name='password' value={data.password} onChange={handleChange}required/>
-    <br />
-    {error && <div>{error}  </div>}
-    <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  )
-}
+    <div className="container">
+            <div className="image-section"></div>
+            <div className="form-section">
+                <div className="wrapper">
+                    <form onSubmit={handleSubmit}>
+                        <h1>Sign Up Here!</h1>
+                        {error && <div className="error">{error}</div>}
+                        <div className="input-box">
+                            <label>Firstname:</label>
+                            <input type="text" placeholder='Enter your First Name' name='firstName' value={data.firstName} onChange={handleChange} required />
+                            <FaUser className="icon" />
+                        </div>
+                        <div className="input-box">
+                            <label>Lastname:</label>
+                            <input type="text" placeholder='Enter your Last Name' name='lastName' value={data.lastName} onChange={handleChange} required />
+                        </div>
+                        <div className="input-box">
+                            <label>Email:</label>
+                            <input type="email" placeholder='Enter your Email' name='email' value={data.email} onChange={handleChange} required />
+                        </div>
+                        <div className="input-box">
+                            <label>Password:</label>
+                            <input type="password" placeholder='Enter your Password' name='password' value={data.password} onChange={handleChange} required />
+                            <FaLock className="icon" />
+                        </div>
+                        <button type="submit">Sign Up</button>
+                        <div className="register-link">
+                            <p>Already have an account? <Link to="/login">Login</Link></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default SignUp

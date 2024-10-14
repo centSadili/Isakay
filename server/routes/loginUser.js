@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, validate } = require('../models/user'); // Ensure you're importing 'validate'
+const { User} = require('../models/user'); // Ensure you're importing 'validate'
 const Joi = require('joi');
 const bcrypt = require('bcryptjs');
 
@@ -27,5 +27,13 @@ router.post('/', async (req, res) => {
         res.status(500).send({ message: 'Login Server Error' });
     }
 });
+
+const validate = (data) => {
+	const schema = Joi.object({
+		email: Joi.string().email().required().label("Email"),
+		password: Joi.string().required().label("Password"),
+	});
+	return schema.validate(data);
+};
 
 module.exports = router;

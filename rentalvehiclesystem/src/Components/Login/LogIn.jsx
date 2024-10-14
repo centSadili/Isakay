@@ -65,9 +65,10 @@ const LogIn = () => {
             required
         />
         <label className="user-label">Password</label>
+        <div className='forgot'> <p><Link to="#">Forgot password?</Link></p> </div>
     </div>
     {error && <div className="error">{error}</div>}
-    <div className='forgot'> <p><Link to="#">Forgot password?</Link></p> </div>
+    
     <button className='butt' type="submit">Sign In</button>
 </form>
     <div className='hyperlinks'><p>Don't have an account? <Link to="/SignUp">Sign up</Link></p></div>

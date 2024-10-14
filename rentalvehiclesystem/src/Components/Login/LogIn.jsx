@@ -35,39 +35,47 @@ const LogIn = () => {
     }
   return (
     <div className="container">
-            <div className="form-container">
-                <div className="logo">Isakay</div>
-                <div className="welcome-text"> {/* Centered welcome text container */}
-                    <h1>Hi there!</h1>
-                    <p>Welcome to Isakay.<br /> Car rental</p>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        placeholder='Enter your Email'
-                        name='email'
-                        value={data.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        placeholder='Enter your Password'
-                        name='password'
-                        value={data.password}
-                        onChange={handleChange}
-                        required
-                    />
-                    {error && <div className="error">{error}</div>}
-                    <button type="submit">Sign In</button>
-                </form>
-                <p><Link to="#">Forgot password?</Link></p>
-                <p>Don't have an account? <Link to="/SignUp">Sign up</Link></p>
-            </div>
-            <div className="image-container"></div> {/* Right image container */}
-        </div>
+  <div className="form-container">
+    <div className="welcome-text">
+        <h1>Hi there!</h1>
+        <p>Welcome to Isakay car rental</p>
+    </div>
+    <form onSubmit={handleSubmit}>
+    <div className="input-group">
+        <input
+            type="email"
+            className="input"
+            placeholder=" "
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+            required
+        />
+        <label className="user-label">Email</label>
+    </div>
+    
+    <div className="input-group">
+        <input
+            type="password"
+            className="input"
+            placeholder=" "
+            name="password"
+            value={data.password}
+            onChange={handleChange}
+            required
+        />
+        <label className="user-label">Password</label>
+        <div className='forgot'> <p><Link to="#">Forgot password?</Link></p> </div>
+    </div>
+    {error && <div className="error">{error}</div>}
+    
+    <button className='butt' type="submit">Sign In</button>
+</form>
+    <div className='hyperlinks'><p>Don't have an account? <Link to="/SignUp">Sign up</Link></p></div>
+    
+  </div>
+  <div className="image-container"></div>
+</div>
   )
 
 }

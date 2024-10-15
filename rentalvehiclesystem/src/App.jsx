@@ -2,6 +2,7 @@
 
 import Home from './Components/Home/Home'
 import LogIn from './Components/Login/LogIn'
+import Profile from './Components/Profile/Profile'
 import SignUp from './Components/Signup/SignUp'
 import {Router,Route,Routes,Navigate} from 'react-router-dom'
 
@@ -15,6 +16,7 @@ function App() {
       {user && <Route path='/Home' exact element={<Home/>}/>}
       <Route path='/login' exact element={<LogIn/>}/>
       <Route path='/signup' exact element={<SignUp/>}/>
+      <Route path='/profile' exact element={<Profile/>}/>
       <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
     </Routes>
     </>

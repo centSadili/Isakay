@@ -23,6 +23,7 @@ const LogIn = () => {
             const response = await axios.post(url, data);
     // Access the token directly from response.data
     const token = response.data.token;
+    const userId=response.data.userId;
 
     if (token) {
         localStorage.setItem("token", token);
@@ -30,9 +31,9 @@ const LogIn = () => {
     } else {
         console.error('Token is undefined in the response:', response.data);
     }
-    localStorage.setItem("firstName", token.firstName);
-    localStorage.setItem("lastName", token.lastName);
-    window.location="Home"
+    
+    localStorage.setItem("id", userId);
+    window.location="/Home"
             console.log(res.message)
         }catch(error){
             if(error.response.status>=400 && 

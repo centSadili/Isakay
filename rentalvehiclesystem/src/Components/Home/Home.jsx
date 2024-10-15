@@ -1,27 +1,61 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom'
+import axios from 'axios';
 import './Home.css'
 
 const Home = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const userToken = localStorage.getItem('token'); // Retrieve token from localStorage
+  const  id  = localStorage.getItem("id") || 'ID Not Found' // Get the user ID from the URL
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  // Retrieve token if using authentication
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-      // Check if the userToken exists
-      if (userToken) {
-          console.log('User Token:', userToken); // Output the token to the console
-      } else {
-          console.log('No token found. User is not logged in.');
+    const fetchUser = async () => {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            // Include the token in headers if required
+            Authorization: token ? `Bearer ${token}` : '',
+          },
+        };
+
+        const response = await axios.get(`http://localhost:3000/api/user/${id}`);
+        setUser(response.data.user);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching user:', err);
+        setError(true);
+        setLoading(false);
       }
-  }, [userToken]); // Add userToken as a dependency
+    };
 
-  useEffect(() => {
-      // Retrieve the names from localStorage on component mount
-      setFirstName(localStorage.getItem("firstName") || 'First Name Not Found');
-      setLastName(localStorage.getItem("lastName") || 'Last Name Not Found');
-  }, []); // This effect runs only once when the component mounts
+    fetchUser();
+  }, [id, token]);
 
+const logOut = () =>{
+  localStorage.setItem("id",null) 
+  setUser(null)
+}
 
+  if (loading) {
+    return <div>Loading user details...</div>;
+  }
+
+  if (error || !user) {
+    return (
+    <div>
+      <h1>Please Log in First</h1> 
+      <Link to="/login">
+          {/* Log in Button Added */}
+          <button>Log in</button>
+      </Link>
+    </div>
+    );
+  }
   return (
     <div>
       <header>
@@ -34,8 +68,13 @@ const Home = () => {
           </ul>
           <div className="profile">
             <img src="https://via.placeholder.com/50" alt="Profile" />
-            <span>{firstName} {lastName}</span>
+            <span>{user.firstName} {user.lastName}</span>
             <p>New User</p>
+          <Link to="/login">
+          {/* Log out Button Added */}
+          <button onClick={logOut}>Log out</button>
+          </Link>
+            
           </div>
         </nav>
       </header>

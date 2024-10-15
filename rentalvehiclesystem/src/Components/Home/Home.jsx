@@ -68,7 +68,7 @@ const logOut = () =>{
             <li><a href="#contacts">Contacts</a></li>
           </ul>
           <div className="profile">
-          <Link to="/Profile">
+          <Link to="/profile">
             <img src="https://via.placeholder.com/50" alt="Profile" />
             <span>{user.firstName} {user.lastName}</span>
             </Link>
@@ -86,19 +86,28 @@ const logOut = () =>{
         <section className="hero">
           <img src="car-image.jpg" alt="Car" className="hero-image" />
           <div className="booking-form">
-            <div className="form-group">
-              <label htmlFor="pickup">Pick up Address</label>
-              <input type="text" id="pickup" placeholder="From:" />
+
+            <form>
+             {/* Pick Up Location */}
+             <div className="form-group">
+            <label htmlFor="pickup">Pick Up Location:</label>
+            <input type="text" id="pickup" name="pickup" required />
             </div>
+
+            {/* Drop Off Location */}
             <div className="form-group">
-              <label htmlFor="dropoff">Drop Off Address</label>
-              <input type="text" id="dropoff" placeholder="To:" />
+            <label htmlFor="dropoff">Drop Off Location:</label>
+            <input type="text" id="dropoff" name="dropoff" required />
             </div>
+
+            {/* Days Availability */}
             <div className="form-group">
-              <label htmlFor="days">Days</label>
-              <input type="text" id="days" placeholder="dd/mm/yyyy" />
+            <label htmlFor="days_availability">Days Available:</label>
+            <input type="number" id="days_availability" name="days_availability" placeholder="Enter the number of available days (e.g., 5)" required /><br />
             </div>
-            <button className="btn">Book Now</button>
+            <button className="btn" type='submit'>Book Now</button>
+            </form>
+
           </div>
 
         </section>

@@ -9,7 +9,7 @@ import {Router,Route,Routes,Navigate} from 'react-router-dom'
 function App() {
   // const [count, setCount] = useState(0)
   const user =localStorage.getItem('token')
-
+  
   return (
     <>
     <Routes>

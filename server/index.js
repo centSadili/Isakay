@@ -6,6 +6,7 @@ const cors = require('cors')
 const loginRoutes  = require('./routes/loginUser')
 const regisRoutes  = require('./routes/registerUser')
 const getUser = require('./routes/getUser')
+const updateUser =  require('./routes/updateUser')
 const app = express()
 //Database Connection
 connectDB()
@@ -18,6 +19,7 @@ app.use(cors())
 app.use('/api/loginUser',loginRoutes)
 app.use('/api/registerUser',regisRoutes)
 app.use('/api/user',getUser)
+app.use('/api/user/update',updateUser)
 
 // Global Error Handler
 app.use((err, req, res, next) => {

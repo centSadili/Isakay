@@ -38,6 +38,7 @@ const Home = () => {
 
 const logOut = () =>{
   localStorage.setItem("id",null) 
+  localStorage.setItem("token", null);
   setUser(null)
 }
 

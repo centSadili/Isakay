@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {Link,useNavigate} from 'react-router-dom'
 
 const Profile = () => {
   const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from the localStorage
@@ -18,7 +19,7 @@ const Profile = () => {
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
-
+const navigate = useNavigate()
   const handleChange =({currentTarget:input})=>{
     setUser({...user,[input.name]:input.value})
   }
@@ -55,13 +56,14 @@ const Profile = () => {
       
   
       // Create a new object without the _id field
-      const { _id,admin,created,__v, ...userData } = user; // Destructure to exclude _id
+      const { _id, ...userData } = user; // Destructure to exclude _id
       
       console.log("Sending data:", userData); // Log the data being sent
   
       const res = await axios.put(url, userData); // Use PUT method
   
       console.log(res.message);
+      navigate("/Home")
       // Optionally, you might want to update the state or redirect after successful update
     } catch (error) {
       if (error.response) {
@@ -121,20 +123,15 @@ const Profile = () => {
           required
         />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          placeholder="Enter your New Password"
-          name="password"
-          
-          onChange={handleChange}
-          required
-        />
+        
 {error && <div className="error">{error}</div>}
-        <button type="submit">Update</button>
-      </form>
 
+        <button type="submit">Update</button>
+  
+      </form>
+      <Link to="/Home">
       <button>Cancel</button>
+      </Link>
     </div>
   );
 };

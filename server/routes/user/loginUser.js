@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User} = require('../models/user'); // Ensure you're importing 'validate'
+const { User} = require('../../models/user'); // Ensure you're importing 'validate'
 const Joi = require('joi');
 const bcrypt = require('bcryptjs');
 

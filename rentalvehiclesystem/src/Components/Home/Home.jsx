@@ -68,8 +68,10 @@ const logOut = () =>{
             <li><a href="#contacts">Contacts</a></li>
           </ul>
           <div className="profile">
+          <Link to="/Profile">
             <img src="https://via.placeholder.com/50" alt="Profile" />
             <span>{user.firstName} {user.lastName}</span>
+            </Link>
             <p>New User</p>
           <Link to="/login">
           {/* Log out Button Added */}

@@ -34,12 +34,18 @@ router.put('/:id', async (req, res) => {
     // Update the user details
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body }, // Set new values
+      { $set: {
+        firstName:req.body.firstName,
+        lastName: req.body.lastName,
+        email:req.body.email,
+        password:req.body.password
+      }}, // Set new values
       { new: true }       // Return the updated document
     );
 
     res.status(200).send({ message: "User updated successfully", user: updatedUser });
   } catch (error) {
+    console.error("Update Server Error:", error);
     res.status(500).send({ message: "Update Server Error" });
   }
 });

@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { User, validate } = require('../models/user');
+const { User } = require('../../models/user');
 const bcrypt = require('bcryptjs');
-
+const Joi = require('joi');
+const passwordComplexity = require('joi-password-complexity');
 // Update user details
 router.put('/:id', async (req, res) => {
   try {
@@ -25,23 +26,31 @@ router.put('/:id', async (req, res) => {
       }
     }
 
-    // If password is provided, hash it before updating
-    if (req.body.password) {
-      const salt = await bcrypt.genSalt(Number(process.env.SALT));
-      req.body.password = await bcrypt.hash(req.body.password, salt);
-    }
-
     // Update the user details
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body }, // Set new values
+      { $set: {
+        firstName:req.body.firstName,
+        lastName: req.body.lastName,
+        email:req.body.email,
+      }}, // Set new values
       { new: true }       // Return the updated document
     );
 
     res.status(200).send({ message: "User updated successfully", user: updatedUser });
   } catch (error) {
+    console.error("Update Server Error:", error);
     res.status(500).send({ message: "Update Server Error" });
   }
 });
+
+const validate = (data) => {
+  const schema = Joi.object({
+      firstName: Joi.string().required().label('First Name'),
+      lastName: Joi.string().required().label('Last Name'),
+      email: Joi.string().email().required().label('Email'),
+  });
+  return schema.validate(data);
+};
 
 module.exports = router;

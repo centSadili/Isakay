@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import './Home.css'
+import Footer from '../Footer/Footer';
+
 
 const Home = () => {
   const  id  = localStorage.getItem("id") || 'ID Not Found' // Get the user ID from the URL
@@ -59,6 +61,7 @@ const logOut = () =>{
   }
   return (
     <div>
+      <Footer/>
       <header>
         <nav className="navbar">
           <ul>
@@ -81,8 +84,6 @@ const logOut = () =>{
           </div>
         </nav>
       </header>
-
-      <main>
         <section className="hero">
           <img src="car-image.jpg" alt="Car" className="hero-image" />
           <div className="booking-form">
@@ -111,7 +112,7 @@ const logOut = () =>{
           </div>
 
         </section>
-      </main>
+        
     </div>
   )
 }

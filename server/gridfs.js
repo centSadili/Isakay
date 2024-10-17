@@ -14,10 +14,7 @@ const mongoURI = process.env.DB_URI;
 let gridFSBucket;
 
 // Connect to MongoDB using Mongoose
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(mongoURI);
 
 const conn = mongoose.connection;
 

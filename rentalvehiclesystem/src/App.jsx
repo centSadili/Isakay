@@ -1,11 +1,11 @@
 // import { useState } from 'react'
 
-import AddCar from './Components/AddCar/AddCar'
-import CarList from './Components/CarList/CarList'
+import AddCar from './Components/Car/AddCar/AddCar'
+import CarList from './Components/Car/CarList/CarList'
 import Home from './Components/Home/Home'
 import LogIn from './Components/Login/LogIn'
-import Profile from './Components/Profile/Profile'
-import SignUp from './Components/Signup/SignUp'
+import Profile from './Components/User/Profile/Profile'
+import SignUp from './Components/User/Signup/SignUp'
 import {Router,Route,Routes,Navigate} from 'react-router-dom'
 
 function App() {

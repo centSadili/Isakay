@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const connectDB = require('./db.js')
 const cors = require('cors')
+
 //user
 const loginRoutes  = require('./routes/user/loginUser.js')
 const regisRoutes  = require('./routes/user/registerUser.js')
@@ -21,7 +22,6 @@ app.use(express.json())
 app.use(cors())
 
 //routes
-
 //user
 app.use('/api/loginUser',loginRoutes)
 app.use('/api/registerUser',regisRoutes)

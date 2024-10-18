@@ -3,6 +3,8 @@ const express = require('express')
 const connectDB = require('./db.js')
 const cors = require('cors')
 
+//rent
+const searchCar = require('./routes/rent/searchCar')
 //user
 const loginRoutes  = require('./routes/user/loginUser.js')
 const regisRoutes  = require('./routes/user/registerUser.js')
@@ -32,6 +34,9 @@ app.use('/api/user/update',updateUser)
 app.use('/api/car/',addCar)
 app.use('/api/cars/',carList)
 app.use('/api/car_img/',router)
+
+//rent
+app.use('/api/car/',searchCar)
 // Global Error Handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

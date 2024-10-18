@@ -61,7 +61,7 @@ const logOut = () =>{
   }
   return (
     <div>
-      <Footer/>
+
       <header>
         <nav className="navbar">
           <ul>
@@ -110,9 +110,9 @@ const logOut = () =>{
             </form>
 
           </div>
-
+          
         </section>
-        
+        <Footer/>
     </div>
   )
 }

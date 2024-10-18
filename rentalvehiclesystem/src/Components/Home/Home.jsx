@@ -5,6 +5,7 @@ import './Home.css'
 import Footer from '../Footer/Footer';
 
 
+
 const Home = () => {
   const  id  = localStorage.getItem("id") || 'ID Not Found' // Get the user ID from the URL
   const [user, setUser] = useState(null);
@@ -48,24 +49,10 @@ const Home = () => {
     e.preventDefault();
 
     try{
-      const url = 'http://localhost:3000/api/car/cars'
-      const response = await axios.get(url,{
-        params:{
-          pickup:pickup,
-          dropoff:dropoff,
-          days_availability: daysAvailability
-
-        }}
-      )
-      if (response.data.cars.length > 0) {
-        console.log(response.data.cars)
-        const searchedcars = response.data.cars
-        localStorage.setItem("searchedcars", searchedcars);
-        
-        navigate("/search")
-      } else {
-        setError('No cars found for the selected criteria.');
-      }
+      localStorage.setItem('pickup',pickup)
+      localStorage.setItem('dropoff',dropoff)
+      localStorage.setItem('daysAvailability',daysAvailability)
+      navigate("/search")
     }catch(err){
       
       console.error('Error fetching user:', err);
@@ -101,7 +88,7 @@ const logOut = () =>{
         <nav className="navbar">
           <ul>
             <li><a href="#about">About</a></li>
-            <li><a href="#vehicles">Vehicles</a></li>
+            <li><Link to="/vehicles"><a href="#vehicles">Vehicles</a></Link></li>
             <li><a href="#booking">Booking</a></li>
             <li><a href="#contacts">Contacts</a></li>
           </ul>

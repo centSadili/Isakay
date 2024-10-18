@@ -21,7 +21,7 @@ function App() {
       <Route path='/signup' exact element={<SignUp/>}/>
       <Route path='/profile' exact element={<Profile/>}/>
       <Route path='/addcar' exact element={<AddCar/>}/>
-      <Route path='/carlist' exact element={<CarList/>}/>
+      <Route path='/vehicles' exact element={<CarList/>}/>
       <Route path='/search' exact element={<SearchCar/>}/>
       <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
     </Routes>

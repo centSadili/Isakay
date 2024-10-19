@@ -15,6 +15,7 @@ const updateUser =  require('./routes/user/updateUser.js')
 const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
 const {router} = require('./gridfs.js')
+const getCar = require('./routes/car/getCar')
 const app = express()
 //Database Connection
 connectDB()
@@ -34,6 +35,7 @@ app.use('/api/user/update',updateUser)
 app.use('/api/car/',addCar)
 app.use('/api/cars/',carList)
 app.use('/api/car_img/',router)
+app.use('/api/getcar/',getCar)
 
 //rent
 app.use('/api/car/',searchCar)

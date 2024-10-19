@@ -2,6 +2,7 @@
 
 import AddCar from './Components/AddCar/AddCar'
 import CarList from './Components/CarList/CarList'
+import CarPage from './Components/CarPage/CarPage'
 import Home from './Components/Home/Home'
 import LogIn from './Components/Login/LogIn'
 import Profile from './Components/Profile/Profile'
@@ -23,6 +24,7 @@ function App() {
       <Route path='/addcar' exact element={<AddCar/>}/>
       <Route path='/vehicles' exact element={<CarList/>}/>
       <Route path='/search' exact element={<SearchCar/>}/>
+      <Route path='/carpage' exact element={<CarPage/>}/>
       <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
     </Routes>
     </>

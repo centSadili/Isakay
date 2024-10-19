@@ -16,6 +16,11 @@ const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
 const {router} = require('./gridfs.js')
 const getCar = require('./routes/car/getCar')
+
+//rent
+const RentDetial = require('./routes/rent/addRent')
+
+
 const app = express()
 //Database Connection
 connectDB()
@@ -39,6 +44,8 @@ app.use('/api/getcar/',getCar)
 
 //rent
 app.use('/api/car/',searchCar)
+app.use('/api/rentcar/',RentDetial)
+
 // Global Error Handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

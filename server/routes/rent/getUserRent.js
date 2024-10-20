@@ -4,11 +4,10 @@ const PersonalDetails = require('../../models/personalDetail');
 const RentDetail = require('../../models/rentDetail');
 
 router.get('/user-rent-details/:userId', async (req, res) => {
-    
+
     try {
         const userId = req.params.userId;
 
-      
         const personalDetailsList = await PersonalDetails.find({ user: userId });
 
         if (!personalDetailsList || personalDetailsList.length === 0) {
@@ -17,7 +16,6 @@ router.get('/user-rent-details/:userId', async (req, res) => {
 
         let allRentDetails = [];
 
-      
         for (const personalDetails of personalDetailsList) {
             const rentDetails = await RentDetail.find({ renterID: personalDetails._id })
                 .populate({
@@ -44,7 +42,6 @@ router.get('/user-rent-details/:userId', async (req, res) => {
 
 
         res.status(200).json({
-            personalDetails: personalDetailsList,
             rentDetails: allRentDetails,
         });
 

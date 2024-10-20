@@ -37,7 +37,7 @@ const personalDetailsSchema = new Schema({
     birthday:{
         type: String,
         required: true,
-        default:Date.now,
+        
     },
     address: {
         street: String,

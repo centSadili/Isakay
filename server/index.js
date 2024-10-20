@@ -19,7 +19,7 @@ const getCar = require('./routes/car/getCar')
 
 //rent
 const RentDetail = require('./routes/rent/addRent')
-
+const getUserRent = require('./routes/rent/getUserRent')
 
 const app = express()
 //Database Connection
@@ -45,7 +45,7 @@ app.use('/api/getcar/',getCar)
 //rent
 app.use('/api/car/',searchCar)
 app.use('/api/rentcar/',RentDetail)
-
+app.use('/api/user/',getUserRent)
 // Global Error Handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

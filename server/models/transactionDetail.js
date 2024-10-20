@@ -14,7 +14,26 @@ const transactDetailsSchema = new Schema({
     transact_No:{
         type: String,
         required: true,
+    },
+    cardHolder:{
+        type: String,
+        required: true,
+    },
+    cardNumber:{
+        type: String,
+        required: true,
+    },
+    expDate:{
+        type: String,
+        required: true,
+    },
+    cvc:{
+        type: String,
+        required: true,
     }
+    
+
+
 });
 
 module.exports = mongoose.model("TransactDetails", transactDetailsSchema);

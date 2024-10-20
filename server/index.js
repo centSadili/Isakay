@@ -18,7 +18,7 @@ const {router} = require('./gridfs.js')
 const getCar = require('./routes/car/getCar')
 
 //rent
-const RentDetial = require('./routes/rent/addRent')
+const RentDetail = require('./routes/rent/addRent')
 
 
 const app = express()
@@ -44,7 +44,7 @@ app.use('/api/getcar/',getCar)
 
 //rent
 app.use('/api/car/',searchCar)
-app.use('/api/rentcar/',RentDetial)
+app.use('/api/rentcar/',RentDetail)
 
 // Global Error Handler
 app.use((err, req, res, next) => {

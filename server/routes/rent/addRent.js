@@ -10,7 +10,7 @@ router.post('/add-rent-details', async (req, res) => {
     try {
         console.log(req.body);
         
-        // Saving personal details
+        
         const personalDetailsDoc = new PersonalDetails({
             user: req.body.userId, 
             firstname: req.body.firstname,
@@ -46,14 +46,18 @@ router.post('/add-rent-details', async (req, res) => {
         // Saving payment details
         const paymentDetailsDoc = new PaymentDetail({
             amountPayment: req.body.amountOfPayment,
-            paymentStatus: true // Assuming payment is completed
+            paymentStatus: true 
         });
         await paymentDetailsDoc.save();
 
         // Saving transaction details
         const transactionDetailsDoc = new TransactionDetail({
             paymentDetails: paymentDetailsDoc._id,
-            transact_Type: req.body.paymentMethod,
+            transact_Type: req.body.transact_Type,
+            cardHolder:req.body.cardHolder,
+            cardNumber:req.body.cardNumber,
+            expDate:req.body.expDate,
+            cvc:req.body.cvc,
             transact_No: new Date().toISOString() + paymentDetailsDoc._id
         });
         await transactionDetailsDoc.save();

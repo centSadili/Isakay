@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './SearchCar.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 const SearchCar = () => {
@@ -43,31 +44,45 @@ const SearchCar = () => {
 
   return (
     <div>
-      <div className="car-list">
-        {searched.map((car) => (
-          <Link
-            key={car._id}
-            to={`/carpage`}
-            onClick={() => handleCarClick(car._id)}
-          >
-            <div className="car-card">
-              <img
-                src={`http://localhost:3000/api/car_img/${car.image}`}
-                alt={car.car_name}
-                style={{ width: '200px', height: 'auto' }}
-              />
-              <h2>{car.car_name}</h2>
+  <h1 style={{ textAlign: 'center', marginBottom: '20px' , marginTop: '20px'}}>Car Listings</h1>
+  <div className="car-list">
+    {searched.map((car) => (
+      <Link
+        key={car._id}
+        to={`/carpage`}
+        onClick={() => handleCarClick(car._id)}
+      >
+        <div className="car-card">
+          <img
+            src={`http://localhost:3000/api/car_img/${car.image}`}
+            alt={car.car_name}
+            style={{ width: '250px', height: '150px' }}
+          />
+          <div className="car-info">
+            <h2>{car.car_name}</h2>
               <p>Seats: {car.seats}</p>
               <p>Transmission: {car.transmission}</p>
-              <p>Pickup: {car.pickup}</p>
-              <p>Dropoff: {car.dropoff}</p>
-              <p>Price: ${car.price}</p>
-              <p>Days Available: {car.days_availability}</p>
+            <p>Pickup: {car.pickup}</p>
+            <p>Dropoff: {car.dropoff}</p>
+            <p className="car-price">${car.price}</p>
+            <div className="important-info">
+              <button className="button-check">Check out the deal</button>
             </div>
-          </Link>
-        ))}
-      </div>
-    </div>
+          </div>
+          {/* Dashed line separator */}
+          <div className="separator"></div>
+          {/* Review Section under the image */}
+          <div className="review-section">
+            <p className="rating">8.2</p>
+            <p>1000+ reviews</p>
+          </div>
+        </div>
+      </Link>
+    ))}
+  </div>
+</div>
+
+   
   );
 };
 

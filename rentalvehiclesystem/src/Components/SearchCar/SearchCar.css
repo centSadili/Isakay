@@ -1,0 +1,134 @@
+.car-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.car-card {
+  width: 100%;
+  max-width: 900px; 
+  display: flex;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  flex-wrap: wrap; 
+  align-items: center; 
+}
+
+.car-card:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.car-card img {
+  width: 250px; 
+  max-width: 100%; 
+  height: 150px; 
+  border-radius: 5px;
+  margin-right: 0; 
+  margin-top: 10px; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.car-info {
+  flex: 1; 
+  padding: 0 15px;
+  text-align: left;
+}
+
+.car-info h2 {
+  margin-top: 10px;
+  font-size: 24px;
+  text-align: left;
+}
+
+.car-info p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+  text-align: left;
+}
+
+.car-price {
+  font-size: 1.5em;
+  color: #2c73d2;
+  font-weight: bold;
+}
+
+.car-details {
+  display: flex;
+  gap: 15px;
+  color: #555;
+  font-size: 14px;
+}
+
+.button-check {
+  background-color: rgb(51, 51, 231);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold; 
+  transition: background-color 0.3s ease; 
+}
+
+.button-check:hover {
+  background-color: blue;
+  font-weight: bold; 
+}
+
+
+.important-info {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+  padding: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.important-info .review-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.important-info .button-check {
+  margin-left: auto; 
+}
+
+
+.review-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  flex-grow: 1; 
+}
+
+.rating {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: inline-block;
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.separator {
+  width: 100%;
+  border-top: 1px solid #ddd; 
+  margin: 10px 0;
+}

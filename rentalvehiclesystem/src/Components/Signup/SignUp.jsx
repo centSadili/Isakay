@@ -45,7 +45,6 @@ const SignUp = () => {
                         <div className="input-box">
                             <label>First Name:</label>
                             <input type="text" placeholder='Enter your First Name' name='firstName' value={data.firstName} onChange={handleChange} required />
-                            <FaUser className="icon" />
                         </div>
                         <div className="input-box">
                             <label>Last Name:</label>
@@ -58,7 +57,6 @@ const SignUp = () => {
                         <div className="input-box">
                             <label>Password:</label>
                             <input type="password" placeholder='Enter your Password' name='password' value={data.password} onChange={handleChange} required />
-                            <FaLock className="icon" />
                         </div>
                         <button type="submit">Sign Up</button>
                         <div className="register-link">

@@ -44,45 +44,41 @@ const SearchCar = () => {
 
   return (
     <div>
-  <h1 style={{ textAlign: 'center', marginBottom: '20px' , marginTop: '20px'}}>Car Listings</h1>
-  <div className="car-list">
-    {searched.map((car) => (
-      <Link
-        key={car._id}
-        to={`/carpage`}
-        onClick={() => handleCarClick(car._id)}
-      >
-        <div className="car-card">
-          <img
-            src={`http://localhost:3000/api/car_img/${car.image}`}
-            alt={car.car_name}
-            style={{ width: '250px', height: '150px' }}
-          />
-          <div className="car-info">
-            <h2>{car.car_name}</h2>
-              <p>Seats: {car.seats}</p>
-              <p>Transmission: {car.transmission}</p>
-            <p>Pickup: {car.pickup}</p>
-            <p>Dropoff: {car.dropoff}</p>
-            <p className="car-price">${car.price}</p>
-            <div className="important-info">
-              <button className="button-check">Check out the deal</button>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Car Listings</h1>
+      <div className="car-list-custom">
+        {searched.map((car) => (
+          <Link style={{ textDecoration: 'none' }}
+            key={car._id}
+            to={`/carpage`}
+            onClick={() => handleCarClick(car._id)}
+          >
+            <div className="car-card-custom">
+              <img
+                src={`http://localhost:3000/api/car_img/${car.image}`}
+                alt={car.car_name}
+                style={{ width: '250px', height: '150px' }}
+              />
+              <div className="car-info-custom">
+                <h2>{car.car_name}</h2>
+                <p>Seats: {car.seats}</p>
+                <p>Transmission: {car.transmission}</p>
+                <p>Pickup: {car.pickup}</p>
+                <p>Dropoff: {car.dropoff}</p>
+                <p className="car-price-custom">${car.price}</p>
+                <div className="important-info-custom">
+                  <button className="button-check-custom">Check out the deal</button>
+                </div>
+              </div>
+              <div className="separator-custom"></div>
+              <div className="review-section-custom">
+                <p className="rating-custom">8.2</p>
+                <p>1000+ reviews</p>
+              </div>
             </div>
-          </div>
-          {/* Dashed line separator */}
-          <div className="separator"></div>
-          {/* Review Section under the image */}
-          <div className="review-section">
-            <p className="rating">8.2</p>
-            <p>1000+ reviews</p>
-          </div>
-        </div>
-      </Link>
-    ))}
-  </div>
-</div>
-
-   
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 };
 

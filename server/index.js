@@ -16,7 +16,7 @@ const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
 const {router} = require('./gridfs.js')
 const getCar = require('./routes/car/getCar')
-
+const updateCar = require('./routes/car/updateCar')
 //rent
 const RentDetail = require('./routes/rent/addRent')
 const getUserRent = require('./routes/rent/getUserRent')
@@ -41,7 +41,7 @@ app.use('/api/car/',addCar)
 app.use('/api/cars/',carList)
 app.use('/api/car_img/',router)
 app.use('/api/getcar/',getCar)
-
+app.use('/api/updatecar/',updateCar)
 //rent
 app.use('/api/car/',searchCar)
 app.use('/api/rentcar/',RentDetail)

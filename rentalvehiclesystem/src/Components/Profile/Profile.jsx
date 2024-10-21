@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link,useNavigate} from 'react-router-dom'
+import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 
 const Profile = () => {
   const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from the localStorage
@@ -132,6 +133,8 @@ const navigate = useNavigate()
       <Link to="/Home">
       <button>Cancel</button>
       </Link>
+
+      <UserRentalDashboard/>
     </div>
   );
 };

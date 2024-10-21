@@ -1,0 +1,57 @@
+import React, { useState ,useEffect} from 'react'
+import axios from 'axios';
+
+const UserRentalDashboard = () => {
+    const userId = localStorage.getItem('id')
+    
+    const [rents,setRents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/user/user-rent-details/'+userId); 
+                setRents(response.data.rentDetails);
+                console.log(response.data);
+                console.log(rents);
+            } catch (err) {
+                setError('Error fetching rents. Please try again.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCars();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
+    return (
+        <div>
+            <h1>Dashboard</h1>
+            {/* irerender lahat ng nasa console.log sa console modify nyo nlng*/}
+          {rents.length > 0 ? (
+            rents.map((rent) => (
+              <div key={rent._id}>
+                <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
+                <h2>Car: {rent.carID.car_name}</h2>
+                <h2>Pick Up: {rent.carID.pickup}</h2>
+                <h2>Drop Off: {rent.carID.dropoff}</h2>
+                <h2>Pick up date:{rent.pickUpDate}</h2>
+                <h2>Days: {rent.carID.days_availability}</h2>
+                <h2>Price: {rent.carID.price}</h2>
+                <button>Cancel</button>
+                <button>View Details</button>
+              </div>
+              
+            ))
+          ) : (
+            <p>No rent details available.</p>
+          )}
+        </div>
+      );
+}
+
+export default UserRentalDashboard

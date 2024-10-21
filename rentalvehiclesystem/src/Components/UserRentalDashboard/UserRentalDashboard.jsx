@@ -50,7 +50,7 @@ const UserRentalDashboard = () => {
       };
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+  
     return (
         <div>
             <h1>Dashboard</h1>

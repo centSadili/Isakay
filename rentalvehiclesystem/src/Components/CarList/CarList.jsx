@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TbManualGearboxFilled, TbAirConditioning } from "react-icons/tb";
 import './CarList.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 const CarList = () => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,57 +28,54 @@ const CarList = () => {
 
     const handleCarClick = (carId) => {
         localStorage.setItem('carId', carId);
-      };
+    };
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
 
     return (
-      <div>
-      <h1>Select a vehicle group</h1>
-    
-      <div class="filter-buttons">
-        <button class="filter">All vehicles</button>
-        <button class="filter">Sedan</button>
-        <button class="filter">Cabriolet</button>
-        <button class="filter">Pickup</button>
-        <button class="filter">SUV</button>
-        <button class="filter">Minivan</button>
-      </div>
-    
-      <div class="car-list">
-        {cars.map((car) => (
-          <Link key={car._id} to={`/carpage`} onClick={() => handleCarClick(car._id)}>
-            <div class="car-card">
-              <img src={`http://localhost:3000/api/car_img/${car.image}`} alt={car.car_name} />
-              <div class="car-info">
-                <h2>{car.car_name}</h2>
-                <p class="car-type">{car.type}</p>
-                <p class="car-price">${car.price} per day</p>
-    
-                <div class="car-details">
-                  <p class="icon1">
-                    <TbManualGearboxFilled />
-                    {car.transmission}
-                  </p>
-                  <p>
-                    <TbAirConditioning />
-                    Air Conditioner
-                  </p>
+      <div className="carlist-container">
+        <h1 className="carlist-title">Select a vehicle group</h1>
+
+        <div className="carlist-filter-buttons">
+          <button className="carlist-filter">All vehicles</button>
+          <button className="carlist-filter">Sedan</button>
+          <button className="carlist-filter">Cabriolet</button>
+          <button className="carlist-filter">Pickup</button>
+          <button className="carlist-filter">SUV</button>
+          <button className="carlist-filter">Minivan</button>
+        </div>
+
+        <div className="carlist-car-list">
+          {cars.map((car) => (
+            <Link style={{ textDecoration: 'none' }} key={car._id} to={`/carpage`} onClick={() => handleCarClick(car._id)}>
+              <div className="carlist-car-card">
+                <div className="picholder">
+                <img src={`http://localhost:3000/api/car_img/${car.image}`} alt={car.car_name} className="carlist-car-img" />
                 </div>
-    
-                <button class="button-check">View Details</button>
+                <div className="carlist-car-info">
+                  <h2 className="carlist-car-name">{car.car_name}</h2>
+                  <p className="carlist-car-type">{car.type}</p>
+                  <p className="carlist-car-price">${car.price} per day</p>
+
+                  <div className="carlist-car-details">
+                    <p className="carlist-icon1">
+                      <TbManualGearboxFilled />
+                      {car.transmission}
+                    </p>
+                    <p>
+                      <TbAirConditioning />
+                      Air Conditioner
+                    </p>
+                  </div>
+
+                </div>
+                <button className="carlist-button-check">View Details</button>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
-    
-
-      
-      
-
     );
 };
 

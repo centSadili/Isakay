@@ -13,7 +13,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
         }
 
         // Update car details
-        const { car_name, seats, transmission, pickup, dropoff, price, days_availability } = req.body;
+        const { car_name, seats, transmission, pickup, dropoff, price, days_availability,status } = req.body;
         car.car_name = car_name || car.car_name;
         car.seats = seats || car.seats;
         car.transmission = transmission || car.transmission;
@@ -22,6 +22,9 @@ router.put('/:id', upload.single('image'), async (req, res) => {
         car.price = price || car.price;
         car.days_availability = days_availability || car.days_availability;
 
+        if (status !== undefined) {
+            car.status = status; // Update status if provided
+          }
         // If a new image is uploaded, update the image field
         if (req.file) {
             const newImageFilename = req.file.filename;

@@ -107,6 +107,10 @@ const RentalForm = () => {
       
       if (response.status === 201) {
         alert('Rent details added successfully');
+
+         // Update the car status to 'false'
+      await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: false });
+
       }
     } catch (error) {
       console.error('Error submitting form:', error);

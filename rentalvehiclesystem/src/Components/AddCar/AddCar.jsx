@@ -38,6 +38,19 @@ const AddCar = () => {
       });
   
       alert(response.data.message); // Notify user on success
+      
+      // Reset formData to initial state after successful submission
+      setFormData({
+        car_name: '',
+        seats: '',
+        transmission: 'manual',
+        pickup: '',
+        dropoff: '',
+        price: '',
+        days_availability: '',
+        image: null, // Reset the file input
+      });
+  
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message || 'Error adding car listing.'); // Notify user on error

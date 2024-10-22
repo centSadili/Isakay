@@ -9,7 +9,8 @@ const SignUp = () => {
         firstName:"",
         lastName:"",
         email:"",
-        password:""
+        password:"",
+        admin:false,
     })
     const [error,setError]=useState("")
     const navigate = useNavigate() 
@@ -34,6 +35,9 @@ const SignUp = () => {
             console.error('Error response:', error.response);
         }
     }
+    const handleCheckboxChange = () => {
+        setData({ ...data, admin: !data.admin });
+    };
   return (
     <div className="container">
             <div className="image-section"></div>
@@ -57,6 +61,16 @@ const SignUp = () => {
                         <div className="input-box">
                             <label>Password:</label>
                             <input type="password" placeholder='Enter your Password' name='password' value={data.password} onChange={handleChange} required />
+                        </div>
+                        <div className="input-box">
+                            <label>
+                                <input 
+                                    type="checkbox" 
+                                    checked={data.isAdmin} 
+                                    onChange={handleCheckboxChange} 
+                                />
+                                Admin
+                            </label>
                         </div>
                         <button type="submit">Sign Up</button>
                         <div className="register-link">

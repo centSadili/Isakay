@@ -7,7 +7,8 @@ const LogIn = () => {
 
     const [data,setData]=useState({
         email:"",
-        password:""
+        password:"",
+        admin:false
     })
     const [error,setError]=useState("")
 
@@ -21,19 +22,27 @@ const LogIn = () => {
         try{
             const url = 'http://localhost:3000/api/loginUser';
             const response = await axios.post(url, data);
-    // Access the token directly from response.data
-    const token = response.data.token;
-    const userId=response.data.userId;
+            // Access the token directly from response.data
+            const token = response.data.token;
+            const userId=response.data.userId;
+            const isAdmin=response.data.admin;
+            console.log(isAdmin)
+
 
     if (token) {
         localStorage.setItem("token", token);
         console.log('Token stored successfully:', token);
+        if (isAdmin) {
+            window.location="/Home"
+        }
+            alert('Only Admin Can Access Admin Server')
+        
     } else {
         console.error('Token is undefined in the response:', response.data);
     }
     
     localStorage.setItem("id", userId);
-    window.location="/Home"
+   
             console.log(res.message)
         }catch(error){
             if(error.response.status>=400 && 

@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
         }
 
         const token = user.generateAuthToken();
-        return res.status(200).send({ message: 'Logged In Successfully!',token:token, userId:user._id });
+        return res.status(200).send({ message: 'Logged In Successfully!',token:token, userId:user._id,admin:user.admin });
 
     } catch (error) {
         res.status(500).send({ message: 'Login Server Error' });
@@ -32,6 +32,7 @@ const validate = (data) => {
 	const schema = Joi.object({
 		email: Joi.string().email().required().label("Email"),
 		password: Joi.string().required().label("Password"),
+        admin: Joi.boolean().label('Admin'),
 	});
 	return schema.validate(data);
 };

@@ -83,9 +83,9 @@ const logOut = () =>{
   return (
     <div>
 
-      
+<Link to="/admin/user/profile">
             <span>{user.firstName} {user.lastName}</span>
-            
+            </Link>       
           <Link to="/login">
           {/* Log out Button Added */}
           <button onClick={logOut}>Log out</button>

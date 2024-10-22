@@ -8,7 +8,7 @@ const LogIn = () => {
     const [data,setData]=useState({
         email:"",
         password:"",
-        admin:false
+       
     })
     const [error,setError]=useState("")
 
@@ -29,19 +29,20 @@ const LogIn = () => {
             console.log(isAdmin)
 
 
-    if (token) {
-        localStorage.setItem("token", token);
-        console.log('Token stored successfully:', token);
-        if (isAdmin) {
-            window.location="/Home"
-        }
-            alert('Only Admin Can Access Admin Server')
-        
-    } else {
-        console.error('Token is undefined in the response:', response.data);
-    }
+            if (token) {
+                localStorage.setItem("token", token);
+                console.log('Token stored successfully:', token);
+                if (isAdmin) {
+                    window.location = "/Home"; // Redirect for admin
+                } 
+                if(isAdmin==false) {
+                    alert('Only Admin Can Access Admin Server'); // Alert for non-admin
+                }
+            } else {
+                console.error('Token is undefined in the response:', response.data);
+            }
     
-    localStorage.setItem("id", userId);
+            localStorage.setItem("id", userId);
    
             console.log(res.message)
         }catch(error){

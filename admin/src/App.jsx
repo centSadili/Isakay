@@ -7,6 +7,7 @@ import CarPage from './Components/Car/CarPage/CarPage'
 import UpdateCar from './Components/Car/UpdateCar/UpdateCar'
 import Userlist from './Components/User/Userlist/Userlist'
 import Profile from './Components/User/UsersProfile/Profile'
+import SignUp from './Components/User/Signup/SignUp'
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
      
      <Route path='/admin/user/list' exact element={<Userlist/>}/>
      <Route path='/admin/user/profile' exact element={<Profile/>}/>
+     <Route path='/admin/user/add' exact element={<SignUp/>}/>
      <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
      </Routes>
     </>

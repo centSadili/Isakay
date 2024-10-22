@@ -34,6 +34,7 @@ const Userlist = () => {
 
     return (
         <div>
+            <Link to='/admin/user/add'>Sign up User</Link>
             {users.map((user) => (
                 <Link 
                     style={{ textDecoration: 'none' }} 

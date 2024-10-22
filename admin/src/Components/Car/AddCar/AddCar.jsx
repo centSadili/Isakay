@@ -16,7 +16,7 @@ const AddCar = () => {
   };
   const [formData, setFormData] = useState({
     car_name: '',
-    body_type: 'Sedan',
+    bodytype: 'Sedan',
     seats: seatOptions['Sedan'],
     transmission: 'manual',
     pickup: '',
@@ -49,15 +49,15 @@ const AddCar = () => {
         setFormData(updatedFormData);
     
         // Automatically update seats based on bodytype
-        if (name === 'body_type') {
+        if (name === 'bodytype') {
           const seats = seatOptions[value] || '';
           updatedFormData.seats = seats;
         }
     
         // Automatically compute price based on bodytype and days availability
-        if (name === 'body_type' || name === 'days_availability') {
+        if (name === 'bodytype' || name === 'days_availability') {
           const days = updatedFormData.days_availability || 0;
-          const basePrice = basePricePerDay[updatedFormData.body_type] || 0;
+          const basePrice = basePricePerDay[updatedFormData.bodytype] || 0;
           const price = basePrice * days;
           updatedFormData.price = price || '';
         }
@@ -90,7 +90,7 @@ const AddCar = () => {
       setFormData({
         car_name: '',
         seats: '',
-        body_type: '',
+        bodytype: '',
         transmission: 'manual',
         pickup: '',
         dropoff: '',
@@ -129,8 +129,8 @@ const AddCar = () => {
         <input type="text" id="car_name" name="car_name" value={formData.car_name} onChange={handleChange} required />
 
          {/* Body Type */}
-        <label htmlFor="body_type">Body Type:</label><br />
-        <select id="body_type" name="body_type" value={formData.body_type || 'Sedan'} onChange={handleChange} required>
+        <label htmlFor="bodytype">Body Type:</label><br />
+        <select id="bodytype" name="bodytype" value={formData.body_type || 'Sedan'} onChange={handleChange} required>
           <option value="Sedan">Sedan</option>
           <option value="Hatchback">Hatchback</option>
           <option value="SUV">SUV</option>

@@ -1,33 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {Router,Route,Routes,Navigate} from 'react-router-dom'
+import LogIn from './Components/Login/LogIn'
+import AddCar from './Components/Car/AddCar/AddCar'
+import Home from './Components/Home/Home'
+import CarList from './Components/Car/CarList/CarList'
+import CarPage from './Components/Car/CarPage/CarPage'
+import UpdateCar from './Components/Car/UpdateCar/UpdateCar'
+import Userlist from './Components/User/Userlist/Userlist'
+import Profile from './Components/User/UsersProfile/Profile'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     <Routes>
+     <Route path='/Home' exact element={<Home/>}/>
+     <Route path='/login' exact element={<LogIn/>}/>
+     <Route path='/admin/car/add' exact element={<AddCar/>}/>
+     <Route path='/admin/car/list' exact element={<CarList/>}/>
+     <Route path='/admin/car/detail' exact element={<CarPage/>}/>
+     <Route path='/admin/car/detail/update/' exact element={<UpdateCar/>}/>
+     
+     <Route path='/admin/user/list' exact element={<Userlist/>}/>
+     <Route path='/admin/user/profile' exact element={<Profile/>}/>
+     <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
+     </Routes>
     </>
   )
 }

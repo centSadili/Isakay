@@ -11,22 +11,27 @@ const UserRentalDashboard = () => {
 
     const navigate = useNavigate() 
     useEffect(() => {
-        const fetchCars = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/user/user-rent-details/'+userId); 
-                setRents(response.data.rentDetails);
-                console.log(response.data);
-                console.log(rents);
-            } catch (err) {
-                setError('Error fetching rents. Please try again.');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCars();
-    }, [rents]);
+      const fetchCars = async () => {
+          try {
+              const response = await axios.get(`http://localhost:3000/api/user/user-rent-details/${userId}`);
+              console.log(response.data); // Log response data for debugging
+  
+              // Check if rentDetails exists and is an array
+              if (Array.isArray(response.data.rentDetails)) {
+                  setRents(response.data.rentDetails);
+              } else {
+                  setRents([]); // Set rents to an empty array if no rentDetails found
+              }
+          } catch (err) {
+              setError('Error fetching rents. Please try again.');
+              console.error(err);
+          } finally {
+              setLoading(false);
+          }
+      };
+  
+      fetchCars();
+  }, [userId]);
 
     const deleteRentDetails = async (rentId,carId) => {
         try {

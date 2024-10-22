@@ -10,6 +10,10 @@ const carSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  body_type: { 
+    type: String,
+    required: true 
+  },
 
   transmission: { 
     type: String, 
@@ -50,6 +54,7 @@ const carSchema = new mongoose.Schema({
 const validate = (data) => {
     const schema = Joi.object({
         car_name: Joi.string().required().label('Car Name'),
+        body_type: Joi.string().required().label('Body Type'),
         seats: Joi.number().integer().required().label('Seats'),
         transmission: Joi.string().required().label('Transmission'),
         pickup: Joi.string().required().label('Pickup Location'),

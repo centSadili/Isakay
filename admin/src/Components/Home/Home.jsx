@@ -11,11 +11,6 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  
-  const [pickup,setPickup]=useState();
-  const [dropoff,setDropoff]=useState();
-  const [daysAvailability, setDaysAvailability] = useState(); 
-
   const navigate = useNavigate()
   // Retrieve token if using authentication
   const token = localStorage.getItem('token');
@@ -43,20 +38,6 @@ const Home = () => {
 
     fetchUser();
   }, [id, token]);
-
-  const handleSubmit = async (e)=>{
-    e.preventDefault();
-
-    try{
-      localStorage.setItem('pickup',pickup)
-      localStorage.setItem('dropoff',dropoff)
-      localStorage.setItem('daysAvailability',daysAvailability)
-      navigate("/search")
-    }catch(err){
-      
-      console.error('Error fetching user:', err);
-    }
-  }
   
 
 const logOut = () =>{

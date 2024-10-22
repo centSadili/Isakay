@@ -8,6 +8,10 @@ import UpdateCar from './Components/Car/UpdateCar/UpdateCar'
 import Userlist from './Components/User/Userlist/Userlist'
 import Profile from './Components/User/UsersProfile/Profile'
 import SignUp from './Components/User/Signup/SignUp'
+import Rentlist from './Components/Rent/Rentlist/Rentlist'
+import SearchCar from './Components/Rent/SearchCar/SearchCar'
+import AddRent from './Components/Rent/AddRent/AddRent'
+import RentalDetails from './Components/Rent/RentDetails/RentDetails'
 
 function App() {
   
@@ -24,6 +28,12 @@ function App() {
      <Route path='/admin/user/list' exact element={<Userlist/>}/>
      <Route path='/admin/user/profile' exact element={<Profile/>}/>
      <Route path='/admin/user/add' exact element={<SignUp/>}/>
+    
+     <Route path='/admin/rent/list' exact element={<Rentlist/>}/>
+     <Route path='/admin/rent/add' exact element={<AddRent/>}/>
+     <Route path='/admin/search/rent' exact element={<SearchCar/>}/>
+     <Route path='/admin/rent/details' exact element={<RentalDetails/>}/>
+     <Route path='/admin/rent/form' exact element={<SearchCar/>}/>
      <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
      </Routes>
     </>

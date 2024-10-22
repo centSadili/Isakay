@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 
-import AddCar from './Components/AddCar/AddCar'
+
 import CarList from './Components/CarList/CarList'
 import CarPage from './Components/CarPage/CarPage'
 import Home from './Components/Home/Home'
@@ -18,7 +18,6 @@ function App() {
       <Route path='/login' exact element={<LogIn/>}/>
       <Route path='/signup' exact element={<SignUp/>}/>
       <Route path='/profile' exact element={<Profile/>}/>
-      <Route path='/addcar' exact element={<AddCar/>}/>
       <Route path='/vehicles' exact element={<CarList/>}/>
       <Route path='/search' exact element={<SearchCar/>}/>
       <Route path='/carpage' exact element={<CarPage/>}/>

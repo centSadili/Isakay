@@ -212,6 +212,10 @@ img {
 .carlist-car-list::-webkit-scrollbar-thumb:hover {
   background-color: rgba(51, 51, 231, 0.8); 
 }
+.carlist-car-unavailable {
+  background-color: red;
+  color: white; /* Optional: make the text stand out on the red background */
+}
 
 @media screen and (max-width: 300px) {
   .carlist-car-list {

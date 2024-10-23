@@ -275,7 +275,10 @@ img {
 }
 
 
-
+.carlist-car-unavailable {
+  background-color: red;
+  color: white; /* Optional: make the text stand out on the red background */
+}
 
 
 @media screen and (max-width: 300px) {

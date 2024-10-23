@@ -47,34 +47,33 @@ const CarList = () => {
         </div>
 
         <div className="carlist-car-list">
-          {cars.map((car) => (
-            <Link style={{ textDecoration: 'none' }} key={car._id} to={`/admin/car/detail`} onClick={() => handleCarClick(car._id)}>
-              <div className="carlist-car-card">
-                <div className="picholder">
-                <img src={`http://localhost:3000/api/car_img/${car.image}`} alt={car.car_name} className="carlist-car-img" />
-                </div>
-                <div className="carlist-car-info">
-                  <h2 className="carlist-car-name">{car.car_name}</h2>
-                  <p className="carlist-car-type">{car.type}</p>
-                  <p className="carlist-car-price">${car.price} per day</p>
-
-                  <div className="carlist-car-details">
-                    <p className="carlist-icon1">
-                      <TbManualGearboxFilled />
-                      {car.transmission}
-                    </p>
-                    <p>
-                      <TbAirConditioning />
-                      Air Conditioner
-                    </p>
+            {cars.map((car) => (
+              <Link style={{ textDecoration: 'none' }} key={car._id} to={`/admin/car/detail`} onClick={() => handleCarClick(car._id)}>
+                <div className={`carlist-car-card ${!car.status ? 'carlist-car-unavailable' : ''}`}>
+                  <div className="picholder">
+                    <img src={`http://localhost:3000/api/car_img/${car.image}`} alt={car.car_name} className="carlist-car-img" />
                   </div>
+                  <div className="carlist-car-info">
+                    <h2 className="carlist-car-name">{car.car_name}</h2>
+                    <p className="carlist-car-type">{car.type}</p>
+                    <p className="carlist-car-price">${car.price} per day</p>
 
+                    <div className="carlist-car-details">
+                      <p className="carlist-icon1">
+                        <TbManualGearboxFilled />
+                        {car.transmission}
+                      </p>
+                      <p>
+                        <TbAirConditioning />
+                        Air Conditioner
+                      </p>
+                    </div>
+                  </div>
+                  <button className="carlist-button-check">View Details</button>
                 </div>
-                <button className="carlist-button-check">View Details</button>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
       </div>
     );
 };

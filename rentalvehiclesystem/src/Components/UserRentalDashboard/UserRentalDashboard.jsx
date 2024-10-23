@@ -87,7 +87,21 @@ const UserRentalDashboard = () => {
                 <h1>Car Details</h1>
                 {details.map((info)=>(
                   <div key={info._id}>
-                    <img src={info.carID.image} alt=''></img>
+                    <h1>Personal Details</h1>
+                    <h2>First Name: {info.renterID.firstname} </h2>
+                    <h2>Last Name: {info.renterID.lastname}</h2>
+                    <h2>Suffix: {info.renterID.suffix}</h2>
+                    <h2>Gender: {info.renterID.gender}</h2>
+                    <h2>Birthday: {info.renterID.birthday}</h2>
+                    <h2>Address: {info.renterID.address.street} {info.renterID.address.city}, {info.renterID.address.state}</h2>
+                    <h2>Car: {info.carID.car_name}</h2>
+                    <h2>Pick Up: {info.carID.pickup}</h2>
+                    <h2>Drop Off: {info.carID.dropoff}</h2>
+                    <h2>Pick up date:{info.pickUpDate}</h2>
+                    <h2>Days: {info.carID.days_availability}</h2>
+                    <h2>Price: {info.carID.price}</h2>
+                    <h1>Specifications</h1>
+                    <img src={info.carID.image} alt='Rented Car'></img>
                     <h2>Body type: {info.carID.body_type}</h2>
                     <h2>Seat Capacity: {info.carID.seats}</h2>
                     <h2>Transmission: {info.carID.transmission}</h2>

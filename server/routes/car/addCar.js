@@ -6,10 +6,11 @@ router.post('/submit-car', upload.single('image'), async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send({ message: error.details[0].message });
   
-    const { car_name, seats, transmission, pickup, dropoff, price, days_availability } = req.body;
+    const { car_name, seats, transmission, pickup, dropoff, price, days_availability,body_type } = req.body;
   
     const carData = {
       car_name,
+      body_type,
       seats,
       transmission,
       pickup,

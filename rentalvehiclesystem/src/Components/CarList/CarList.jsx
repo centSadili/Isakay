@@ -3,6 +3,7 @@ import axios from 'axios';
 import { TbManualGearboxFilled, TbAirConditioning } from "react-icons/tb";
 import './CarList.css';
 import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const CarList = () => {
     const [cars, setCars] = useState([]);
@@ -34,7 +35,21 @@ const CarList = () => {
     if (error) return <div>{error}</div>;
 
     return (
-      <div className="carlist-container">
+
+      <div className="carlist-main-container">
+        <div className="carlist-header">
+        <a href='#'>
+          <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img"></img>
+        </a>
+        <a href='#' className="logo">Isakay</a>
+        <nav className="navbar"> 
+           <a href='#'>Home</a>
+           <a href='#'>Vehicles</a>
+           <a href='#'>About</a>
+           <a href='#'>Contact Us</a>
+        </nav>
+      </div>
+         <div className="carlists-container">
         <h1 className="carlist-title">Select a vehicle group</h1>
 
         <div className="carlist-filter-buttons">
@@ -73,9 +88,15 @@ const CarList = () => {
                 <button className="carlist-button-check">View Details</button>
               </div>
             </Link>
+
           ))}
         </div>
       </div>
+          
+
+          <Footer/>
+      </div>
+     
     );
 };
 

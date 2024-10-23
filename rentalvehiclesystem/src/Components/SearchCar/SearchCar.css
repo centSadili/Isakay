@@ -1,3 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ .cars-header {
+    width: 100vw;
+    padding: 10px 5%; 
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+.logo {
+    font-size: 2rem; 
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    margin-right: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap; 
+}
+
+.navbar a {
+    position: relative;
+    font-size: 1rem; 
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 2rem; 
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: orange;
+    transition: .3s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+
+
 .car-list-custom {
   display: flex;
   flex-direction: column;

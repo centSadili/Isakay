@@ -9,7 +9,8 @@ router.get('/cars', async (req, res) => {
         const cars = await Car.find({
             pickup: pickup,
             dropoff: dropoff,
-            days_availability: days_availability
+            days_availability: days_availability,
+            status: true
         });
 
         // If no cars are found, return 404

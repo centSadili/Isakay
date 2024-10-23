@@ -43,7 +43,19 @@ const SearchCar = () => {
   };
 
   return (
-    <div>
+    <div className="searchcontainer">
+      <div className="cars-header">
+        <a href='#'>
+          <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img"></img>
+        </a>
+        <a href='#' className="logo">Isakay</a>
+        <nav className="navbar"> 
+           <a href='#'>Home</a>
+           <a href='#'>Vehicles</a>
+           <a href='#'>About</a>
+           <a href='#'>Contact Us</a>
+        </nav>
+      </div>
       <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Car Listings</h1>
       <div className="car-list-custom">
         {searched.map((car) => (
@@ -66,7 +78,7 @@ const SearchCar = () => {
                 <p>Dropoff: {car.dropoff}</p>
                 <p className="car-price-custom">${car.price}</p>
                 <div className="important-info-custom">
-                  <button className="button-check-custom">Check out the deal</button>
+                  <button className="button-check-custom">Check out the deal!</button>
                 </div>
               </div>
               <div className="separator-custom"></div>

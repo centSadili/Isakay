@@ -10,7 +10,7 @@ const loginRoutes  = require('./routes/user/loginUser.js')
 const regisRoutes  = require('./routes/user/registerUser.js')
 const getUser = require('./routes/user/getUser.js')
 const updateUser =  require('./routes/user/updateUser.js')
-
+const getUserList = require('./routes/user/getUserList.js')
 //car
 const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
@@ -20,7 +20,8 @@ const getCar = require('./routes/car/getCar')
 //rent
 const RentDetail = require('./routes/rent/addRent')
 const getUserRent = require('./routes/rent/getUserRent')
-
+const deleteRent = require('./routes/rent/deleteRent')
+const carlist = require('./routes/rent/rentList.js')
 const app = express()
 //Database Connection
 connectDB()
@@ -35,17 +36,21 @@ app.use('/api/loginUser',loginRoutes)
 app.use('/api/registerUser',regisRoutes)
 app.use('/api/user',getUser)
 app.use('/api/user/update',updateUser)
+app.use('/api/users/',getUserList)
 
 //car
 app.use('/api/car/',addCar)
 app.use('/api/cars/',carList)
 app.use('/api/car_img/',router)
 app.use('/api/getcar/',getCar)
-
+app.use('/api/updatecar/',router)
+app.use('/api/deletecar/',router)
 //rent
 app.use('/api/car/',searchCar)
 app.use('/api/rentcar/',RentDetail)
 app.use('/api/user/',getUserRent)
+app.use('/api/rent/',deleteRent)
+app.use('/api/rents/',carlist)
 // Global Error Handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

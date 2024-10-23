@@ -9,9 +9,9 @@ router.get('/:id', async (req,res)=>{
         if (!car) {
             return res.status(404).send('Car not found');
         }
-        const {car_name,seats,transmission,pickup,dropoff,price,days_availability,image} = car;
+        const {car_name,seats,transmission,pickup,dropoff,price,days_availability,image,status,body_type} = car;
 
-        return res.status(200).send({ message: 'The Car', car: { car_name,seats,transmission,pickup,dropoff,price,days_availability,image } });
+        return res.status(200).send({ message: 'The Car', car: { car_name,seats,transmission,pickup,dropoff,price,days_availability,image,status,body_type } });
     }catch(err){
         res.status(500).send({ message: 'Get Car Server Error' });
     }

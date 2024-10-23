@@ -6,7 +6,7 @@ import {Link,useNavigate} from 'react-router-dom'
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 
 const Profile = () => {
-  const id = localStorage.getItem("userId") || "ID Not Found"; // Get the user ID from the localStorage
+  const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from the localStorage
   const [user, setUser] = useState({
     firstName:"",
     lastName:"",

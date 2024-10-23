@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Autocomplete, TextField } from '@mui/material';
 const RentalForm = () => {
   const userId = localStorage.getItem('id');
   const carId = localStorage.getItem('carId');
@@ -8,39 +8,37 @@ const RentalForm = () => {
   const [cities, setCity] = useState([]);
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState([]);
-
-  useEffect(()=>{
-    axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
-    .then((res)=>{
-      for(let i=0; i< res.data.length; i++){
-        setCity(city => [...city, res.data[i].name].sort())
-      }
-      console.log(cities)
-    }
-    )
-    .catch(
-      (error)=>{
-        console.error(error)
-      }
-    )
+  useEffect(() => {
+      // Fetch cities
+      axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
+      .then((res) => {
+          const cityNames = res.data.map((city, index) => ({ name: city.name, id: index })); // Add unique id with index
+          setCity(cityNames.sort((a, b) => a.name.localeCompare(b.name))); // Sort and update state
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  
+    // Fetch countries
     axios.get('https://restcountries.com/v3.1/all?fields=name')
-    .then((res)=>{
-      for(let i=0; i <res.data.length; i++){
-        setCountries(country =>[...country, res.data[i].name.official].sort())
-      }
-    })
-    .catch((error)=>{
-      console.error(error)
-    }
-    )
+      .then((res) => {
+        const countryNames = res.data.map(country => country.name.official); // Collect all countries
+        setCountries(countryNames.sort()); // Update state once with sorted list
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  
+    // Fetch regions
     axios.get('https://psgc.gitlab.io/api/island-groups/luzon/regions/')
-    .then((res)=>{
-      for(let i=0; i <res.data.length; i++){
-        setRegion(district => [...district, res.data[i].regionName].sort())
-      }
-    })
-    .catch((error)=> console.error(error))
-  },[])
+      .then((res) => {
+        const regionNames = res.data.map(region => region.regionName); // Collect all regions
+        setRegion(regionNames.sort()); // Update state once with sorted list
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []); 
 
 
   const [formData, setFormData] = useState({
@@ -231,21 +229,25 @@ const RentalForm = () => {
         </div>
 
         <div style={formRowStyle}>
-          <label style={labelStyle}>City:</label>
-          <select name='city' value={formData.city} onChange={handleInputChange} style={inputStyle}>
-            {cities.map((city, index)=>(
-              <option key={index} value={city}>{city}</option>
-            ))}
-          </select>
+        <label style={labelStyle}>City:</label>
+          <Autocomplete
+            options={cities}
+            renderInput={(params) => <TextField {...params} label="City" />}
+            value={formData.city}
+            style={inputStyle}
+            onInputChange={(event, newValue) => setFormData({ ...formData, city: newValue })}
+          />
         </div>
 
         <div style={formRowStyle}>
-          <label style={labelStyle}>State:</label>
-          <select name='State' value={formData.state} onChange={handleInputChange} style={inputStyle}>
-            {region.map((state, index)=>(
-              <option key={index} value={state}>{state}</option>
-            ))}
-          </select>
+        <label style={labelStyle}>State:</label>
+          <Autocomplete
+            options={region}
+            renderInput={(params) => <TextField {...params} label="State" />}
+            value={formData.state}
+            style={inputStyle}
+            onInputChange={(event, newValue) => setFormData({ ...formData, state: newValue })}
+          />
         </div>
 
         <div style={formRowStyle}>
@@ -254,12 +256,14 @@ const RentalForm = () => {
         </div>
 
         <div style={formRowStyle}>
-          <label style={labelStyle}>Country:</label>
-          <select name='country' value={formData.country} onChange={handleInputChange} style={inputStyle}>
-            {countries.map((country, index)=>(
-              <option key={index} value={country}>{country}</option>
-            ))}
-          </select>
+        <label style={labelStyle}>Country:</label>
+          <Autocomplete
+            options={countries}
+            renderInput={(params) => <TextField {...params} label="Country"  />}
+            value={formData.country}
+            style={inputStyle}
+            onInputChange={(event, newValue) => setFormData({ ...formData, country: newValue })}
+          />
         </div>
 
         <div style={formRowStyle}>

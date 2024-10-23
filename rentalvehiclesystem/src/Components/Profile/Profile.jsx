@@ -53,20 +53,22 @@ const navigate = useNavigate()
   const handleUpdate =  async (e) => {
     e.preventDefault(); 
     try {
-      const url = `http://localhost:3000/api/user/update/${id}`; // Update URL
+      if (window.confirm("Are you sure you want to update your details?")){
+        const url = `http://localhost:3000/api/user/update/${id}`; // Update URL
       
   
-      // Create a new object without the _id field
-      const { _id, ...userData } = user; // Destructure to exclude _id
-      
-      console.log("Sending data:", userData); // Log the data being sent
-  
-      const res = await axios.put(url, userData); // Use PUT method
-  
-      console.log(res.message);
-      navigate("/Home")
-      // Optionally, you might want to update the state or redirect after successful update
-    } catch (error) {
+        // Create a new object without the _id field
+        const { _id, ...userData } = user; // Destructure to exclude _id
+        
+        console.log("Sending data:", userData); // Log the data being sent
+    
+        const res = await axios.put(url, userData); // Use PUT method
+    
+        console.log(res.message);
+        navigate("/Home")
+        // Optionally, you might want to update the state or redirect after successful update
+     
+      }} catch (error) {
       if (error.response) {
         if (error.response.status >= 400 && error.response.status <= 500) {
           setError(error.response.data.message || "An error occurred.");

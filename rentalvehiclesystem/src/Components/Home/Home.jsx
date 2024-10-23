@@ -12,7 +12,8 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  
+  const [cars, setCars] = useState([]);
+
   const [pickup,setPickup]=useState();
   const [dropoff,setDropoff]=useState();
   const [daysAvailability, setDaysAvailability] = useState(); 
@@ -20,6 +21,23 @@ const Home = () => {
   const navigate = useNavigate()
   // Retrieve token if using authentication
   const token = localStorage.getItem('token');
+  //getcars
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/cars'); // Adjust URL based on your setup
+                setCars(response.data);
+                console.log(response.data);
+            } catch (err) {
+                setError('Error fetching cars. Please try again.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCars();
+    }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -186,35 +204,15 @@ const logOut = () =>{
           <h1>OUR FLEET <span>Check out some of our quality cars for you to enjoy</span></h1> 
 
           <div className='slider'>
-
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            <div className='slider-cards'>
-                <img src="/src/images/car1.png" alt="" />
-            </div>
-            
-
-
+          <div className='slider'>
+            {cars.map((car) => (
+              <div className='slider-cards' key={car._id}>
+                <img src={`http://localhost:3000/api/car_img/${car.image}`} alt={car.car_name} />
+              </div>
+            ))}
+          </div>
+          
+           
           </div>
         </section>
 

@@ -64,7 +64,7 @@ const logOut = () =>{
   return (
     <div>
 
-<Link to="/admin/user/profile">
+<Link to="/admin/profile">
             <span>{user.firstName} {user.lastName}</span>
             </Link>       
           <Link to="/login">

@@ -8,6 +8,8 @@ const UserRentalDashboard = () => {
     const [rents,setRents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [details, setDetails] = useState([]);
+    const [isActive, setActive] = useState(false);
 
     const navigate = useNavigate() 
     useEffect(() => {
@@ -15,8 +17,8 @@ const UserRentalDashboard = () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/user/user-rent-details/'+userId); 
                 setRents(response.data.rentDetails);
-                console.log(response.data);
-                console.log(rents);
+                setDetails(response.data.rentDetails)
+                console.log(response.data)
             } catch (err) {
                 setError('Error fetching rents. Please try again.');
                 console.error(err);
@@ -26,7 +28,7 @@ const UserRentalDashboard = () => {
         };
 
         fetchCars();
-    }, [rents]);
+    }, []);
 
     const deleteRentDetails = async (rentId,carId) => {
         try {
@@ -49,6 +51,10 @@ const UserRentalDashboard = () => {
         }
       };
 
+      const viewdetails = ()=>{
+        setActive(!isActive);
+      }
+
     if (loading) return <div>Loading...</div>;
   
     return (
@@ -66,12 +72,31 @@ const UserRentalDashboard = () => {
                 <h2>Days: {rent.carID.days_availability}</h2>
                 <h2>Price: {rent.carID.price}</h2>
                 <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
-                <button>View Details</button>
+                <button onClick={()=>viewdetails()}>View Details</button>
               </div>
-              
             ))
           ) : (
             <p>No rent details available.</p>
+          )}
+          {/* View details */}
+          {isActive && (
+              <div className="modal">
+              <div className="overlay">
+              </div>
+              <div className="content">
+                <h1>Car Details</h1>
+                {details.map((info)=>(
+                  <div key={info._id}>
+                    <img src={info.carID.image} alt=''></img>
+                    <h2>Body type: {info.carID.body_type}</h2>
+                    <h2>Seat Capacity: {info.carID.seats}</h2>
+                    <h2>Transmission: {info.carID.transmission}</h2>
+                  </div>
+                ))}
+                <button onClick={()=>viewdetails()}>Close</button>
+              </div>
+              
+            </div>
           )}
         </div>
       );

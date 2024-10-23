@@ -101,7 +101,7 @@ const UserRentalDashboard = () => {
                     <h2>Days: {info.carID.days_availability}</h2>
                     <h2>Price: {info.carID.price}</h2>
                     <h1>Specifications</h1>
-                    <img src={info.carID.image} alt='Rented Car'></img>
+                    <img src={`http://localhost:3000/api/car_img/${info.carID.image}`} alt='Rented Car'></img>
                     <h2>Body type: {info.carID.body_type}</h2>
                     <h2>Seat Capacity: {info.carID.seats}</h2>
                     <h2>Transmission: {info.carID.transmission}</h2>

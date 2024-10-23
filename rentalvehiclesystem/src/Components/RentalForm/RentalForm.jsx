@@ -44,9 +44,61 @@ const RentalForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const {
+      user,
+      firstname,
+      middleinitial,
+      lastname,
+      suffix,
+      gender,
+      birthday,
+      street,
+      city,
+      state,
+      zipCode,
+      country,
+      nationality,
+      email,
+      phone,
+      telno,
+      emergencyname,
+      emergencyno,
+      transact_Type,
+      cardHolder,
+      cardNumber,
+      expDate,
+      cvc,
+      carID,
+      pickUpDate
+    } = formData;
+
     const payload = {
-      ...formData,
-      amountOfPayment: price
+      userId: user,
+      firstname,
+      middleinitial,
+      lastname,
+      suffix,
+      gender,
+      birthday,
+      street,
+      city,
+      state,
+      zipCode,
+      country,
+      nationality,
+      email,
+      phone,
+      telno,
+      emergencyname,
+      emergencyno,
+      amountOfPayment: price,
+      transact_Type,
+      cardHolder,
+      cardNumber,
+      expDate,
+      cvc,
+      carID,
+      pickUpDate
     };
 
     try {

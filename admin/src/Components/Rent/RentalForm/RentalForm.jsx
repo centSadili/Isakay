@@ -1,10 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const RentalForm = () => {
   const userId = localStorage.getItem('id');
   const carId = localStorage.getItem('carId');
   const price = localStorage.getItem('price');
+  const [cities, setCity] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [region, setRegion] = useState([]);
+
+  useEffect(()=>{
+    axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
+    .then((res)=>{
+      for(let i=0; i< res.data.length; i++){
+        setCity(city => [...city, res.data[i].name].sort())
+      }
+      console.log(cities)
+    }
+    )
+    .catch(
+      (error)=>{
+        console.error(error)
+      }
+    )
+    axios.get('https://restcountries.com/v3.1/all?fields=name')
+    .then((res)=>{
+      for(let i=0; i <res.data.length; i++){
+        setCountries(country =>[...country, res.data[i].name.official].sort())
+      }
+    })
+    .catch((error)=>{
+      console.error(error)
+    }
+    )
+    axios.get('https://psgc.gitlab.io/api/island-groups/luzon/regions/')
+    .then((res)=>{
+      for(let i=0; i <res.data.length; i++){
+        setRegion(district => [...district, res.data[i].regionName].sort())
+      }
+    })
+    .catch((error)=> console.error(error))
+  },[])
 
 
   const [formData, setFormData] = useState({
@@ -196,12 +232,20 @@ const RentalForm = () => {
 
         <div style={formRowStyle}>
           <label style={labelStyle}>City:</label>
-          <input type="text" name="city" required value={formData.city} onChange={handleInputChange} style={inputStyle} />
+          <select name='city' value={formData.city} onChange={handleInputChange} style={inputStyle}>
+            {cities.map((city, index)=>(
+              <option key={index} value={city}>{city}</option>
+            ))}
+          </select>
         </div>
 
         <div style={formRowStyle}>
           <label style={labelStyle}>State:</label>
-          <input type="text" name="state" required value={formData.state} onChange={handleInputChange} style={inputStyle} />
+          <select name='State' value={formData.state} onChange={handleInputChange} style={inputStyle}>
+            {region.map((state, index)=>(
+              <option key={index} value={state}>{state}</option>
+            ))}
+          </select>
         </div>
 
         <div style={formRowStyle}>
@@ -211,7 +255,11 @@ const RentalForm = () => {
 
         <div style={formRowStyle}>
           <label style={labelStyle}>Country:</label>
-          <input type="text" name="country" required value={formData.country} onChange={handleInputChange} style={inputStyle} />
+          <select name='country' value={formData.country} onChange={handleInputChange} style={inputStyle}>
+            {countries.map((country, index)=>(
+              <option key={index} value={country}>{country}</option>
+            ))}
+          </select>
         </div>
 
         <div style={formRowStyle}>

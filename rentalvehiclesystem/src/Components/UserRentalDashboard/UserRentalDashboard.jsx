@@ -3,7 +3,7 @@ import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 const UserRentalDashboard = () => {
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('id')
     
     const [rents,setRents] = useState([]);
     const [loading, setLoading] = useState(true);

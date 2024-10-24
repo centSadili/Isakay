@@ -16,13 +16,18 @@ const AdminProfile = () => {
     password:""
 });
   
- 
+const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
 const navigate = useNavigate()
+
+const handleImageChange = (e) => {
+  setImage(e.target.files[0]); // Store the selected image file
+};
+
   const handleChange =({currentTarget:input})=>{
     setUser({...user,[input.name]:input.value})
   }
@@ -99,6 +104,11 @@ const navigate = useNavigate()
   return (
     <div className="profile-container">
       <form onSubmit={handleUpdate}>
+      <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
+     
+     <label htmlFor="image">Change Picture:</label><br />
+     <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
+     
         <label>First Name:</label>
         <input
           type="text"

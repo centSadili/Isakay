@@ -41,31 +41,15 @@ const AddRent = () => {
             <form onSubmit={handleSubmit}>
                 {/* Pick Up Location */}
                 <div className="form-group">
-                    <label htmlFor="pickup">Pick Up Location:</label>
-                    <Autocomplete
-                        options={cities} // Array of city objects
-                        value={pickup}
-                        onChange={(event, newValue) => setPickup(newValue ? newValue.name : '')} // Set the name as pickup
-                        getOptionLabel={(option) => option.name} // Extract the city name as the label
-                        renderInput={(params) => (
-                            <TextField {...params} label="Pick Up Location" required />
-                        )}
-                    />
-                </div>
+            <label htmlFor="pickup">Pick Up Location:</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Enter pick-up" onChange={(e)=>setPickup(e.target.value)} required />
+            </div>
 
-                {/* Drop Off Location */}
-                <div className="form-group">
-                    <label htmlFor="dropoff">Drop Off Location:</label>
-                    <Autocomplete
-                        options={cities} // Array of city objects
-                        value={dropoff}
-                        onChange={(event, newValue) => setDropoff(newValue ? newValue.name : '')} // Set the name as dropoff
-                        getOptionLabel={(option) => option.name} // Extract the city name as the label
-                        renderInput={(params) => (
-                            <TextField {...params} label="Drop Off Location" required />
-                        )}
-                    />
-                </div>
+            {/* Drop Off Location */}
+            <div className="form-group">
+            <label htmlFor="dropoff">Drop Off Location:</label>
+            <input type="text" id="dropoff" name="dropoff" placeholder="Enter drop-off" onChange={(e)=>setDropoff(e.target.value)} required />
+            </div>
 
                 {/* Days Availability */}
                 <div className="form-group">

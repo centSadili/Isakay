@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import { Avatar} from 'antd';
 import './Home.css'
 import Footer from '../Footer/Footer';
 
@@ -112,7 +113,7 @@ const logOut = () =>{
           <div className="profile">
           <Link to="/profile">
           <div className='prof-container'>
-          <div><img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" /></div>
+          <div><Avatar size={64} icon={<img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />} /></div>
           <div className='name'><span>{user.firstName} {user.lastName}
              <br /> 
           <p>New User</p></span>

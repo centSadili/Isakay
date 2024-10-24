@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
-
+import { Avatar} from 'antd';
 
 
 
@@ -65,14 +65,14 @@ const logOut = () =>{
     <div>
 
 <Link to="/admin/profile">
-<img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
+<Avatar size={64} icon={<img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />} />
             <span>{user.firstName} {user.lastName}</span>
             </Link>       
           <Link to="/login">
           {/* Log out Button Added */}
           <button onClick={logOut}>Log out</button>
           </Link>
-
+<br />
          
           <Link to='/admin/car/list'>Cars Page</Link>
           <Link to='/admin/user/list'>Users Page</Link>

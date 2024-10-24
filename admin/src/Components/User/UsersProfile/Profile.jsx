@@ -17,6 +17,7 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [ctrdelete, setDelete] = useState(0);
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
@@ -55,6 +56,29 @@ const Profile = () => {
 
     fetchUser();
   }, [id, token]);
+
+  useEffect(()=>{
+    if(ctrdelete > 0){
+      if(confirm("Are you sure you want to delete this user?")){
+        axios.delete(`http://localhost:3000/api/user/delete/${id}`)
+        .then((res)=>{
+          alert("User Deleted")
+          console.log(res.data)
+          location = '/admin/user/list'
+        })
+        .catch((error)=> console.error(error))
+      }
+    }     
+  }, [ctrdelete])
+
+  // const deleteUser = async ()=>{
+  //   const deleteUser=()=>{
+  //     axios.delete(`http://localhost:3000/api/user/delete/${id}`)
+  //     .then((res)=>{
+  //       console.log()
+  //     })
+  //   }
+  // }
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -151,8 +175,9 @@ const Profile = () => {
         <button type="submit">Update</button>
       </form>
       <Link to="/Home">
-        <button>Cancel</button>
+        <button>Go Home</button>
       </Link>
+      <button type="button" onClick={()=> setDelete(ctrdelete+1)}>Delete User</button>
 
       <UserRentalDashboard />
     </div>

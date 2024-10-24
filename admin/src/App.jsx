@@ -13,6 +13,7 @@ import SearchCar from './Components/Rent/SearchCar/SearchCar'
 import AddRent from './Components/Rent/AddRent/AddRent'
 import RentalDetails from './Components/Rent/RentDetails/RentDetails'
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
+import Adminlist from './Components/Admin/Adminlist/Adminlist'
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
      <Route path='/admin/user/add' exact element={<SignUp/>}/>
     
      <Route path='/admin/profile' exact element={<AdminProfile/>}/>
+     <Route path='/admin/list' exact element={<Adminlist/>}/>
      <Route path='/admin/rent/list' exact element={<Rentlist/>}/>
      <Route path='/admin/rent/add' exact element={<AddRent/>}/>
      <Route path='/admin/search/rent' exact element={<SearchCar/>}/>

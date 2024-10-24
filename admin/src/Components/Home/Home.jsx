@@ -77,6 +77,7 @@ const logOut = () =>{
           <Link to='/admin/car/list'>Cars Page</Link>
           <Link to='/admin/user/list'>Users Page</Link>
           <Link to='/admin/rent/list'>Rents Page</Link>
+          <Link to='/admin/list'>Admin Page</Link>
             
          
         

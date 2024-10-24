@@ -6,6 +6,7 @@ import './Login.css';
 const LogIn = () => {
     const [isActive, setActive] = useState(false);
     const [forgotemail, setForgot] = useState("");
+    const [successForgot, setSuccessful] = useState(false);
 
 
     const [data,setData]=useState({
@@ -14,6 +15,7 @@ const LogIn = () => {
     })
     const [error,setError]=useState("")
 
+    //Forgotpassword
     const forgotChange = (input)=>{
         setForgot(input)
     }
@@ -22,11 +24,16 @@ const LogIn = () => {
         setData({...data,[input.name]:input.value})
 
     }
-
+    //handles ForgotPassword Submission
     const handleforgotSubmit = async (e)=>{
-        axios.post('http://localhost:3000/api/', forgotemail)
+        e.preventDefault();
+        axios.post('http://localhost:3000/api/resetpassword', forgotemail)
         .then((res)=>{
-
+            const token = res.data.token;
+            setSuccessful(!successForgot);
+            localStorage.setItem("resetToken", token)
+        }).catch((error)=>{
+            console.error(error)
         })
     }
 
@@ -48,7 +55,7 @@ const LogIn = () => {
     
     localStorage.setItem("id", userId);
     window.location="/Home"
-            console.log(res.message)
+            console.log(response.data.message)
         }catch(error){
             if(error.response.status>=400 && 
                error.response.status<=500
@@ -58,10 +65,9 @@ const LogIn = () => {
             console.error('Error response:', error.response);
         }
     }
-
+    //changes to Forgot password toggle modal
     const forgotpass = ()=>{
         setActive(!isActive);
-        console.log(isActive)
     }
   return (
     <div className="container">
@@ -103,27 +109,39 @@ const LogIn = () => {
     
     <button className='butt' type="submit">Sign In</button>
 </form>
-
+{/*Forgot Password render*/}
 {isActive && (
         <div>
             <div className='modal'></div>
             <div className='overlay' onClick={()=>forgotpass()}></div>
             <div className='forgotpass-content'>
-                <button type='button' onClick={()=>forgotpass()}> back</button>
-                <h1>Forgot Password?</h1>
-                <form>
-                    <label htmlFor="Email">Email</label>
-                    <input
-                        type="email"
-                        className="input"
-                        placeholder=" "
-                        value={forgotemail}
-                        onChange={(e)=> forgotChange(e.target.value)}
-                        name="email"
-                        required
-                    />
-                    <button className='butt' type='submit'>Submit</button>
-                </form>
+                <h1>Forgot Password?</h1>                
+                {!successForgot && (
+                    <>
+                    <form onSubmit={handleforgotSubmit}>
+                        <label htmlFor="Email">Email</label>
+                        <input
+                            type="email"
+                            className="input"
+                            placeholder=" "
+                            value={forgotemail}
+                            onChange={(e)=> forgotChange(e.target.value)}
+                            name="email"
+                            required
+                        />
+                        <button className='butt' type='submit'>Submit</button>
+                    </form>
+                    <button className='butt' type='button' onClick={()=>forgotpass()}>Close</button>
+                    </>
+                )}
+                {successForgot && (
+                    <>
+                    <h2>We have sent the verification code</h2>
+                    <p>Check your email for the code, you may now close this window</p>
+                    <button className='butt' type='button' onClick={()=>forgotpass()}>Close</button>
+                    </>
+                )}
+                
             </div>
         </div>
     )}

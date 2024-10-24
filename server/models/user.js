@@ -36,12 +36,19 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: Date.now,
     },
+    resetToken:{
+        type: String,
+        default:""
+    }
 });
 
 userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '1hr' });
     return token;
 };
+userSchema.method.generateResetToken = ()=>{
+    return jwt.sign({email: this.email}, process.env.JWT_SECRET, {expiresIn: '1hr'});
+}
 
 const User = mongoose.model('User', userSchema);
 

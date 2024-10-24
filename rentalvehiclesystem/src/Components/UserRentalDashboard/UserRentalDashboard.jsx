@@ -1,6 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import './dashboard.css'
 
 const UserRentalDashboard = () => {
     const userId = localStorage.getItem('id')
@@ -78,40 +79,41 @@ const UserRentalDashboard = () => {
           ) : (
             <p>No rent details available.</p>
           )}
+
           {/* View details */}
+          <div>
           {isActive && (
-              <div className="modal">
-              <div className="overlay">
-              </div>
+            <div className="modal">
+              <div className="overlay" onClick={viewdetails}></div>
               <div className="content">
-                <h1>Car Details</h1>
-                {details.map((info)=>(
-                  <div key={info._id}>
-                    <h1>Personal Details</h1>
-                    <h2>First Name: {info.renterID.firstname} </h2>
-                    <h2>Last Name: {info.renterID.lastname}</h2>
-                    <h2>Suffix: {info.renterID.suffix}</h2>
-                    <h2>Gender: {info.renterID.gender}</h2>
-                    <h2>Birthday: {info.renterID.birthday}</h2>
-                    <h2>Address: {info.renterID.address.street} {info.renterID.address.city}, {info.renterID.address.state}</h2>
-                    <h2>Car: {info.carID.car_name}</h2>
-                    <h2>Pick Up: {info.carID.pickup}</h2>
-                    <h2>Drop Off: {info.carID.dropoff}</h2>
-                    <h2>Pick up date:{info.pickUpDate}</h2>
-                    <h2>Days: {info.carID.days_availability}</h2>
-                    <h2>Price: {info.carID.price}</h2>
-                    <h1>Specifications</h1>
-                    <img src={`http://localhost:3000/api/car_img/${info.carID.image}`} alt='Rented Car'></img>
-                    <h2>Body type: {info.carID.body_type}</h2>
-                    <h2>Seat Capacity: {info.carID.seats}</h2>
-                    <h2>Transmission: {info.carID.transmission}</h2>
-                  </div>
-                ))}
-                <button onClick={()=>viewdetails()}>Close</button>
+                  <h1>Car Details</h1>
+                  {details.map((info)=>(
+                    <div key={info._id}>
+                      <h1>Personal Details</h1>
+                      <h2>First Name: {info.renterID.firstname} </h2>
+                      <h2>Last Name: {info.renterID.lastname}</h2>
+                      <h2>Suffix: {info.renterID.suffix}</h2>
+                      <h2>Gender: {info.renterID.gender}</h2>
+                      <h2>Birthday: {info.renterID.birthday}</h2>
+                      <h2>Address: {info.renterID.address.street} {info.renterID.address.city}, {info.renterID.address.state}</h2>
+                      <h2>Car: {info.carID.car_name}</h2>
+                      <h2>Pick Up: {info.carID.pickup}</h2>
+                      <h2>Drop Off: {info.carID.dropoff}</h2>
+                      <h2>Pick up date:{info.pickUpDate}</h2>
+                      <h2>Days: {info.carID.days_availability}</h2>
+                      <h2>Price: {info.carID.price}</h2>
+                      <h1>Specifications</h1>
+                      <img src={`http://localhost:3000/api/car_img/${info.carID.image}`} alt='Rented Car' className='img-spec'/>
+                      <h2>Body type: {info.carID.body_type}</h2>
+                      <h2>Seat Capacity: {info.carID.seats}</h2>
+                      <h2>Transmission: {info.carID.transmission}</h2>
+                    </div>
+                  ))}
+                  <button onClick={()=>viewdetails()}>Close</button>
               </div>
-              
             </div>
           )}
+          </div>
         </div>
       );
 }

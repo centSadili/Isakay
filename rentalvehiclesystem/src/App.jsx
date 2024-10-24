@@ -8,7 +8,8 @@ import LogIn from './Components/Login/LogIn'
 import Profile from './Components/Profile/Profile'
 import SearchCar from './Components/SearchCar/SearchCar'
 import SignUp from './Components/Signup/SignUp'
-import {Router,Route,Routes,Navigate} from 'react-router-dom'
+import Forgotpassword from './Components/Login/Otp'
+import {Route,Routes,Navigate} from 'react-router-dom'
 
 function App() {  
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path='/vehicles' exact element={<CarList/>}/>
       <Route path='/search' exact element={<SearchCar/>}/>
       <Route path='/carpage' exact element={<CarPage/>}/>
+      <Route path='/forgotpass' element={<Forgotpassword/>}/>
       <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
     </Routes>
     </>

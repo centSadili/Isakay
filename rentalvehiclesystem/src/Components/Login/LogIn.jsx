@@ -4,6 +4,9 @@ import axios from 'axios'
 import './Login.css';
 
 const LogIn = () => {
+    const [isActive, setActive] = useState(false);
+    const [forgotemail, setForgot] = useState("");
+
 
     const [data,setData]=useState({
         email:"",
@@ -11,9 +14,20 @@ const LogIn = () => {
     })
     const [error,setError]=useState("")
 
+    const forgotChange = (input)=>{
+        setForgot(input)
+    }
+
     const handleChange =({currentTarget:input})=>{
         setData({...data,[input.name]:input.value})
 
+    }
+
+    const handleforgotSubmit = async (e)=>{
+        axios.post('http://localhost:3000/api/', forgotemail)
+        .then((res)=>{
+
+        })
     }
 
     const handleSubmit = async (e) =>{
@@ -43,6 +57,11 @@ const LogIn = () => {
             }
             console.error('Error response:', error.response);
         }
+    }
+
+    const forgotpass = ()=>{
+        setActive(!isActive);
+        console.log(isActive)
     }
   return (
     <div className="container">
@@ -76,12 +95,38 @@ const LogIn = () => {
             required
         />
         <label className="user-label">Password</label>
-        <div className='forgot'> <p><Link to="#">Forgot password?</Link></p> </div>
+        <div className='forgot'> 
+            <button type="button" onClick={()=> {forgotpass()}}>Forgot password?</button> 
+        </div>
     </div>
     {error && <div className="error">{error}</div>}
     
     <button className='butt' type="submit">Sign In</button>
 </form>
+
+{isActive && (
+        <div>
+            <div className='modal'></div>
+            <div className='overlay' onClick={()=>forgotpass()}></div>
+            <div className='forgotpass-content'>
+                <button type='button' onClick={()=>forgotpass()}> back</button>
+                <h1>Forgot Password?</h1>
+                <form>
+                    <label htmlFor="Email">Email</label>
+                    <input
+                        type="email"
+                        className="input"
+                        placeholder=" "
+                        value={forgotemail}
+                        onChange={(e)=> forgotChange(e.target.value)}
+                        name="email"
+                        required
+                    />
+                    <button className='butt' type='submit'>Submit</button>
+                </form>
+            </div>
+        </div>
+    )}
     <div className='hyperlinks'><p>Don't have an account? <Link to="/SignUp">Sign up</Link></p></div>
     
   </div>

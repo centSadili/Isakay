@@ -9,15 +9,17 @@ const RentalForm = () => {
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState([]);
   useEffect(() => {
-      // Fetch cities
-      axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
-      .then((res) => {
-          const cityNames = res.data.map((city, index) => ({ name: city.name, id: index })); // Add unique id with index
-          setCity(cityNames.sort((a, b) => a.name.localeCompare(b.name))); // Sort and update state
-      })
-      .catch((error) => {
-          console.error(error);
-      });
+    axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
+    .then((res) => {
+      const cityNames = res.data.map((city) => ({
+        name: city.name,
+        id: city.code || city.geonameId || city.id || city.name // Use a unique property if available
+      }));
+      setCity(cityNames.sort((a, b) => a.name.localeCompare(b.name))); // Sort and update state
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   
     // Fetch countries
     axios.get('https://restcountries.com/v3.1/all?fields=name')
@@ -152,7 +154,15 @@ const RentalForm = () => {
     }
   };
 
-  
+  const formStyle = {
+    maxWidth: '800px',
+    margin: 'auto',
+    padding: '20px',
+    backgroundColor: 'white', 
+    borderRadius: '10px',    
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+  };
+
 
   const labelStyle = {
     flexBasis: '30%',
@@ -184,7 +194,7 @@ const RentalForm = () => {
     marginBottom: '20px',
   };
   return (
-    <div style={{ maxWidth: '800px', margin: 'auto', padding: '20px' }}>
+    <div style={formStyle}>
       <form onSubmit={handleSubmit}>
         <h1 style={headerStyle}>Personal Details</h1>
         <div style={formRowStyle}>
@@ -229,14 +239,17 @@ const RentalForm = () => {
         </div>
 
         <div style={formRowStyle}>
-        <label style={labelStyle}>City:</label>
-          <Autocomplete
-            options={cities}
-            renderInput={(params) => <TextField {...params} label="City" />}
-            value={formData.city}
-            style={inputStyle}
-            onInputChange={(event, newValue) => setFormData({ ...formData, city: newValue })}
-          />
+       <label style={labelStyle}>City:</label>
+       <Autocomplete
+          options={cities}
+          getOptionLabel={(option) => (typeof option === 'string' ? option : option?.name || '')}
+          renderInput={(params) => <TextField {...params} label="City" />}
+          value={formData.city ? cities.find(city => city.name === formData.city) : null} 
+          onChange={(event, newValue) => setFormData({ ...formData, city: newValue ? newValue.name : '' })}
+          getoptionselected={(option, value) => option.name === value.name}
+          key={cities.id} // Use unique city id for the key
+          style={inputStyle}
+        />
         </div>
 
         <div style={formRowStyle}>

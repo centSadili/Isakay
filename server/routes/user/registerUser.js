@@ -1,27 +1,43 @@
 const router = require('express').Router();
 const { User, validate } = require('../../models/user');
 const bcrypt = require('bcryptjs');
+const { upload } = require('../../gridfs.js');
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
+    // Validate the request body
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send({ message: error.details[0].message });
+
     try {
-        const { error } = validate(req.body);
-        if (error) {
-            return res.status(400).send({ message: error.details[0].message });
-        }
+        // Check if user already exists
+        const userExists = await User.findOne({ email: req.body.email });
+        if (userExists) return res.status(409).send({ message: 'User with given Email Already Exists' });
 
-        const user = await User.findOne({ email: req.body.email });
-        if (user) {
-            return res.status(409).send({ message: "User with given Email Already Exists" });
-        }
+        // Ensure an image file was uploaded
+        if (!req.file) return res.status(400).send({ message: 'Image is required' });
 
+        // Hash the password
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
-        const hashPassword = await bcrypt.hash(req.body.password, salt);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-        await new User({ ...req.body, password: hashPassword }).save();
+        // Create user data
+        const userData = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hashedPassword,
+            admin: req.body.admin || false, // Default admin to false if not provided
+            image: req.file.filename, // Save image filename from multer
+        };
 
-        res.status(201).send({ message: "User Created" });
+        // Save the new user
+        const newUser = new User(userData);
+        await newUser.save();
+
+        res.status(201).send({ message: 'User Created Successfully!' });
     } catch (error) {
-        res.status(500).send({ message: "Register Server Error" });
+        console.error('Register Server Error:', error);
+        res.status(500).send({ message: 'Register Server Error' });
     }
 });
 

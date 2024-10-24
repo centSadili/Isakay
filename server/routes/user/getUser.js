@@ -10,8 +10,8 @@ router.get('/:id', async (req, res) => {
             return res.status(404).send('User not found');
         }
         
-        const { firstName, lastName, email } = user;
-        return res.status(200).send({ message: 'Logged In User!', user: { firstName, lastName, email } });
+        const { firstName, lastName, email,image } = user;
+        return res.status(200).send({ message: 'Logged In User!', user: { firstName, lastName, email,image } });
     } catch (error) {
         res.status(500).send({ message: 'Get User Server Error' });
     }

@@ -65,6 +65,7 @@ const logOut = () =>{
     <div>
 
 <Link to="/admin/profile">
+<img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
             <span>{user.firstName} {user.lastName}</span>
             </Link>       
           <Link to="/login">

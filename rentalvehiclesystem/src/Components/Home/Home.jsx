@@ -112,7 +112,7 @@ const logOut = () =>{
           <div className="profile">
           <Link to="/profile">
           <div className='prof-container'>
-          <div><img src="https://via.placeholder.com/50" alt="Profile" /></div>
+          <div><img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" /></div>
           <div className='name'><span>{user.firstName} {user.lastName}
              <br /> 
           <p>New User</p></span>

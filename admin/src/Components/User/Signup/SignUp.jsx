@@ -12,29 +12,43 @@ const SignUp = () => {
         password:"",
         admin:false,
     })
+    const [image, setImage] = useState(null);
     const [error,setError]=useState("")
     const navigate = useNavigate() 
     const handleChange =({currentTarget:input})=>{
         setData({...data,[input.name]:input.value})
 
     }
-
-    const handleSubmit = async (e) =>{
+   
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]); 
+    };
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
+        try {
+            const formData = new FormData(); // Create FormData object
+            formData.append('firstName', data.firstName);
+            formData.append('lastName', data.lastName);
+            formData.append('email', data.email);
+            formData.append('password', data.password);
+            formData.append('image', image); // Append the image file
+            formData.append('admin', data.admin);
             const url = 'http://localhost:3000/api/registerUser';
-            const {data:res}=await axios.post(url,data);
-            navigate("/login")
-            console.log(res.message)
-        }catch(error){
-            if(error.response.status>=400 && 
-               error.response.status<=500
-            ){
-                setError(error.response.data.message)
+            const { data: res } = await axios.post(url, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            navigate('/login');
+            console.log(res.message);
+        } catch (error) {
+            if (error.response && error.response.status >= 400 && error.response.status <= 500) {
+                setError(error.response.data.message);
             }
             console.error('Error response:', error.response);
         }
-    }
+    };
     const handleCheckboxChange = () => {
         setData({ ...data, admin: !data.admin });
     };
@@ -46,6 +60,10 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit}>
                         <h1>Sign Up Here!</h1>
                         {error && <div className="error">{error}</div>}
+                        <div className="input-box">
+                            <label htmlFor="image">Profile Picture:</label><br />
+                            <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
+                        </div>
                         <div className="input-box">
                             <label>First Name:</label>
                             <input type="text" placeholder='Enter your First Name' name='firstName' value={data.firstName} onChange={handleChange} required />

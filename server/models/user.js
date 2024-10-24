@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         default: false,
         required: true,
     },
+    image: { 
+        type: String, 
+        required: true 
+      }, 
     created: {
         type: Date,
         required: true,
@@ -48,6 +52,7 @@ const validate = (data) => {
         email: Joi.string().email().required().label('Email'),
         password: passwordComplexity().required().label('Password'),
         admin: Joi.boolean().label('Admin'),
+        image: Joi.string().label('Image'),
     });
     return schema.validate(data);
 };

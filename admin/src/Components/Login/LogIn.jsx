@@ -92,7 +92,7 @@ const LogIn = () => {
     
     <button className='butt' type="submit">Sign In</button>
 </form>
-    <div className='hyperlinks'><p>Don't have an account? <Link to="/SignUp">Sign up</Link></p></div>
+
     
   </div>
   <div className="image-container"></div>

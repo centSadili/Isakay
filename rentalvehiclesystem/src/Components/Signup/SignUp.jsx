@@ -5,35 +5,52 @@ import './SignUp.css';
 import { FaUser, FaLock } from 'react-icons/fa';
 
 const SignUp = () => {
-    const [data,setData]=useState({
-        firstName:"",
-        lastName:"",
-        email:"",
-        password:""
-    })
-    const [error,setError]=useState("")
-    const navigate = useNavigate() 
-    const handleChange =({currentTarget:input})=>{
-        setData({...data,[input.name]:input.value})
+    const [data, setData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+    });
+    const [image, setImage] = useState(null); // State to hold the image file
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-    }
+    // Handle input changes for text fields
+    const handleChange = ({ currentTarget: input }) => {
+        setData({ ...data, [input.name]: input.value });
+    };
 
-    const handleSubmit = async (e) =>{
+    // Handle image change
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]); // Store the selected image file
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
+        try {
+            const formData = new FormData(); // Create FormData object
+            formData.append('firstName', data.firstName);
+            formData.append('lastName', data.lastName);
+            formData.append('email', data.email);
+            formData.append('password', data.password);
+            formData.append('image', image); // Append the image file
+
             const url = 'http://localhost:3000/api/registerUser';
-            const {data:res}=await axios.post(url,data);
-            navigate("/login")
-            console.log(res.message)
-        }catch(error){
-            if(error.response.status>=400 && 
-               error.response.status<=500
-            ){
-                setError(error.response.data.message)
+            const { data: res } = await axios.post(url, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            navigate('/login');
+            console.log(res.message);
+        } catch (error) {
+            if (error.response && error.response.status >= 400 && error.response.status <= 500) {
+                setError(error.response.data.message);
             }
             console.error('Error response:', error.response);
         }
-    }
+    };
   return (
     <div className="container">
             <div className="image-section"></div>
@@ -42,6 +59,10 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit}>
                         <h1>Sign Up Here!</h1>
                         {error && <div className="error">{error}</div>}
+                        <div className="input-box">
+                            <label htmlFor="image">Profile Picture:</label><br />
+                            <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
+                        </div>
                         <div className="input-box">
                             <label>First Name:</label>
                             <input type="text" placeholder='Enter your First Name' name='firstName' value={data.firstName} onChange={handleChange} required />

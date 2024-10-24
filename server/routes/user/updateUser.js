@@ -3,8 +3,10 @@ const { User } = require('../../models/user');
 const bcrypt = require('bcryptjs');
 const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
+
+const { upload} = require('../../gridfs.js');
 // Update user details
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     // Validate the incoming data
     const { error } = validate(req.body);
@@ -27,17 +29,29 @@ router.put('/:id', async (req, res) => {
     }
 
     // Update the user details
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { $set: {
-        firstName:req.body.firstName,
-        lastName: req.body.lastName,
-        email:req.body.email,
-      }}, // Set new values
-      { new: true }       // Return the updated document
-    );
-
-    res.status(200).send({ message: "User updated successfully", user: updatedUser });
+    const { firstName, lastName, email} = req.body;
+   
+          user.firstName=firstName || user.firstName
+          user.lastName=lastName || user.lastName
+          user.email=email || user.email
+            // If a new image is uploaded, update the image field
+            if (req.file) {
+              const newImageId = req.file.filename; // Assuming req.file.id is the ObjectId of the uploaded image
+              
+              // Delete the old image from GridFS if it exists
+              if (user.image) {
+                  try {
+                      await gridFSBucket.delete(user.image); // Ensure car.image is an ObjectId
+                  } catch (error) {
+                      console.error('Error deleting old image:', error);
+                  }
+              }
+  
+              // Set the new image ID
+              user.image = newImageId; // Store the new image ID
+          }
+    await user.save();
+    res.status(200).send({ message: "User updated successfully", user: user });
   } catch (error) {
     console.error("Update Server Error:", error);
     res.status(500).send({ message: "Update Server Error" });
@@ -48,6 +62,7 @@ const validate = (data) => {
   const schema = Joi.object({
       firstName: Joi.string().required().label('First Name'),
       lastName: Joi.string().required().label('Last Name'),
+      image: Joi.string().label('Image'),
       email: Joi.string().email().required().label('Email'),
   });
   return schema.validate(data);

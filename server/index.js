@@ -11,6 +11,7 @@ const regisRoutes  = require('./routes/user/registerUser.js')
 const getUser = require('./routes/user/getUser.js')
 const updateUser =  require('./routes/user/updateUser.js')
 const getUserList = require('./routes/user/getUserList.js')
+const deleteUser = require('./routes/user/deleteUser.js') 
 //car
 const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
@@ -36,6 +37,7 @@ app.use('/api/loginUser',loginRoutes)
 app.use('/api/registerUser',regisRoutes)
 app.use('/api/user',getUser)
 app.use('/api/user/update',updateUser)
+app.use('/api/user/delete',deleteUser)
 app.use('/api/users/',getUserList)
 
 //car

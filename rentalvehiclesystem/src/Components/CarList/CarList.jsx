@@ -9,27 +9,39 @@ const CarList = () => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [category,setCategory]=useState('all')
 
     useEffect(() => {
-        const fetchCars = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/cars'); // Adjust URL based on your setup
-                setCars(response.data);
-                console.log(response.data);
-            } catch (err) {
-                setError('Error fetching cars. Please try again.');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+      const fetchCars = async () => {
+          try {
+              const response = await axios.get('http://localhost:3000/api/cars');
+              const cars = response.data
+              if(category==='all'){
+                setCars(cars);
+              }else{
+                const carbyCategory = cars.filter(car => car.body_type===category);
+                setCars(carbyCategory);
+              }
+              
+              console.log(response.data);
+          } catch (err) {
+              setError('Error fetching cars. Please try again.');
+              console.error(err);
+          } finally {
+              setLoading(false);
+          }
+      };
 
-        fetchCars();
-    }, []);
+      fetchCars();
+  }, [category]);
 
     const handleCarClick = (carId) => {
         localStorage.setItem('carId', carId);
     };
+
+    const handleCategory = (cat)=>{
+      setCategory(cat)
+    }
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
@@ -53,12 +65,16 @@ const CarList = () => {
         <h1 className="carlist-title">Select a vehicle group</h1>
 
         <div className="carlist-filter-buttons">
-          <button className="carlist-filter">All vehicles</button>
-          <button className="carlist-filter">Sedan</button>
-          <button className="carlist-filter">Cabriolet</button>
-          <button className="carlist-filter">Pickup</button>
-          <button className="carlist-filter">SUV</button>
-          <button className="carlist-filter">Minivan</button>
+        <button className="carlist-filter" onClick={()=>handleCategory('all')}>All vehicles</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Sedan')}>Sedan</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Hatchback')}>Hatchback</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('SUV')}>SUV</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Crossover')}>Crossover</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Coupe')}>Coupe</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Convertible')}>Convertible</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Pickup Truck')}>Pickup Truck</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Station Wagon')}>Station Wagon</button>
+          <button className="carlist-filter" onClick={()=>handleCategory('Luxury Car')}>Luxury Car</button>
         </div>
 
         <div className="carlist-car-list">

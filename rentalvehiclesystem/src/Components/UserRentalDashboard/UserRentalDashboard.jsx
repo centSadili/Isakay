@@ -1,6 +1,9 @@
 import React, { useState ,useEffect} from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import './dashboard.css'
+import Modal from './Modal';
+
 
 const UserRentalDashboard = () => {
     const userId = localStorage.getItem('id')
@@ -51,67 +54,63 @@ const UserRentalDashboard = () => {
         }
       };
 
-      const viewdetails = ()=>{
-        setActive(!isActive);
-      }
+      const viewDetails = (rent) => {
+        setDetails([rent]); // Set the details for the specific rent
+        setActive(true); // Use setActive to open the modal
+    };
+    
+    const closeModal = () => {
+        setActive(false); // Use setActive to close the modal
+    };
 
     if (loading) return <div>Loading...</div>;
   
     return (
-        <div>
-            <h1>Dashboard</h1>
-            {/* irerender lahat ng nasa console.log sa console modify nyo nlng*/}
+        <div className='dash-container'>
+          <div className='title'><h1>Booking Dashboard</h1> </div>
+          
+          <div className="details-container">
           {rents.length > 0 ? (
             rents.map((rent) => (
               <div key={rent._id}>
+
+                <div className="divider">
                 <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
-                <h2>Car: {rent.carID.car_name}</h2>
-                <h2>Pick Up: {rent.carID.pickup}</h2>
-                <h2>Drop Off: {rent.carID.dropoff}</h2>
-                <h2>Pick up date:{rent.pickUpDate}</h2>
-                <h2>Days: {rent.carID.days_availability}</h2>
-                <h2>Price: {rent.carID.price}</h2>
-                <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
-                <button onClick={()=>viewdetails()}>View Details</button>
+                <h2>Car: {rent.carID.car_name}</h2> <br />
+                <h2>Pick up date:{rent.pickUpDate}</h2> <br />
+                <h2>Pick Up: {rent.carID.pickup} <span> Drop Off: {rent.carID.dropoff} </span></h2> <br />
+                <h2>Days: {rent.carID.days_availability} <span>Price: {rent.carID.price}</span></h2> <br />
+                
+                <div className="clickables">
+                <button className='view' onClick={() => viewDetails(rent)}>View Details</button>
+                    <div>
+                    <button className='delete'onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel Booking</button>
+
+                    </div>
+
+                    <div>
+                    
+
+                    </div>
+                </div>
+                
+
+                </div>
+                
               </div>
             ))
           ) : (
             <p>No rent details available.</p>
           )}
+          </div>
+          <Modal isActive={isActive} details={details} onClose={closeModal} />
+
+          
+            
+            {/* irerender lahat ng nasa console.log sa console modify nyo nlng*/}
+          
           {/* View details */}
-          {isActive && (
-              <div className="modal">
-              <div className="overlay">
-              </div>
-              <div className="content">
-                <h1>Car Details</h1>
-                {details.map((info)=>(
-                  <div key={info._id}>
-                    <h1>Personal Details</h1>
-                    <h2>First Name: {info.renterID.firstname} </h2>
-                    <h2>Last Name: {info.renterID.lastname}</h2>
-                    <h2>Suffix: {info.renterID.suffix}</h2>
-                    <h2>Gender: {info.renterID.gender}</h2>
-                    <h2>Birthday: {info.renterID.birthday}</h2>
-                    <h2>Address: {info.renterID.address.street} {info.renterID.address.city}, {info.renterID.address.state}</h2>
-                    <h2>Car: {info.carID.car_name}</h2>
-                    <h2>Pick Up: {info.carID.pickup}</h2>
-                    <h2>Drop Off: {info.carID.dropoff}</h2>
-                    <h2>Pick up date:{info.pickUpDate}</h2>
-                    <h2>Days: {info.carID.days_availability}</h2>
-                    <h2>Price: {info.carID.price}</h2>
-                    <h1>Specifications</h1>
-                    <img src={`http://localhost:3000/api/car_img/${info.carID.image}`} alt='Rented Car'></img>
-                    <h2>Body type: {info.carID.body_type}</h2>
-                    <h2>Seat Capacity: {info.carID.seats}</h2>
-                    <h2>Transmission: {info.carID.transmission}</h2>
-                  </div>
-                ))}
-                <button onClick={()=>viewdetails()}>Close</button>
-              </div>
-              
-            </div>
-          )}
+        
         </div>
       );
 }

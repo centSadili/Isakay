@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link,useNavigate} from 'react-router-dom'
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
+import './Profile.css'
+import { Space } from 'antd';
+
 
 const Profile = () => {
   const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from the localStorage
@@ -100,53 +103,82 @@ const handleImageChange = (e) => {
 
   return (
     <div className="profile-container">
-       <form onSubmit={handleUpdate}>
-       <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
+
+      <div className ="info-update">
+      
+        
+      <form onSubmit={handleUpdate}>
+      <div className="main-picture">
+      <h1>Welcome to your account!</h1>
+      <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
      
-      <label htmlFor="image">Change Picture:</label><br />
+      </div>
+       
+      <div className="form-group">
+      <label htmlFor="image">Change Picture:</label>
       <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
-                        
+            
+      </div>
+                  
+        <div className="form-group">
         <label>First Name:</label>
         <input
           type="text"
-          placeholder="Enter your First Name"
+          placeholder="Enter First Name"
           name="firstName"
           value={user.firstName}
           onChange={handleChange}
           required
         />
+        </div>
 
+        <div className="form-group">
         <label>Last Name:</label>
         <input
           type="text"
-          placeholder="Enter your Last Name"
+          placeholder="Enter Last Name"
           name="lastName"
           value={user.lastName}
           onChange={handleChange}
           required
         />
-
-        <label>Email:</label>
-        <input
-          type="email"
-          placeholder="Enter your Email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-          required
-        />
-
+        </div>
         
+        
+
+          <div className="form-group">
+          <label>Email:</label>
+                  <input
+                    type="email"
+                    placeholder="Enter Email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
+                    required
+                  />
+
+
+
 {error && <div className="error">{error}</div>}
+          </div>
 
-        <button type="submit">Update</button>
-  
-      </form>
-      <Link to="/Home">
-      <button>Cancel</button>
+        <div className="form-group">
+        <button className="update" type="submit">Update</button> 
+        
+        <Link to="/Home">
+      <button className="return"> Return
+      </button>
       </Link>
-
+        </div>
+              
+      </form>
+        
+         </div>
+      <div className="dashboard">
       <UserRentalDashboard/>
+      </div>
+    
+      
     </div>
   );
 };

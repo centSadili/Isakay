@@ -1,0 +1,19 @@
+.modal, .overlay{
+    width:100%;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+
+.overlay{
+    background-color: rgba(92, 92, 92, 0.507);
+}
+
+.content{
+    background-color: rgb(233, 233, 233);
+    position: absolute;
+    margin: 0 auto;
+}
+
+.img-spec{
+    width: 250px;
+}

@@ -1,3 +1,8 @@
 body{
     overflow-y: auto;
 }
+
+.profile-container{
+    overflow-y: auto;
+    height: 100vh;
+}

@@ -188,6 +188,7 @@ const RentalForm = () => {
   };
 
   const formStyle = {
+
     justifyContent: 'center',
     maxWidth: '800px',
     margin: 'auto',

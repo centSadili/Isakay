@@ -35,16 +35,19 @@ const UserRentalDashboard = () => {
 
     const deleteRentDetails = async (rentId,carId) => {
         try {
+          if (window.confirm("Are you sure you want to Cancel this Rent?")){
             //Palagay ng Validation Dito
-          const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
-          alert(response.data.message);
-          if (response.status === 200) {
-            alert('Rent CANCELLED successfully');
-    
-             // Update the car status to 'false'
-          await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
-    
-          } 
+            const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
+            alert(response.data.message);
+            if (response.status === 200) {
+              alert('Rent CANCELLED successfully');
+      
+               // Update the car status to 'false'
+            await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
+      
+            } 
+          }
+
         } catch (error) {
           if (error.response) {
             alert(error.response.data.error || 'Error deleting rent details.'); // Notify user of error

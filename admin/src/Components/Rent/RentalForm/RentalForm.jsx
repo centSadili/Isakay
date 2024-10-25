@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Autocomplete, TextField } from '@mui/material';
+import {useNavigate} from 'react-router-dom'
 const RentalForm = () => {
   const userId = localStorage.getItem('id');
   const carId = localStorage.getItem('carId');
@@ -8,6 +9,7 @@ const RentalForm = () => {
   const [cities, setCity] = useState([]);
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState([]);
+  const navigation = useNavigate()
   useEffect(() => {
     axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
     .then((res) => {
@@ -139,15 +141,46 @@ const RentalForm = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/api/rentcar/add-rent-details', payload);
+      if (window.confirm("Are you sure you want to confirm this rental booking? ")){
+        const response = await axios.post('http://localhost:3000/api/rentcar/add-rent-details', payload);
       
-      if (response.status === 201) {
-        alert('Rent details added successfully');
-
-         // Update the car status to 'false'
-      await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: false });
-
+        if (response.status === 201) {
+          alert('Rent details added successfully');
+  
+           // Update the car status to 'false'
+        await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: false });
+  
+        }
+        setFormData({
+          user: userId,
+          firstname: '',
+          middleinitial: '',
+          lastname: '',
+          suffix: '',
+          gender: 'Male',
+          birthday: '',
+          street: '',
+          city: '',
+          state: '',
+          zipCode: '',
+          country: '',
+          nationality: '',
+          email: '',
+          phone: '',
+          telno: '',
+          emergencyname: '',
+          emergencyno: '',
+          transact_Type: 'Visa',
+          cardHolder: '',
+          cardNumber: '',
+          expDate: '',
+          cvc: '',
+          carID: carId,
+          pickUpDate: ''
+        })
+        navigation('/Home')
       }
+
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('Failed to submit rent details.');

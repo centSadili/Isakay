@@ -157,7 +157,7 @@ const logOut = () =>{
             {/* Days Availability */}
             <div className="form-group">
             <label htmlFor="days_availability">Days Available:</label>
-            <input type="number" id="days_availability" name="days_availability" placeholder="Total day of renting" onChange={(e)=>setDaysAvailability(e.target.value)} required /><br />
+            <input type="number" id="days_availability" name="days_availability" min="1" max="30" placeholder="Total day of renting" onChange={(e)=>setDaysAvailability(e.target.value)} required /><br />
             </div>
             <div className="form-group" >
             <button className="btn" type='submit'>Book Now</button>

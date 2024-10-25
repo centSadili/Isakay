@@ -113,13 +113,16 @@ const UpdateCar = () => {
     });
 
     try {
-      const response = await axios.put(`http://localhost:3000/api/updatecar/${id}`, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      if (window.confirm(`Are you sure you want to update this car:${formData.car_name}?`)){
+        const response = await axios.put(`http://localhost:3000/api/updatecar/${id}`, data, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        alert(response.data.message); // Notify user on success
+      }
 
-      alert(response.data.message); // Notify user on success
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message || 'Error updating car listing.'); // Notify user on error

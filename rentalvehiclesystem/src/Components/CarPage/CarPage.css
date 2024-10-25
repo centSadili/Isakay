@@ -85,7 +85,7 @@
     align-items: center;
     margin-bottom: 10px;
     width: 100%;
-    margin-left: -10%; /* Adjust this value as needed */
+    margin-left: -10%; 
 }
 
 .card-page-custom {
@@ -173,7 +173,7 @@
 
 .review-carpage-custom p{
     font-weight: 500;
-    color: black;
+    color: white;
 }
 
 .ratings-carpage {
@@ -183,7 +183,7 @@
     display: inline-block;
     font-weight: bold;
     font-weight: 600;
-    color: white;
+    color:white;
     font-size: .93em;
 }
 

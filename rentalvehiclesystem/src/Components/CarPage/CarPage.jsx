@@ -84,7 +84,7 @@ const CarPage = () => {
             </div>
             <div className="separatorcarpage-custom"></div>
             <div className="review-carpage-custom">
-              <p className="ratings-carpage"> <span> 8.2</span></p>
+              <p className="ratings-carpage">  8.2</p>
               <p className="review">1000+ reviews</p>
             </div>
          

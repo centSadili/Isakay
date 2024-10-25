@@ -28,22 +28,25 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formData = new FormData(); // Create FormData object
-            formData.append('firstName', data.firstName);
-            formData.append('lastName', data.lastName);
-            formData.append('email', data.email);
-            formData.append('password', data.password);
-            formData.append('image', image); // Append the image file
+            if (window.confirm("Please review and confirm your details before proceeding.")) {
+                const formData = new FormData(); // Create FormData object
+                formData.append('firstName', data.firstName);
+                formData.append('lastName', data.lastName);
+                formData.append('email', data.email);
+                formData.append('password', data.password);
+                formData.append('image', image); // Append the image file
+    
+                const url = 'http://localhost:3000/api/registerUser';
+                const { data: res } = await axios.post(url, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+    
+                navigate('/login');
+                console.log(res.message);
+            }
 
-            const url = 'http://localhost:3000/api/registerUser';
-            const { data: res } = await axios.post(url, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            navigate('/login');
-            console.log(res.message);
         } catch (error) {
             if (error.response && error.response.status >= 400 && error.response.status <= 500) {
                 setError(error.response.data.message);

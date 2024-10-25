@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Link,useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 import './Profile.css'
 import { Space } from 'antd';
@@ -11,27 +11,28 @@ import { Space } from 'antd';
 const Profile = () => {
   const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from the localStorage
   const [user, setUser] = useState({
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:""
-});
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
   
-const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const handleImageChange = (e) => {
-  setImage(e.target.files[0]); // Store the selected image file
-};
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]); // Store the selected image file
+  };
 
-  const handleChange =({currentTarget:input})=>{
-    setUser({...user,[input.name]:input.value})
-  }
+  const handleChange = ({ currentTarget: input }) => {
+    setUser({ ...user, [input.name]: input.value });
+  };
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -58,25 +59,37 @@ const handleImageChange = (e) => {
     fetchUser();
   }, [id, token]);
 
-  const handleUpdate =  async (e) => {
-    e.preventDefault(); 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
     try {
-      if (window.confirm("Are you sure you want to update your details?")){
+      if (window.confirm("Are you sure you want to update your details?")) {
         const url = `http://localhost:3000/api/user/update/${id}`; // Update URL
-      
-  
-        // Create a new object without the _id field
-        const { _id, ...userData } = user; // Destructure to exclude _id
+
+        // Create FormData to include both user data and image
+        const formData = new FormData();
+        formData.append("firstName", user.firstName);
+        formData.append("lastName", user.lastName);
+        formData.append("email", user.email);
         
-        console.log("Sending data:", userData); // Log the data being sent
-    
-        const res = await axios.put(url, userData); // Use PUT method
-    
-        console.log(res.message);
-        navigate("/Home")
+        // Append the image if it exists
+        if (image) {
+          formData.append("image", image);
+        }
+        
+        console.log("Sending data:", user); // Log the data being sent
+
+        const res = await axios.put(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set the content type
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }); // Use PUT method
+
+        console.log(res.data.message);
+        navigate("/Home");
         // Optionally, you might want to update the state or redirect after successful update
-     
-      }} catch (error) {
+      }
+    } catch (error) {
       if (error.response) {
         if (error.response.status >= 400 && error.response.status <= 500) {
           setError(error.response.data.message || "An error occurred.");
@@ -89,15 +102,12 @@ const handleImageChange = (e) => {
       console.error("Error response:", error);
     }
   };
-  
-  
-  
 
   if (loading) {
     return <div>Loading user details...</div>;
   }
 
-  if ( !user) {
+  if (!user) {
     return <div>Error loading user details.</div>;
   }
 
@@ -182,6 +192,5 @@ const handleImageChange = (e) => {
     </div>
   );
 };
-
 
 export default Profile;

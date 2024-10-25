@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import { Avatar} from 'antd';
 import './Home.css'
 import Footer from '../Footer/Footer';
 
@@ -112,7 +113,7 @@ const logOut = () =>{
           <div className="profile">
           <Link to="/profile">
           <div className='prof-container'>
-          <div><img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" /></div>
+          <div><Avatar size={64} icon={<img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />} /></div>
           <div className='name'><span>{user.firstName} {user.lastName}
              <br /> 
           <p>New User</p></span>
@@ -156,7 +157,7 @@ const logOut = () =>{
             {/* Days Availability */}
             <div className="form-group">
             <label htmlFor="days_availability">Days Available:</label>
-            <input type="number" id="days_availability" name="days_availability" placeholder="Total day of renting" onChange={(e)=>setDaysAvailability(e.target.value)} required /><br />
+            <input type="number" id="days_availability" name="days_availability" min="1" max="30" placeholder="Total day of renting" onChange={(e)=>setDaysAvailability(e.target.value)} required /><br />
             </div>
             <div className="form-group" >
             <button className="btn" type='submit'>Book Now</button>

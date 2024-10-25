@@ -8,28 +8,29 @@ import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 const Profile = () => {
   const id = localStorage.getItem("userId") || "ID Not Found"; // Get the user ID from the localStorage
   const [user, setUser] = useState({
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:""
-});
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
   
-const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [ctrdelete, setDelete] = useState(0);
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]); // Store the selected image file
+  };
 
-const handleImageChange = (e) => {
-  setImage(e.target.files[0]); // Store the selected image file
-};
+  const handleChange = ({ currentTarget: input }) => {
+    setUser({ ...user, [input.name]: input.value });
+  };
 
-  const handleChange =({currentTarget:input})=>{
-    setUser({...user,[input.name]:input.value})
-  }
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -56,26 +57,60 @@ const handleImageChange = (e) => {
     fetchUser();
   }, [id, token]);
 
-  const handleUpdate =  async (e) => {
-    e.preventDefault(); 
-    try {
-      if (window.confirm("Are you sure you want to update this user?")){
-        const url = `http://localhost:3000/api/user/update/${id}`; // Update URL
-      
-  
-        // Create a new object without the _id field
-        const { _id, ...userData } = user; // Destructure to exclude _id
-        
-        console.log("Sending data:", userData); // Log the data being sent
-    
-        const res = await axios.put(url, userData); // Use PUT method
-    
-        console.log(res.message);
-        navigate("/Home")
-        // Optionally, you might want to update the state or redirect after successful update
-      
+  useEffect(()=>{
+    if(ctrdelete > 0){
+      if(confirm("Are you sure you want to delete this user?")){
+        axios.delete(`http://localhost:3000/api/user/delete/${id}`)
+        .then((res)=>{
+          alert("User Deleted")
+          console.log(res.data)
+          location = '/admin/user/list'
+        })
+        .catch((error)=> console.error(error))
       }
-} catch (error) {
+    }     
+  }, [ctrdelete])
+
+  // const deleteUser = async ()=>{
+  //   const deleteUser=()=>{
+  //     axios.delete(`http://localhost:3000/api/user/delete/${id}`)
+  //     .then((res)=>{
+  //       console.log()
+  //     })
+  //   }
+  // }
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      if (window.confirm("Are you sure you want to update your details?")) {
+        const url = `http://localhost:3000/api/user/update/${id}`; // Update URL
+
+        // Create FormData to include both user data and image
+        const formData = new FormData();
+        formData.append("firstName", user.firstName);
+        formData.append("lastName", user.lastName);
+        formData.append("email", user.email);
+        
+        // Append the image if it exists
+        if (image) {
+          formData.append("image", image);
+        }
+        
+        console.log("Sending data:", user); // Log the data being sent
+
+        const res = await axios.put(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set the content type
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }); // Use PUT method
+
+        console.log(res.data.message);
+        navigate("/Home");
+        // Optionally, you might want to update the state or redirect after successful update
+      }
+    } catch (error) {
       if (error.response) {
         if (error.response.status >= 400 && error.response.status <= 500) {
           setError(error.response.data.message || "An error occurred.");
@@ -88,27 +123,23 @@ const handleImageChange = (e) => {
       console.error("Error response:", error);
     }
   };
-  
-  
-  
 
   if (loading) {
     return <div>Loading user details...</div>;
   }
 
-  if ( !user) {
+  if (!user) {
     return <div>Error loading user details.</div>;
   }
 
   return (
     <div className="profile-container">
       <form onSubmit={handleUpdate}>
-
-      <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
-     
-     <label htmlFor="image">Change Picture:</label><br />
-     <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
-             
+        <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
+        
+        <label htmlFor="image">Change Picture:</label><br />
+        <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} />
+                      
         <label>First Name:</label>
         <input
           type="text"
@@ -139,17 +170,16 @@ const handleImageChange = (e) => {
           required
         />
 
-        
-{error && <div className="error">{error}</div>}
+        {error && <div className="error">{error}</div>}
 
         <button type="submit">Update</button>
-  
       </form>
       <Link to="/Home">
-      <button>Cancel</button>
+        <button>Go Home</button>
       </Link>
+      <button type="button" onClick={()=> setDelete(ctrdelete+1)}>Delete User</button>
 
-      <UserRentalDashboard/>
+      <UserRentalDashboard />
     </div>
   );
 };

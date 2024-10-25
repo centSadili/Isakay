@@ -11,16 +11,16 @@ const UserRentalDashboard = () => {
     const [rents,setRents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [details, setDetails] = useState([]);
+ 
     const [isActive, setActive] = useState(false);
 
+    const [rentDetail,setRentDetail]= useState(null);
     const navigate = useNavigate() 
     useEffect(() => {
         const fetchCars = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/user/user-rent-details/'+userId); 
                 setRents(response.data.rentDetails);
-                setDetails(response.data.rentDetails)
                 console.log(response.data)
             } catch (err) {
                 setError('Error fetching rents. Please try again.');
@@ -35,16 +35,18 @@ const UserRentalDashboard = () => {
 
     const deleteRentDetails = async (rentId,carId) => {
         try {
-            //Palagay ng Validation Dito
-          const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
-          alert(response.data.message);
-          if (response.status === 200) {
-            alert('Rent CANCELLED successfully');
-    
-             // Update the car status to 'false'
-          await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
-    
-          } 
+          if (window.confirm("Are you sure you want to Cancel your Rent?")){
+            const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
+            alert(response.data.message);
+            if (response.status === 200) {
+              alert('Rent CANCELLED successfully');
+      
+               // Update the car status to 'false'
+            await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
+      
+            } 
+          }
+
         } catch (error) {
           if (error.response) {
             alert(error.response.data.error || 'Error deleting rent details.'); // Notify user of error

@@ -71,33 +71,36 @@ const AddCar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
   
     try {
-      const response = await axios.post('http://localhost:3000/api/car/submit-car', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-  
-      alert(response.data.message); // Notify user on success
-      
-      // Reset formData to initial state after successful submission
-      setFormData({
-        car_name: '',
-        seats: '',
-        body_type: '',
-        transmission: 'manual',
-        pickup: '',
-        dropoff: '',
-        price: '',
-        days_availability: '',
-        image: null, // Reset the file input
-      });
+      if (window.confirm("Are you sure you want to Add this Car: "+formData.car_name+"?")){
+        const response = await axios.post('http://localhost:3000/api/car/submit-car', data, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        alert(response.data.message); // Notify user on success
+        
+        // Reset formData to initial state after successful submission
+        setFormData({
+          car_name: '',
+          seats: '',
+          body_type: '',
+          transmission: 'manual',
+          pickup: '',
+          dropoff: '',
+          price: '',
+          days_availability: '',
+          image: null, // Reset the file input
+        });
+      }
+
   
     } catch (error) {
       if (error.response) {

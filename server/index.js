@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const connectDB = require('./db.js')
 const cors = require('cors')
+const nodemailer = require('nodemailer')
 
 //rent
 const searchCar = require('./routes/rent/searchCar')
@@ -11,6 +12,8 @@ const regisRoutes  = require('./routes/user/registerUser.js')
 const getUser = require('./routes/user/getUser.js')
 const updateUser =  require('./routes/user/updateUser.js')
 const getUserList = require('./routes/user/getUserList.js')
+const deleteUser = require('./routes/user/deleteUser.js') 
+const resetpass = require('./routes/user/forgotUser.js')
 //car
 const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
@@ -36,7 +39,9 @@ app.use('/api/loginUser',loginRoutes)
 app.use('/api/registerUser',regisRoutes)
 app.use('/api/user',getUser)
 app.use('/api/user/update',updateUser)
+app.use('/api/user/delete',deleteUser)
 app.use('/api/users/',getUserList)
+app.use('/api/resetpassword', resetpass)
 
 //car
 app.use('/api/car/',addCar)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-
+import { Avatar, Card} from 'antd';
 const Userlist = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -36,16 +36,22 @@ const Userlist = () => {
         <div>
             <Link to='/admin/user/add'>Sign up User</Link>
             {users.map((user) => (
-                <Link 
-                    style={{ textDecoration: 'none' }} 
-                    key={user._id} // Use user._id as the key
-                    to={`/admin/user/profile`} 
-                    onClick={() => handleUserClick(user._id)}
-                >
-                    <h2>Name: {user.firstName} {user.lastName}</h2>
-                    <h2>Email: {user.email}</h2>
-                    <br />
-                </Link>
+                 <Link 
+                 style={{ textDecoration: 'none' }} 
+                 key={user._id} // Use user._id as the key
+                 to={`/admin/user/profile`} 
+                 onClick={() => handleUserClick(user._id)}
+             >
+             <Card.Meta
+                 avatar={<Avatar src={`http://localhost:3000/api/car_img/${user.image}`} />}
+                 title={`${user.firstName} ${user.lastName}`}
+                 description={
+                     <>
+                     <p>{user.email}</p>
+                     </>
+                 }
+                 />
+             </Link>
             ))}
         </div>
     );

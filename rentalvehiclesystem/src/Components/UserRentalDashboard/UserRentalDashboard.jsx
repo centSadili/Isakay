@@ -62,29 +62,44 @@ const UserRentalDashboard = () => {
     if (loading) return <div>Loading...</div>;
   
     return (
-        <div>
-            <h1>Dashboard</h1>
-            {/* irerender lahat ng nasa console.log sa console modify nyo nlng*/}
-          {rents.length > 0 ? (
-            rents.map((rent) => (
-              <div key={rent._id}>
-                <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
-                <h2>Car: {rent.carID.car_name}</h2>
-                <h2>Pick Up: {rent.carID.pickup}</h2>
-                <h2>Drop Off: {rent.carID.dropoff}</h2>
-                <h2>Pick up date:{rent.pickUpDate}</h2>
-                <h2>Days: {rent.carID.days_availability}</h2>
-                <h2>Price: {rent.carID.price}</h2>
-                <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
-                <button onClick={()=>viewdetails(rent)}>View Details</button>
-              </div>
-            ))
-          ) : (
-            <p>No rent details available.</p>
-          )}
+        <div className='dash-container'>
+        <div className='title'><h1>Booking Dashboard</h1> </div>
+        
+        <div className="details-container">
+        {rents.length > 0 ? (
+          rents.map((rent) => (
+            <div key={rent._id}>
 
-          {/* View details */}
-          <div>
+              <div className="divider">
+              <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
+              <h2>Car: {rent.carID.car_name}</h2> <br />
+              <h2>Pick up date:{rent.pickUpDate}</h2> <br />
+              <h2>Pick Up: {rent.carID.pickup} <span> Drop Off: {rent.carID.dropoff} </span></h2> <br />
+              <h2>Days: {rent.carID.days_availability} <span>Price: {rent.carID.price}</span></h2> <br />
+              
+              <div className="clickables">
+              <button onClick={()=>viewdetails(rent)}>View Details</button>
+                  <div>
+                  <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
+
+                  </div>
+
+                  <div>
+                  
+
+                  </div>
+              </div>
+              
+
+              </div>
+              
+            </div>
+          ))
+        ) : (
+          <p>No rent details available.</p>
+        )}
+        </div>
+        <div>
           {isActive && (
             <div className="modal">
               <div className="overlay" onClick={viewdetails}></div>
@@ -117,7 +132,11 @@ const UserRentalDashboard = () => {
             </div>
           )}
           </div>
-        </div>
+
+        
+          
+        
+      </div>
       );
 }
 

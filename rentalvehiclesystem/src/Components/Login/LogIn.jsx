@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import './Login.css';
@@ -7,13 +7,14 @@ const LogIn = () => {
     const [isActive, setActive] = useState(false);
     const [forgotemail, setForgot] = useState("");
     const [successForgot, setSuccessful] = useState(false);
-
+    const [error,setError]=useState("")
+    const [fpassmsg, setPassMsg] = useState("");
 
     const [data,setData]=useState({
         email:"",
         password:""
     })
-    const [error,setError]=useState("")
+    
 
     //Forgotpassword
     const forgotChange = (input)=>{
@@ -27,13 +28,16 @@ const LogIn = () => {
     //handles ForgotPassword Submission
     const handleforgotSubmit = async (e)=>{
         e.preventDefault();
-        axios.post('http://localhost:3000/api/resetpassword', forgotemail)
+        await axios.post('http://localhost:3000/api/resetpassword', forgotemail)
         .then((res)=>{
-            const token = res.data.token;
-            setSuccessful(!successForgot);
-            localStorage.setItem("resetToken", token)
+            // const token = res.data.token;
+            // setSuccessful(!successForgot);
+            // localStorage.setItem("resetToken", token)
+            console.log(res.data)
+            // setPassMsg(res.data)
         }).catch((error)=>{
-            console.error(error)
+            setPassMsg(error.response.data.message)
+            console.log("Error Response", error)
         })
     }
 
@@ -54,8 +58,8 @@ const LogIn = () => {
     }
     
     localStorage.setItem("id", userId);
-    window.location="/Home"
-            console.log(response.data.message)
+    // window.location="/Home"
+    console.log(response.data)
         }catch(error){
             if(error.response.status>=400 && 
                error.response.status<=500
@@ -108,7 +112,7 @@ const LogIn = () => {
     {error && <div className="error">{error}</div>}
     
     <button className='butt' type="submit">Sign In</button>
-</form>
+    </form>
 {/*Forgot Password render*/}
 {isActive && (
         <div>
@@ -119,14 +123,13 @@ const LogIn = () => {
                 {!successForgot && (
                     <>
                     <form onSubmit={handleforgotSubmit}>
-                        <label htmlFor="Email">Email</label>
+                        <label htmlFor="forgotEmail">Email</label>
                         <input
                             type="email"
-                            className="input"
+                            name="forgotEmail"
                             placeholder=" "
                             value={forgotemail}
                             onChange={(e)=> forgotChange(e.target.value)}
-                            name="email"
                             required
                         />
                         <button className='butt' type='submit'>Submit</button>
@@ -137,7 +140,7 @@ const LogIn = () => {
                 {successForgot && (
                     <>
                     <h2>We have sent the verification code</h2>
-                    <p>Check your email for the code, you may now close this window</p>
+                    {fpassmsg && (<div className='forgotpassMSG'>{fpassmsg}</div>)}
                     <button className='butt' type='button' onClick={()=>forgotpass()}>Close</button>
                     </>
                 )}

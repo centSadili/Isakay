@@ -58,7 +58,7 @@ const LogIn = () => {
     }
     
     localStorage.setItem("id", userId);
-    // window.location="/Home"
+    window.location="/Home"
     console.log(response.data)
         }catch(error){
             if(error.response.status>=400 && 

@@ -47,18 +47,23 @@ const CarPage = () => {
   return (
 
     <div className="cars-page-container">
-          <div className="cars-header">
-        <a href='#'>
-          <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img"></img>
-        </a>
-        <a href='#' className="logo">Isakay</a>
-        <nav className="navbar"> 
-           <a href='#'>Home</a>
-           <a href='#'>Vehicles</a>
-           <a href='#'>About</a>
-           <a href='#'>Contact Us</a>
-        </nav>
-      </div>
+          <div className="carlist-header">
+    <a href='#'>
+        <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img" />
+    </a>
+    <a href='#' className="logo">Isakay</a>
+    <nav className="navbars">
+        <span><a href='#'>Home</a></span>
+        <span><a href='#'>Vehicles</a></span>
+        <span><a href='#'>About</a></span>
+        <span><a href='#'>Contact Us</a></span>
+
+      
+
+
+
+    </nav>
+</div>
         <div className="car-page-container"> 
       <div key={car._id} className="car-page-card" >
         <div className="card-page-custom">

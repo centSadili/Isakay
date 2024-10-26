@@ -3,6 +3,8 @@
 
 import CarList from './Components/CarList/CarList'
 import CarPage from './Components/CarPage/CarPage'
+import About from './Components/Home/About'
+import Contact from './Components/Home/Contact'
 import Home from './Components/Home/Home'
 import ForgotPassword from './Components/Login/ForgotPassword'
 import LogIn from './Components/Login/LogIn'
@@ -16,6 +18,8 @@ function App() {
     <>
     <Routes>
       <Route path='/Home' exact element={<Home/>}/>
+      <Route path='/contact' exact element={<Contact/>}/>
+      <Route path='/about_us' exact element={<About/>}/>
       <Route path='/login' exact element={<LogIn/>}/>
       <Route path='/signup' exact element={<SignUp/>}/>
       <Route path='/profile' exact element={<Profile/>}/>

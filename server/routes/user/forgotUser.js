@@ -60,5 +60,4 @@ router.post('/forgot-password', (req, res) => {
             res.status(500).send({ Status: "Server error" });
         });
 });
-    }
 module.exports = router;

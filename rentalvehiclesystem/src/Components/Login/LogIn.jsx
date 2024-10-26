@@ -5,10 +5,8 @@ import './Login.css';
 
 const LogIn = () => {
     const [isActive, setActive] = useState(false);
-    const [forgotemail, setForgot] = useState("");
-    const [successForgot, setSuccessful] = useState(false);
     const [error,setError]=useState("")
-    const [fpassmsg, setPassMsg] = useState("");
+
 
     const [data,setData]=useState({
         email:"",
@@ -16,29 +14,10 @@ const LogIn = () => {
     })
     
 
-    //Forgotpassword
-    const forgotChange = (input)=>{
-        setForgot(input)
-    }
 
     const handleChange =({currentTarget:input})=>{
         setData({...data,[input.name]:input.value})
 
-    }
-    //handles ForgotPassword Submission
-    const handleforgotSubmit = async (e)=>{
-        e.preventDefault();
-        await axios.post('http://localhost:3000/api/resetpassword', forgotemail)
-        .then((res)=>{
-            // const token = res.data.token;
-            // setSuccessful(!successForgot);
-            // localStorage.setItem("resetToken", token)
-            console.log(res.data)
-            // setPassMsg(res.data)
-        }).catch((error)=>{
-            setPassMsg(error.response.data.message)
-            console.log("Error Response", error)
-        })
     }
 
     const handleSubmit = async (e) =>{
@@ -46,9 +25,9 @@ const LogIn = () => {
         try{
             const url = 'http://localhost:3000/api/loginUser';
             const response = await axios.post(url, data);
-    // Access the token directly from response.data
-    const token = response.data.token;
-    const userId=response.data.userId;
+            // Access the token directly from response.data
+            const token = response.data.token;
+            const userId=response.data.userId;
 
     if (token) {
         localStorage.setItem("token", token);
@@ -69,10 +48,7 @@ const LogIn = () => {
             console.error('Error response:', error.response);
         }
     }
-    //changes to Forgot password toggle modal
-    const forgotpass = ()=>{
-        setActive(!isActive);
-    }
+
   return (
     <div className="container">
   <div className="form-container">
@@ -106,48 +82,14 @@ const LogIn = () => {
         />
         <label className="user-label">Password</label>
         <div className='forgot'> 
-            <button type="button" onClick={()=> {forgotpass()}}>Forgot password?</button> 
+          <Link to='/forgot-password'>Forgot password?</Link> 
         </div>
     </div>
     {error && <div className="error">{error}</div>}
     
     <button className='butt' type="submit">Sign In</button>
-    </form>
-{/*Forgot Password render*/}
-{isActive && (
-        <div>
-            <div className='modal'></div>
-            <div className='overlay' onClick={()=>forgotpass()}></div>
-            <div className='forgotpass-content'>
-                <h1>Forgot Password?</h1>                
-                {!successForgot && (
-                    <>
-                    <form onSubmit={handleforgotSubmit}>
-                        <label htmlFor="forgotEmail">Email</label>
-                        <input
-                            type="email"
-                            name="forgotEmail"
-                            placeholder=" "
-                            value={forgotemail}
-                            onChange={(e)=> forgotChange(e.target.value)}
-                            required
-                        />
-                        <button className='butt' type='submit'>Submit</button>
-                    </form>
-                    <button className='butt' type='button' onClick={()=>forgotpass()}>Close</button>
-                    </>
-                )}
-                {successForgot && (
-                    <>
-                    <h2>We have sent the verification code</h2>
-                    {fpassmsg && (<div className='forgotpassMSG'>{fpassmsg}</div>)}
-                    <button className='butt' type='button' onClick={()=>forgotpass()}>Close</button>
-                    </>
-                )}
-                
-            </div>
-        </div>
-    )}
+</form>
+
     <div className='hyperlinks'><p>Don't have an account? <Link to="/SignUp">Sign up</Link></p></div>
     
   </div>

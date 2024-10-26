@@ -105,10 +105,10 @@ const logOut = () =>{
       <div className='header'>
         <nav className="navbar">
           <ul>
-            <li><a href="#about">About</a></li>
+            <li><Link to ='/abput_us'><a href="#about">About</a></Link></li>
             <li><Link to="/vehicles"><a href="#vehicles">Vehicles</a></Link></li>
             <li><a href="#booking">Booking</a></li>
-            <li><a href="#contacts">Contacts</a></li>
+            <li><Link to='/contact'><a href="#contacts">Contacts</a></Link></li>
           </ul>
           <div className="profile">
           <Link to="/profile">

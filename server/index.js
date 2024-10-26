@@ -12,7 +12,7 @@ const getUser = require('./routes/user/getUser.js')
 const updateUser =  require('./routes/user/updateUser.js')
 const getUserList = require('./routes/user/getUserList.js')
 const deleteUser = require('./routes/user/deleteUser.js') 
-const resetpass = require('./routes/user/forgotUser.js')
+const forgotUser = require('./routes/user/forgotUser.js')
 //car
 const addCar = require('./routes/car/addCar')
 const carList = require('./routes/car/carList')
@@ -40,7 +40,7 @@ app.use('/api/user',getUser)
 app.use('/api/user/update',updateUser)
 app.use('/api/user/delete',deleteUser)
 app.use('/api/users/',getUserList)
-app.use('/api/resetpassword', resetpass)
+app.use('/api/user', forgotUser)
 
 //car
 app.use('/api/car/',addCar)

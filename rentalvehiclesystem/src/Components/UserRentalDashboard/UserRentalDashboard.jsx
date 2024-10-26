@@ -74,13 +74,13 @@ const UserRentalDashboard = () => {
               <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
               <h2>Car: {rent.carID.car_name}</h2> <br />
               <h2>Pick up date:{rent.pickUpDate}</h2> <br />
-              <h2>Pick Up: {rent.carID.pickup} <span> Drop Off: {rent.carID.dropoff} </span></h2> <br />
-              <h2>Days: {rent.carID.days_availability} <span>Price: {rent.carID.price}</span></h2> <br />
+              <h2>Pick Up: {rent.carID.pickup}  <span>Drop Off: {rent.carID.dropoff}</span></h2> <br />
+              <h2>Days: {rent.carID.days_availability} <span>Price: {rent.carID.price} </span> </h2> <br />
               
               <div className="clickables">
-              <button onClick={()=>viewdetails(rent)}>View Details</button>
+              <button className='view' onClick={()=>viewdetails(rent)}>View Details</button>
                   <div>
-                  <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
+                  <button className='delete' onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel Booking</button>
 
                   </div>
 
@@ -108,26 +108,26 @@ const UserRentalDashboard = () => {
                  
                     <div key={rentDetail._id}>
                       <h1>Personal Details</h1>
-                      <h2>First Name: {rentDetail.renterID.firstname} </h2>
-                      <h2>Last Name: {rentDetail.renterID.lastname}</h2>
-                      <h2>Suffix: {rentDetail.renterID.suffix}</h2>
-                      <h2>Gender: {rentDetail.renterID.gender}</h2>
-                      <h2>Birthday: {rentDetail.renterID.birthday}</h2>
-                      <h2>Address: {rentDetail.renterID.address.street} {rentDetail.renterID.address.city}, {rentDetail.renterID.address.state}</h2>
-                      <h2>Car: {rentDetail.carID.car_name}</h2>
-                      <h2>Pick Up: {rentDetail.carID.pickup}</h2>
-                      <h2>Drop Off: {rentDetail.carID.dropoff}</h2>
-                      <h2>Pick up date:{rentDetail.pickUpDate}</h2>
-                      <h2>Days: {rentDetail.carID.days_availability}</h2>
-                      <h2>Price: {rentDetail.carID.price}</h2>
+                      <h2>First Name: {rentDetail.renterID.firstname} <span>Last Name: {rentDetail.renterID.lastname}</span></h2>
+                      <h2>Suffix: {rentDetail.renterID.suffix} <span>Gender: {rentDetail.renterID.gender}</span></h2>
+                      <h2>Birthday: {rentDetail.renterID.birthday}</h2> 
+                      <h2>Address: {rentDetail.renterID.address.street} {rentDetail.renterID.address.city}, {rentDetail.renterID.address.state}</h2><br />
+                      <h2>Pick Up: {rentDetail.carID.pickup} <span> Drop Off: {rentDetail.carID.dropoff}</span> </h2>
+                      <h2>Days: {rentDetail.carID.days_availability} Day/s <span>Price: {rentDetail.carID.price}</span> </h2>
+                      <h2>Pick up date:{rentDetail.pickUpDate}</h2> <br />
                       <h1>Specifications</h1>
+
+                      <div className='Specifications'>
                       <img src={`http://localhost:3000/api/car_img/${rentDetail.carID.image}`} alt='Rented Car' className='img-spec'/>
-                      <h2>Body type: {rentDetail.carID.body_type}</h2>
-                      <h2>Seat Capacity: {rentDetail.carID.seats}</h2>
-                      <h2>Transmission: {rentDetail.carID.transmission}</h2>
+                      <h2>Car Rented: {rentDetail.carID.car_name} <br />Body type: {rentDetail.carID.body_type} <br />
+                      Seat Capacity: {rentDetail.carID.seats} <br />
+                      Transmission: {rentDetail.carID.transmission}
+                      </h2>
+                      </div>
+                      
                     </div>
                 
-                  <button onClick={()=>viewdetails()}>Close</button>
+                  <button className='close' onClick={()=>viewdetails()}>Close</button>
               </div>
             </div>
           )}

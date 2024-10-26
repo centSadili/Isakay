@@ -111,26 +111,26 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-
       <div className ="info-update">
       
         
       <form onSubmit={handleUpdate}>
-      <div className="main-picture">
       <h1>Welcome to your account!</h1>
-      <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
+      <div className="main-picture">
+      <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile"  />
      
       </div>
        
-      <div className="form-group">
-      <label htmlFor="image">Change Picture:</label>
-      <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
+      <div className="">
+      <label htmlFor="image">Change Picture:</label> <br />
+      <input className="img-input" type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
             
-      </div>
+      </div><br />
                   
-        <div className="form-group">
-        <label>First Name:</label>
+        <div className="">
+        <label>First Name:</label> <br />
         <input
+        className="input"
           type="text"
           placeholder="Enter First Name"
           name="firstName"
@@ -140,9 +140,10 @@ const Profile = () => {
         />
         </div>
 
-        <div className="form-group">
-        <label>Last Name:</label>
+        <div className=""> 
+        <label>Last Name:</label><br />
         <input
+        className="input"
           type="text"
           placeholder="Enter Last Name"
           name="lastName"
@@ -154,9 +155,10 @@ const Profile = () => {
         
         
 
-          <div className="form-group">
-          <label>Email:</label>
+          <div className=""> 
+          <label>Email:</label><br />
                   <input
+                  className="input"
                     type="email"
                     placeholder="Enter Email"
                     name="email"

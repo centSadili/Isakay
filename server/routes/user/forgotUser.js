@@ -1,62 +1,64 @@
 const router = require('express').Router();
-const {User} = require('../../models/user'); 
+const { User } = require('../../models/user');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Joi = require('joi');
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+require('dotenv').config()
 
 
-// Not yet Done
-router.post('/', async (req, res)=>{
-    try {
-        const { error } = validate(req.body);
-        if (error) {
-            return res.status(400).send({ message: error.details[0].message });
-        }
-        const user = await User.findOne({ email: req.body.email });
-        if (!user) {
-            return res.status(400).send({ message: 'Email Not found' });
-        }
-        const token = user.generateResetToken();
-        // await User.findOneAndUpdate({email: req.body.email}, user)
-        console.log("Token: "+token)
+router.post('/forgot-password', (req, res) => {
+    const { email } = req.body;
+    User.findOne({ email: email })
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({ Status: "User not found" });
+            }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-        // const transporter = nodemailer.createTransport({
-        //     host: 'smtp.ethereal.email',
-        //     port:587,
-        //     auth: {
-        //         user: process.env.user,
-        //         pass: process.env.pass
-        //     }
-        // })
-        // async ()=>{
-        //     const info = await transporter.sendMail({
-        //         from:process.env.user,
-        //         to:useremail.email,
-        //         subject:"Forgot password Code Link",
-        //         text:`http://localhost:3000/api/resetpassword${user._id}/${token}`
-        
-        //     }, (err)=>{
-        //         if(err){
-        //             console.log(err)
-        //         }
-        //         else{
-        //             return res.sendStatus(200)
-        //         }
-        //     })
-        //     console.log(info.messageId)
-        // }
-        return res.status(200).send({ message: 'Check your email for the link, you may now close this window',token:token, email:user.email });
-    } catch (error) {
-        res.status(400).send({message: error})
-        console.log(error)
+            // Create a test SMTP account from Ethereal for testing
+            nodemailer.createTestAccount((err, account) => {
+                if (err) {
+                    console.error('Failed to create a testing account. ' + err.message);
+                    return res.status(500).send({ Status: "Failed to create test account" });
+                }
+
+                // Set up transporter using Ethereal's SMTP service
+                const transporter = nodemailer.createTransport({
+                    host: account.smtp.host,
+                    port: account.smtp.port,
+                    secure: account.smtp.secure,
+                    auth: {
+                        user: account.user,
+                        pass: account.pass
+                    }
+                });
+
+                // Email content and recipient details
+                const mailOptions = {
+                    from: '"ISAKAY Support" <support@isakay.com>', // Sender info
+                    to: email,
+                    subject: 'Reset Password Link',
+                    text: `hello ${email}`
+                };
+
+                // Send the email
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.error("Error sending email:", error);
+                        return res.status(500).send({ Status: "Failed to send email" });
+                    } else {
+                        console.log('Message sent:', info.messageId);
+                        console.log('Preview URL:', nodemailer.getTestMessageUrl(info));
+                        return res.send({ Status: "Success", PreviewURL: nodemailer.getTestMessageUrl(info) });
+                    }
+                });
+            });
+        })
+        .catch(err => {
+            console.error("Error finding user:", err);
+            res.status(500).send({ Status: "Server error" });
+        });
+});
     }
-})
-
-const validate = (data) => {
-	const schema = Joi.object({
-		email: Joi.string().email().required().label("Email")
-	});
-	return schema.validate(data);
-};
-
 module.exports = router;

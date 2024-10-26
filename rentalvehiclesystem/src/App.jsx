@@ -4,11 +4,11 @@
 import CarList from './Components/CarList/CarList'
 import CarPage from './Components/CarPage/CarPage'
 import Home from './Components/Home/Home'
+import ForgotPassword from './Components/Login/ForgotPassword'
 import LogIn from './Components/Login/LogIn'
 import Profile from './Components/Profile/Profile'
 import SearchCar from './Components/SearchCar/SearchCar'
 import SignUp from './Components/Signup/SignUp'
-import Forgotpassword from './Components/Login/Otp'
 import {Route,Routes,Navigate} from 'react-router-dom'
 
 function App() {  
@@ -22,7 +22,7 @@ function App() {
       <Route path='/vehicles' exact element={<CarList/>}/>
       <Route path='/search' exact element={<SearchCar/>}/>
       <Route path='/carpage' exact element={<CarPage/>}/>
-      <Route path='/forgotpass' element={<Forgotpassword/>}/>
+      <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
     </Routes>
     </>

@@ -1,23 +1,24 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import './Login.css';
 
 const LogIn = () => {
     const [isActive, setActive] = useState(false);
+    const [error,setError]=useState("")
+
 
     const [data,setData]=useState({
         email:"",
         password:""
     })
-    const [error,setError]=useState("")
+    
 
 
     const handleChange =({currentTarget:input})=>{
         setData({...data,[input.name]:input.value})
 
     }
-
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -37,7 +38,7 @@ const LogIn = () => {
     
     localStorage.setItem("id", userId);
     window.location="/Home"
-            console.log(response.data.message)
+    console.log(response.data)
         }catch(error){
             if(error.response.status>=400 && 
                error.response.status<=500
@@ -88,6 +89,7 @@ const LogIn = () => {
     
     <button className='butt' type="submit">Sign In</button>
 </form>
+
     <div className='hyperlinks'><p>Don't have an account? <Link to="/SignUp">Sign up</Link></p></div>
     
   </div>

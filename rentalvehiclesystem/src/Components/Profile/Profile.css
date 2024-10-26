@@ -1,3 +1,125 @@
-body{
-    overflow-y: auto;
+.profile-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    
 }
+
+.info-update{
+  padding: 1rem;
+    width: 35%;
+    height: 1000px;
+    border-right: solid 3px rgb(27, 26, 25);
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    font-weight: bold;
+
+}
+
+.info-update h1{
+      font-size: 2.5vh;
+      margin-bottom: 20px;
+}
+
+.main-picture{
+    padding-left: 6rem;
+    margin-bottom: 2rlh;
+}
+
+.main-picture img {
+    width: 220px;
+    height: 180px;
+    border-radius: 50%;
+    border: solid 5px rgb(34, 34, 34);
+
+}
+
+.form-group{
+    margin: 10px 0;
+}
+
+.input-box {
+    position: relative;
+    margin: 7px ; 
+}
+
+.input-box label {
+    display: block; 
+    margin-bottom: 4px; 
+}
+
+.input {
+    width: 100%;
+    height: 50px;
+    border: 2px solid rgba(15, 34, 87, 0.836);
+    border-radius: 20px;
+    padding: 10px 40px; 
+}
+
+.input .icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-20%);
+    color: rgba(0, 0, 0, 0.5); 
+}
+
+
+.dashboard{
+    width: 65%;
+    height: 1000px;
+
+}
+
+
+.update {
+    margin-right: 6lvw;
+    padding: 12.5px 30px;
+    border: 0;
+    border-radius: 10%;
+    background-color: #242424;
+    color: #ffffff;
+    font-weight: Bold;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+  
+  .update:hover {
+    background-color: #242424;
+    box-shadow: 0 0 20px #242424;
+    transform: scale(1.1);
+  }
+  
+  .update:active {
+    background-color: #242424;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    box-shadow: none;
+    transform: scale(0.98);
+  }
+
+  .return {
+    padding: 12.5px 30px;
+    border: 0;
+    border-radius: 10%;
+    background-color: #c41a1a;
+    color: #ffffff;
+    font-weight: Bold;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+  
+  .return:hover {
+    background-color: #c41a1a;
+    box-shadow: 0 0 20px #c41a1a;
+    transform: scale(1.1);
+  }
+  
+  .return:active {
+    background-color: #c41a1a;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    box-shadow: none;
+    transform: scale(0.98);
+  }

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const connectDB = require('./db.js')
 const cors = require('cors')
+const nodemailer = require('nodemailer')
 
 //rent
 const searchCar = require('./routes/rent/searchCar')

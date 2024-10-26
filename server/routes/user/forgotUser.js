@@ -6,21 +6,15 @@ const Joi = require('joi');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 
+
 router.post('/forgot-password', (req, res) => {
     const { email } = req.body;
-
-    // Validate email input
-    if (!email) {
-        return res.status(400).send({ Status: "Email is required" });
-    }
-
     User.findOne({ email: email })
         .then(user => {
             if (!user) {
                 return res.status(404).send({ Status: "User not found" });
             }
-
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
             // Create a test SMTP account from Ethereal for testing
             nodemailer.createTestAccount((err, account) => {
@@ -66,5 +60,5 @@ router.post('/forgot-password', (req, res) => {
             res.status(500).send({ Status: "Server error" });
         });
 });
-
+    }
 module.exports = router;

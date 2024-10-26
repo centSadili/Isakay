@@ -60,13 +60,14 @@ const CarPage = () => {
         </nav>
       </div>
         <div className="car-page-container"> 
-      <div key={car._id} className="car-page-card">
+      <div key={car._id} className="car-page-card" >
         <div className="card-page-custom">
           <img
+          className="picholdings"
             src={`http://localhost:3000/api/car_img/${car.image}`}
             alt={car.car_name}
-            style={{ width: '250px', height: '150px' }}
           />
+
           <div className="car-page-info">
             <h2>{car.car_name}</h2>
             <p>Seats: {car.seats}</p>
@@ -83,8 +84,8 @@ const CarPage = () => {
             </div>
             <div className="separatorcarpage-custom"></div>
             <div className="review-carpage-custom">
-              <p className="ratings-carpage">8.2</p>
-              <p>1000+ reviews</p>
+              <p className="ratings-carpage">  8.2</p>
+              <p className="review">1000+ reviews</p>
             </div>
          
         </div>

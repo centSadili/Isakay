@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Avatar} from 'antd';
 import './Home.css'
 import Footer from '../Footer/Footer';
+import Error500 from '../Error Pages/Error500';
 
 
 
@@ -91,11 +92,7 @@ const logOut = () =>{
   if (error || !user) {
     return (
     <div>
-      <h1>Please Log in First</h1> 
-      <Link to="/login">
-          {/* Log in Button Added */}
-          <button>Log in</button>
-      </Link>
+      <Error500></Error500>
     </div>
     );
   }

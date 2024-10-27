@@ -74,8 +74,8 @@ form {
     margin-bottom: 10px;
 }
 
-.input {
-    border: solid 1.5px #9e9e9e;
+.input1 {
+    border: solid 2px #474747;
     border-radius: 1rem;
     background: none;
     padding: 1rem;
@@ -97,14 +97,14 @@ form {
     padding: 0 .2em;
 }
 
-.input:focus,
-.input:valid {
+.input1:focus,
+.input1:valid {
     outline: none;
     border: 2px solid rgb(22, 44, 77);
 }
 
-.input:focus ~ .user-label,
-.input:valid ~ .user-label {
+.input1:focus ~ .user-label,
+.input1:valid ~ .user-label {
     transform: translateY(-50%) scale(0.8);
     background-color: #f9f9f9;
     padding: 0 .2em;

@@ -41,8 +41,8 @@ const Home = () => {
   
 
 const logOut = () =>{
-  localStorage.clear()
   localStorage.setItem('id',null)
+  localStorage.clear()
   setUser(null)
 }
 
@@ -50,17 +50,7 @@ const logOut = () =>{
     return <div>Loading user details...</div>;
   }
 
-  if (error || !user) {
-    return (
-    <div>
-      <h1>Please Log in First</h1> 
-      <Link to="/login">
-          {/* Log in Button Added */}
-          <button>Log in</button>
-      </Link>
-    </div>
-    );
-  }
+
   return (
     <div>
 

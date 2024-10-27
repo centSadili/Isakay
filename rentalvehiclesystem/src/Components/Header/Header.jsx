@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Avatar } from 'antd';
+import './Header.css';
 
 const Header = () => {
     const [user, setUser] = useState(null);
@@ -43,15 +44,20 @@ const Header = () => {
             </Link>
             <a href="#" className="logo">Isakay</a>
             <nav className="navbarcarlist">
+                <div className="navigationlinks">
+                <span><Link style={{ textDecoration: "none" }} to="/Home">Home</Link></span>
+                <span><Link style={{ textDecoration: "none" }} to="/vehicles">Vehicles</Link></span>
                 <span><Link style={{ textDecoration: "none" }} to="/about_us">About</Link></span>
                 <span><Link style={{ textDecoration: "none" }} to="/contact">Contact Us</Link></span>
-                <span><Link style={{ textDecoration: "none" }} to="/vehicles">Vehicles</Link></span>
-                <span><Link style={{ textDecoration: "none" }} to="/Home">Home</Link></span>
-                <div className="profile">
+                </div>
+            
+            </nav>
+
+            <div className="profile">
                     <Link style={{ textDecoration: "none" }} to="/profile">
                         <div className="prof-container">
                             <Avatar
-                                size={74}
+                                size={60}
                                 icon={
                                     <img
                                         src={user && user.image ? `http://localhost:3000/api/car_img/${user.image}` : "default_profile_img.png"}
@@ -60,11 +66,11 @@ const Header = () => {
                                 }
                             />
                             <div className="name">
-                                <span>
+                               
                                     {user ? `${user.firstName} ${user.lastName}` : "Guest User"}
                                     <br />
                                     <p>New User</p>
-                                </span>
+                               
                             </div>
                             <button className="logout" onClick={logOut}>
                                     <div className="sign">
@@ -77,7 +83,6 @@ const Header = () => {
                         </div>
                     </Link>
                 </div>
-            </nav>
         </div>
     );
 };

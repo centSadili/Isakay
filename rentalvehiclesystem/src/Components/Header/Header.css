@@ -1,0 +1,92 @@
+.carlist-header {
+  background-color: black;
+  width: 100vw;
+  padding: 10px 5%;
+  display: flex;
+  align-items: center; /* Ensures vertical alignment of header items */
+}
+
+.logo {
+  font-size: 2rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  display: flex;
+  align-items: center; /* Vertically center the logo */
+}
+
+.navbarcarlist {
+  flex: 1; /* Allows the navbar to take available space */
+  display: flex;
+  justify-content: center; /* Centers the navigation links */
+}
+
+.navigationlinks {
+  margin-left: 300px;
+  display: flex; 
+  gap: 2.1rem; 
+}
+
+.navbarcarlist span {
+  padding: 0 1rem; 
+}
+
+.navbarcarlist a {
+  position: relative;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.navbarcarlist a::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: orange;
+  transition: .3s;
+}
+
+.navbarcarlist a:hover::before {
+  width: 100%;
+}
+
+.profile {
+  height: 1%;
+  width: 8.5%;
+  display: flex;
+  align-items: center; 
+  margin-left: auto; 
+}
+
+.prof-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the profile items */
+}
+
+.name {
+  color: white;
+  text-align: center;
+  margin-left: 5px; /* Maintain spacing from the avatar */
+}
+
+.logout {
+  margin-top: 5px; /* Margin above the logout button */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.logout .sign {
+  margin-right: 5px; /* Space between sign and text */
+}
+

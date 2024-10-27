@@ -3,6 +3,7 @@ import axios from 'axios';
 import RentalForm from '../RentalForm/RentalForm';
 import './CarPage.css';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 const CarPage = () => {
   const id = localStorage.getItem("carId") || 'ID Not Found'; // Get the user ID from the URL
@@ -47,23 +48,7 @@ const CarPage = () => {
   return (
 
     <div className="cars-page-container">
-          <div className="carlist-header">
-    <a href='#'>
-        <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img" />
-    </a>
-    <a href='#' className="logo">Isakay</a>
-    <nav className="navbars">
-        <span><a href='#'>Home</a></span>
-        <span><a href='#'>Vehicles</a></span>
-        <span><a href='#'>About</a></span>
-        <span><a href='#'>Contact Us</a></span>
-
-      
-
-
-
-    </nav>
-</div>
+         <Header/>
         <div className="car-page-container"> 
       <div key={car._id} className="car-page-card" >
         <div className="card-page-custom">

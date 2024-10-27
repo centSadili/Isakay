@@ -4,6 +4,7 @@ import { TbManualGearboxFilled, TbAirConditioning } from "react-icons/tb";
 import './CarList.css';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 const CarList = () => {
     const [activeFilter, setActiveFilter] = useState('');
@@ -43,19 +44,7 @@ const CarList = () => {
 
     return (
         <div className="carlist-main-container">
-           <div className="carlist-header">
-    <a href='#'>
-        <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img" />
-    </a>
-    <a href='#' className="logo">Isakay</a>
-    <nav className="navbarcarlist">
-        <span><a href='#'>Home</a></span>
-        <span><a href='#'>Vehicles</a></span>
-        <span><a href='#'>About</a></span>
-        <span><a href='#'>Contact Us</a></span>
-    </nav>
-</div>
-
+           <Header/>
 
             <div className="carlists-container">
                 <h1 className="carlist-title">Select a vehicle group</h1>

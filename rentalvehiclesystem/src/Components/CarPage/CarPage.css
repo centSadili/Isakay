@@ -6,40 +6,47 @@
     box-sizing: border-box;
 }
 
- .cars-header {
+.car-header {
+    background-color: black;
     width: 100vw;
     padding: 10px 5%; 
-    background-color: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap; 
-}
-
-.logo {
+  }
+  
+  .logo {
     font-size: 2rem; 
     color: #fff;
     text-decoration: none;
     font-weight: 700;
     margin-right: auto;
-}
-
-.navbar {
     display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap; 
-}
-
-.navbar a {
+    align-items: center;
+  }
+  
+  .navbars {
+    padding-right: 460px;
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+    margin: auto;
+  }
+  
+  .navbars span {
+    padding: 0 1rem; 
+  }
+  
+  .navbars a {
     position: relative;
     font-size: 1rem; 
     color: #fff;
     font-weight: 500;
     text-decoration: none;
-    margin-left: 2rem; 
-}
-
-.navbar a::before {
+  }
+  
+  .navbars a::before {
     content: '';
     position: absolute;
     top: 100%;
@@ -48,11 +55,11 @@
     height: 2px;
     background: orange;
     transition: .3s;
-}
-
-.navbar a:hover::before {
+  }
+  
+  .navbars a:hover::before {
     width: 100%;
-}
+  }
 
 .cars-page-container {
     overflow-y: scroll; 

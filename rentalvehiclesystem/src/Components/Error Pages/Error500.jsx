@@ -9,7 +9,7 @@ const Error500 = () => (
     title="500"
     subTitle="Sorry, but you need to log in first."
     extra={<Link to="/login">
-        <Button type="primary">Click to Log In</Button>
+        <Button className='error' type="primary">Click to Log In</Button>
       </Link>}
   />
 );

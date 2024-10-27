@@ -4,7 +4,6 @@
 import CarList from './Components/CarList/CarList'
 import CarPage from './Components/CarPage/CarPage'
 import Error500 from './Components/Error Pages/Error500'
-import Header from './Components/Header/Header'
 import About from './Components/Home/About'
 import Contact from './Components/Home/Contact'
 import Home from './Components/Home/Home'
@@ -18,7 +17,8 @@ import {Route,Routes,Navigate} from 'react-router-dom'
 
 function PrivateRoute({ children }) {
   const user = localStorage.getItem('id');
-  return user ? children : <Navigate to="/error" replace />;
+  console.log(user)
+  return user && user !== 'null' ?  children : <Navigate to="/error" replace />;
 }
 
 function App() {

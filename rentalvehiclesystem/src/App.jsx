@@ -3,6 +3,7 @@
 
 import CarList from './Components/CarList/CarList'
 import CarPage from './Components/CarPage/CarPage'
+import Error500 from './Components/Error Pages/Error500'
 import Header from './Components/Header/Header'
 import About from './Components/Home/About'
 import Contact from './Components/Home/Contact'
@@ -14,25 +15,36 @@ import SearchCar from './Components/SearchCar/SearchCar'
 import SignUp from './Components/Signup/SignUp'
 import {Route,Routes,Navigate} from 'react-router-dom'
 
-function App() {  
-  return (
-    <>
-    <Routes>
-    <Route path='/Header' exact element={<Header/>}/>
-      <Route path='/Home' exact element={<Home/>}/>
-      <Route path='/contact' exact element={<Contact/>}/>
-      <Route path='/about_us' exact element={<About/>}/>
-      <Route path='/login' exact element={<LogIn/>}/>
-      <Route path='/signup' exact element={<SignUp/>}/>
-      <Route path='/profile' exact element={<Profile/>}/>
-      <Route path='/vehicles' exact element={<CarList/>}/>
-      <Route path='/search' exact element={<SearchCar/>}/>
-      <Route path='/carpage' exact element={<CarPage/>}/>
-      <Route path='/forgot-password' element={<ForgotPassword/>}/>
-      <Route path ='/' exact element={<Navigate replace to='/login'/>}/>
-    </Routes>
-    </>
-  )
+
+function PrivateRoute({ children }) {
+  const user = localStorage.getItem('id');
+  return user ? children : <Navigate to="/error" replace />;
 }
 
-export default App
+function App() {
+  return (
+    <>
+      <Routes>
+        <Route path='/home' element={<Home />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/about_us' element={<About />} />
+        <Route path='/vehicles' element={<CarList />} />
+        <Route path='/login' element={<LogIn />} />
+        <Route path='/signup' element={<SignUp />} />
+        
+        <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path='/search' element={<PrivateRoute><SearchCar /></PrivateRoute>} />
+        <Route path='/carpage' element={<PrivateRoute><CarPage /></PrivateRoute>} />
+
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/' element={<Navigate replace to='/login' />} />
+        <Route path='/error' element={<Error500 />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
+
+
+

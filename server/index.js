@@ -25,6 +25,8 @@ const RentDetail = require('./routes/rent/addRent')
 const getUserRent = require('./routes/rent/getUserRent')
 const deleteRent = require('./routes/rent/deleteRent')
 const carlist = require('./routes/rent/rentList.js')
+const updateRent = require('./routes/rent/updateRent.js')
+const getRent = require('./routes/rent/getRent.js')
 const app = express()
 //Database Connection
 connectDB()
@@ -55,6 +57,8 @@ app.use('/api/car/',searchCar)
 app.use('/api/rentcar/',RentDetail)
 app.use('/api/user/',getUserRent)
 app.use('/api/rent/',deleteRent)
+app.use('/api/rent/',updateRent)
+app.use('/api/rents/',getRent)
 app.use('/api/rents/',carlist)
 // Global Error Handler
 app.use((err, req, res, next) => {

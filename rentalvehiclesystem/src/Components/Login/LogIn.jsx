@@ -60,7 +60,7 @@ const LogIn = () => {
     <div className="input-group">
         <input
             type="email"
-            className="input"
+            className="input1"
             placeholder=" "
             name="email"
             value={data.email}
@@ -73,7 +73,7 @@ const LogIn = () => {
     <div className="input-group">
         <input
             type="password"
-            className="input"
+            className="input1"
             placeholder=" "
             name="password"
             value={data.password}

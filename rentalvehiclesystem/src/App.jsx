@@ -10,6 +10,7 @@ import Home from './Components/Home/Home'
 import ForgotPassword from './Components/Login/ForgotPassword'
 import LogIn from './Components/Login/LogIn'
 import Profile from './Components/Profile/Profile'
+import UpdateRentDetailsForm from './Components/RentalForm/UpdateRentDetailsForm'
 import SearchCar from './Components/SearchCar/SearchCar'
 import SignUp from './Components/Signup/SignUp'
 import {Route,Routes,Navigate} from 'react-router-dom'
@@ -33,6 +34,7 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         
         <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path='/update/rent/:id' element={<PrivateRoute><UpdateRentDetailsForm /></PrivateRoute>} />
         <Route path='/search' element={<PrivateRoute><SearchCar /></PrivateRoute>} />
         <Route path='/carpage' element={<PrivateRoute><CarPage /></PrivateRoute>} />
 

@@ -251,6 +251,7 @@ const RentalForm = () => {
     <input
       type="text"
       name="middleinitial"
+      maxLength='2'
       value={formData.middleinitial}
       onChange={handleInputChange}
       style={inputStyle}
@@ -311,7 +312,7 @@ const RentalForm = () => {
       type="date"
       name="birthday"
       required
-      value={formData.birthday}
+      value={formData.birthday ? new Date(formData.birthday).toISOString().split("T")[0] : ""}
       onChange={handleInputChange}
       style={inputStyle}
     />

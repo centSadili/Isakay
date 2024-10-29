@@ -126,9 +126,14 @@ const UserRentalDashboard = () => {
                       </div>
                       
                     </div>
+                    <div className='clickables'>
+                      <div>
+                      <button className='close' onClick={()=>viewdetails()}>Close</button>
+                    <Link to={'/update/rent/'+rentDetail._id}><button className='view' >Update</button></Link>
+                      </div>     
+                    </div>
                 
-                  <button className='close' onClick={()=>viewdetails()}>Close</button>
-                  <Link to={'/update/rent/'+rentDetail._id}><button className='close' >Update</button></Link>
+                  
               </div>
             </div>
           )}

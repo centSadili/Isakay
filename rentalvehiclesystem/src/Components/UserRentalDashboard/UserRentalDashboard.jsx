@@ -73,7 +73,7 @@ const UserRentalDashboard = () => {
               <div className="divider">
               <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
               <h2>Car: {rent.carID.car_name}</h2> <br />
-              <h2>Pick up date:{rent.pickUpDate}</h2> <br />
+              <h2>Pick up date:{rent.pickUpDate ? new Date(rent.pickUpDate).toISOString().split("T")[0] : ""}</h2> <br />
               <h2>Pick Up: {rent.carID.pickup}  <span>Drop Off: {rent.carID.dropoff}</span></h2> <br />
               <h2>Days: {rent.carID.days_availability} <span>Price: {rent.carID.price} </span> </h2> <br />
               
@@ -110,11 +110,11 @@ const UserRentalDashboard = () => {
                       <h1>Personal Details</h1>
                       <h2>First Name: {rentDetail.renterID.firstname} <span>Last Name: {rentDetail.renterID.lastname}</span></h2>
                       <h2>Suffix: {rentDetail.renterID.suffix} <span>Gender: {rentDetail.renterID.gender}</span></h2>
-                      <h2>Birthday: {rentDetail.renterID.birthday}</h2> 
+                      <h2>Birthday: {rentDetail.renterID.birthday ? new Date(rentDetail.renterID.birthday).toISOString().split("T")[0] : ""}</h2> 
                       <h2>Address: {rentDetail.renterID.address.street} {rentDetail.renterID.address.city}, {rentDetail.renterID.address.state}</h2><br />
                       <h2>Pick Up: {rentDetail.carID.pickup} <span> Drop Off: {rentDetail.carID.dropoff}</span> </h2>
                       <h2>Days: {rentDetail.carID.days_availability} Day/s <span>Price: {rentDetail.carID.price}</span> </h2>
-                      <h2>Pick up date:{rentDetail.pickUpDate}</h2> <br />
+                      <h2>Pick up date:{rentDetail.pickUpDate ? new Date(rentDetail.pickUpDate).toISOString().split("T")[0] : ""}</h2> <br />
                       <h1>Specifications</h1>
 
                       <div className='Specifications'>

@@ -197,20 +197,30 @@ const UpdateRentDetailsForm = () => {
 
         <h1>Payment Details</h1>
         <label>Card Holder:</label>
-        <input type="text" name="cardHolder" value={formData.cardHolder} onChange={handleInputChange} />
+        <input type="text" name="cardHolder" value={formData.cardHolder} onChange={handleInputChange} readOnly/>
 
         <label>Card Number:</label>
-        <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleInputChange} />
+        <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleInputChange} readOnly/>
 
         <label>Expiration Date:</label>
-        <input type="date" name="expDate" value={formData.expDate} onChange={handleInputChange} />
+        <input type="date" name="expDate" value={formData.expDate} onChange={handleInputChange} readOnly/>
 
         <label>CVC:</label>
-        <input type="number" name="cvc" value={formData.cvc} onChange={handleInputChange} />
+        <input type="number" name="cvc" value={formData.cvc} onChange={handleInputChange} readOnly/>
 
         <label>Pick Up Date:</label>
-        <input type="date" name="pickUpDate" value={formData.pickUpDate ? new Date(formData.pickUpDate).toISOString().split("T")[0] : ""} onChange={handleInputChange} />
+        <input type="date" name="pickUpDate" value={formData.pickUpDate ? new Date(formData.pickUpDate).toISOString().split("T")[0] : ""} onChange={handleInputChange} readOnly/>
 
+
+        <label>Price:</label>
+        <input
+          type="number"
+          name="amountOfPayment"
+          value={rentDetail?.rentDetails?.carID?.price}
+          onChange={handleInputChange}
+          readOnly
+          required
+        />
         <button type="submit">Update</button>
       </form>
     </div>

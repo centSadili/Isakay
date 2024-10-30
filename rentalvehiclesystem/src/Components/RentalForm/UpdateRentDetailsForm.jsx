@@ -1,60 +1,109 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Autocomplete, TextField } from '@mui/material';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Autocomplete, TextField } from "@mui/material";
+import axios from "axios";
 
 const UpdateRentDetailsForm = () => {
   const { id } = useParams();
   const [rentDetail, setRentDetails] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const [cities, setCity] = useState([]);
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState([]);
 
-  useEffect(() => {
-    axios.get('https://psgc.gitlab.io/api/island-groups/luzon/cities/')
-    .then((res) => {
-      const cityNames = res.data.map((city) => ({
-        name: city.name,
-        id: city.code || city.geonameId || city.id || city.name // Use a unique property if available
-      }));
-      setCity(cityNames.sort((a, b) => a.name.localeCompare(b.name))); // Sort and update state
-    })
-    .catch((error) => {
-      console.error(error);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    middleinitial: "",
+    lastname: "",
+    suffix: "",
+    gender: "Male",
+    birthday: "",
+    street: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "",
+    nationality: "",
+    email: "",
+    phone: "",
+    telno: "",
+    emergencyname: "",
+    emergencyno: "",
+    transact_Type: "Visa",
+    cardHolder: "",
+    cardNumber: "",
+    expDate: "",
+    cvc: "",
+    pickUpDate: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
-  
-    // Fetch countries
-    axios.get('https://restcountries.com/v3.1/all?fields=name')
+  };
+
+  useEffect(() => {
+    axios.get("https://psgc.gitlab.io/api/island-groups/luzon/cities/")
       .then((res) => {
-        const countryNames = res.data.map(country => country.name.official); // Collect all countries
-        setCountries(countryNames.sort()); // Update state once with sorted list
+        const cityNames = res.data.map((city) => ({
+          name: city.name,
+          id: city.code || city.geonameId || city.id || city.name,
+        }));
+        setCity(cityNames.sort((a, b) => a.name.localeCompare(b.name)));
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  
-    // Fetch regions
-    axios.get('https://psgc.gitlab.io/api/island-groups/luzon/regions/')
+      .catch((error) => console.error(error));
+
+    axios.get("https://restcountries.com/v3.1/all?fields=name")
       .then((res) => {
-        const regionNames = res.data.map(region => region.regionName); // Collect all regions
-        setRegion(regionNames.sort()); // Update state once with sorted list
+        const countryNames = res.data.map((country) => country.name.official);
+        setCountries(countryNames.sort());
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []); 
+      .catch((error) => console.error(error));
+
+    axios.get("https://psgc.gitlab.io/api/island-groups/luzon/regions/")
+      .then((res) => {
+        const regionNames = res.data.map((region) => region.regionName);
+        setRegion(regionNames.sort());
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   useEffect(() => {
     const fetchRent = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/rents/get-rent/' + id);
+        const response = await axios.get("http://localhost:3000/api/rents/get-rent/" + id);
         setRentDetails(response.data);
-        console.log(response.data);
+        setFormData({
+          firstname: response.data?.rentDetails?.renterID?.firstname || "",
+          middleinitial: response.data?.rentDetails?.renterID?.middleinitial || "",
+          lastname: response.data?.rentDetails?.renterID?.lastname || "",
+          suffix: response.data?.rentDetails?.renterID?.suffix,
+          gender: response.data?.rentDetails?.renterID?.gender,
+          birthday: response.data?.rentDetails?.renterID?.birthday,
+          street: response.data?.rentDetails?.renterID?.address?.street,
+          city: response.data?.rentDetails?.renterID?.address?.city,
+          state: response.data?.rentDetails?.renterID?.address?.state,
+          zipCode: response.data?.rentDetails?.renterID?.address?.zipCode,
+          country: response.data?.rentDetails?.renterID?.address?.country,
+          nationality: response.data?.rentDetails?.renterID?.nationality,
+          email: response.data?.contactDetail?.email,
+          phone: response.data?.contactDetail?.phone,
+          telno: response.data?.contactDetail?.telno,
+          emergencyname: response.data?.contactDetail?.emergency?.emergencyname,
+          emergencyno: response.data?.contactDetail?.emergency?.emergencyno,
+          transact_Type: response.data?.rentDetails?.transactionID?.transact_Type,
+          cardHolder: response.data?.rentDetails?.transactionID?.cardHolder,
+          cardNumber: response.data?.rentDetails?.transactionID?.cardNumber,
+          expDate: response.data?.rentDetails?.transactionID?.expDate,
+          cvc: response.data?.rentDetails?.transactionID?.cvc,
+          pickUpDate: response.data?.rentDetails?.pickUpDate,
+        });
       } catch (err) {
-        setError('Error fetching rents. Please try again.');
+        setError("Error fetching rents. Please try again.");
         console.error(err);
       } finally {
         setLoading(false);
@@ -64,93 +113,105 @@ const UpdateRentDetailsForm = () => {
     fetchRent();
   }, [id]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div>
-      <form>
-      <h1>Personal Details</h1>
+      <form onSubmit={handleSubmit}>
+        <h1>Personal Details</h1>
         <label htmlFor="firstName">First Name:</label>
-        <input type="text" value={rentDetail?.renterID?.firstname || ''}  />
+        <input type="text" name="firstname" value={formData.firstname} onChange={handleInputChange} />
 
         <label htmlFor="middleInitial">Middle Initial:</label>
-        <input type="text" maxLength='2'value={rentDetail?.renterID?.middleinitial || ''}  />
+        <input type="text" name="middleinitial" maxLength="2" value={formData.middleinitial} onChange={handleInputChange} />
 
         <label htmlFor="lastName">Last Name:</label>
-        <input type="text" value={rentDetail?.renterID?.lastname || ''}  />
-        
-        <label htmlFor="lastName">Suffix:</label>
-        <input type="text" value={rentDetail?.renterID?.suffix || ''}  />
+        <input type="text" name="lastname" value={formData.lastname} onChange={handleInputChange} />
+
+        <label htmlFor="suffix">Suffix:</label>
+        <input type="text" name="suffix" value={formData.suffix} onChange={handleInputChange} />
 
         <label htmlFor="gender">Gender:</label>
-        <select value={rentDetail?.renterID?.gender || ''} >
+        <select name="gender" value={formData.gender} onChange={handleInputChange}>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
 
-        <label >Birthday:</label>
-        <input
-          type="date"
-          name="birthday"
-          required
-          value={rentDetail?.renterID?.birthday ? new Date(rentDetail?.renterID?.birthday).toISOString().split("T")[0] : ""}
+        <label>Birthday:</label>
+        <input type="date" name="birthday" value={formData.birthday ? new Date(formData.birthday).toISOString().split("T")[0] : ""} onChange={handleInputChange} />
+
+        <h1>Address</h1>
+        <label>Street:</label>
+        <input type="text" name="street" value={formData.street} onChange={handleInputChange} />
+
+        <label>City:</label>
+        <Autocomplete
+          options={cities}
+          getOptionLabel={(option) => option.name}
+          renderInput={(params) => <TextField {...params} label="City" />}
+          value={cities.find((city) => city.name === formData.city) || null}
+          onChange={(event, newValue) => setFormData({ ...formData, city: newValue ? newValue.name : "" })}
         />
 
-      <h1>Address</h1>
+        <label>State:</label>
+        <Autocomplete
+          options={region}
+          renderInput={(params) => <TextField {...params} label="State" />}
+          value={formData.state}
+          onChange={(event, newValue) => setFormData({ ...formData, state: newValue || "" })}
+        />
 
-      <label>Street:</label>
-      <input
-        type="text"
-        name="street"
-        required
-        value={rentDetail?.renterID?.address?.street || ""}
-      />
+        <label>Country:</label>
+        <Autocomplete
+          options={countries}
+          renderInput={(params) => <TextField {...params} label="Country" />}
+          value={formData.country}
+          onChange={(event, newValue) => setFormData({ ...formData, country: newValue || "" })}
+        />
 
-      <label>City:</label>
-      <Autocomplete
-      options={cities}
-      getOptionLabel={(option) => (typeof option === 'string' ? option : option?.name || '')}
-      renderInput={(params) => <TextField {...params} label="City" />}
-      value={rentDetail?.renterID?.address?.city ? cities.find(city => city.name === rentDetail?.renterID?.address?.city) : null}
-      getoptionselected={(option, value) => option.name === value.name}
-      key={cities.id}
+        <label>Zip Code:</label>
+        <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} />
 
-    />
+        <label>Nationality:</label>
+        <input type="text" name="nationality" value={formData.nationality} onChange={handleInputChange} />
 
-    <label>State:</label>
-    <Autocomplete
-            options={region}
-            renderInput={(params) => <TextField {...params} label="State" />}
-            value={rentDetail?.renterID?.address?.state ?region.find(reg => reg.name === rentDetail?.renterID?.address?.state) : null}
-          />
-    
-    <label>Country:</label>
-    <Autocomplete
-            options={countries}
-            renderInput={(params) => <TextField {...params} label="Country"  />}
-            value={rentDetail?.renterID?.address?.country}
-           />
-    <label>Zip Code:</label>
-    <input 
-    type="text" 
-    name="zipCode" 
-    required 
-    value={rentDetail?.renterID?.address?.zipCode}
-      />
-    <label>Nationality:</label>
-    <input 
-    type="text" 
-    name="nationality" 
-    required 
-    value={rentDetail?.renterID?.nationality}
-    />
-{/* <h1>Contact Details</h1>
-<label style={labelStyle}>Email:</label>
-          <input 
-          type="email" 
-          name="email" 
-          required 
-          value={formData.email}
-          /> */}
+        <h1>Contact Details</h1>
+        <label>Email:</label>
+        <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
+
+        <label>Phone:</label>
+        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} />
+
+        <label>Telephone:</label>
+        <input type="tel" name="telno" value={formData.telno} onChange={handleInputChange} />
+
+        <label>Emergency Contact Name:</label>
+        <input type="text" name="emergencyname" value={formData.emergencyname} onChange={handleInputChange} />
+
+        <label>Emergency Contact Number:</label>
+        <input type="tel" name="emergencyno" value={formData.emergencyno} onChange={handleInputChange} />
+
+        <h1>Payment Details</h1>
+        <label>Card Holder:</label>
+        <input type="text" name="cardHolder" value={formData.cardHolder} onChange={handleInputChange} />
+
+        <label>Card Number:</label>
+        <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleInputChange} />
+
+        <label>Expiration Date:</label>
+        <input type="date" name="expDate" value={formData.expDate} onChange={handleInputChange} />
+
+        <label>CVC:</label>
+        <input type="number" name="cvc" value={formData.cvc} onChange={handleInputChange} />
+
+        <label>Pick Up Date:</label>
+        <input type="date" name="pickUpDate" value={formData.pickUpDate ? new Date(formData.pickUpDate).toISOString().split("T")[0] : ""} onChange={handleInputChange} />
+
+        <button type="submit">Update</button>
       </form>
     </div>
   );

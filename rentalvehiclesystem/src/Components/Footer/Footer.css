@@ -1,76 +1,75 @@
-
+/* Base Footer Styles */
 .footer {
   background-color: black;
   padding: 40px 0;
   color: #000;
   text-align: center;
- 
-
+  max-height: 300px; /* Set a maximum height for the footer */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
 }
-  
-  .footer .footer-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    
-  }
-  
-  .footer-column {
-    margin-bottom: 20px;
-  }
-  
-  .footer-column h3 {
-    color: orange;
-    font-size: 18px;
-    margin-bottom: 10px;
-    font-size: 1vw;
-  }
-  
-  .footer-column ul {
-    color: orange;
-    list-style: none;
-    padding: 0;
 
+.footer .footer-container {
+  display: flex;
+  justify-content: space-between; /* Adjust to space-between for closer alignment */
+  flex-wrap: wrap;
+  gap: 10px; /* Reduced gap for closer spacing on smaller screens */
+}
 
-  }
-  
-  .footer-column ul li {
-    color: orange;
-    margin-bottom: 10px;
-  }
-  
-  .footer-column ul li a {
-    color: orange;
-    text-decoration: none;
-    font-size: 16px;
-    font-size: 1vw;
-  }
-  
-  .footer-column ul li a:hover {
-    text-decoration: underline;
-  }
-  
-  .footer-social {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .footer-social a {
-    font-size: 24px;
-    color: #000;
-    text-decoration: none;
-  }
-  
-  .footer-social a:hover {
-    color: #666;
-  }
-  
- 
-.wrapper {
-  display: inline-flex;
+.footer-column {
+  flex: 1 1 150px; /* Shrinkable columns with minimum width */
+  margin: 5px; /* Reduced margin for closer alignment */
+  text-align: center; /* Centers content for smaller screens */
+}
+
+.footer-column h3 {
+  color: orange;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  color: orange;
   list-style: none;
-  height: 220px;
-  width: 10vw;
+  padding: 0;
+}
+
+.footer-column ul li {
+  color: orange;
+  margin-bottom: 5px; /* Reduced margin for closer spacing */
+}
+
+.footer-column ul li a {
+  color: orange;
+  text-decoration: none;
+  font-size: 0.8vw;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Maintained gap for social icons */
+}
+
+.footer-social a {
+  font-size: 24px;
+  color: #000;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  color: #666;
+}
+
+/* Wrapper for Icons */
+.wrapper {
+  display: flex;
+  list-style: none;
+  height: auto; /* Allow flexible height */
+  width: 100%;
   padding-top: 40px;
   font-family: "Poppins", sans-serif;
   justify-content: center;
@@ -80,7 +79,7 @@
   position: relative;
   background: #fff;
   border-radius: 50%;
-  margin: 10px;
+  margin: 5px; /* Reduced margin for closer alignment */
   width: 40px;
   height: 40px;
   font-size: 18px;
@@ -93,6 +92,7 @@
   transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+/* Tooltip Styles */
 .wrapper .tooltip {
   position: absolute;
   top: 0;
@@ -116,9 +116,9 @@
   bottom: -3px;
   left: 50%;
   transform: translate(-50%) rotate(45deg);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+/* Icon Hover Effects */
 .wrapper .icon:hover .tooltip {
   top: -45px;
   opacity: 1;
@@ -131,6 +131,7 @@
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
 }
 
+/* Social Icon Hover Effects */
 .wrapper .facebook:hover,
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
@@ -150,4 +151,60 @@
 .wrapper .instagram:hover .tooltip::before {
   background: #e4405f;
   color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px 0;
+  }
+
+  .footer .footer-container {
+    flex-direction: column; /* Stacks columns vertically */
+    align-items: center; /* Centers items */
+  }
+
+  .footer-column h3 {
+    font-size: 16px;
+  }
+
+  .footer-column ul li a {
+    font-size: 14px;
+  }
+
+  .footer-social a {
+    font-size: 20px;
+  }
+
+  .wrapper {
+    height: auto; /* Flexible height */
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  .wrapper .icon {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-column h3 {
+    font-size: 14px;
+  }
+
+  .footer-column ul li a {
+    font-size: 12px;
+  }
+
+  .footer-social a {
+    font-size: 18px;
+  }
+
+  .wrapper .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
 }

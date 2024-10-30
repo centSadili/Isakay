@@ -115,7 +115,18 @@ const UpdateRentDetailsForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try{
+      if (window.confirm("Are you sure you want to Update your rental booking? This action cannot be undone.")){
+        const url = `http://localhost:3000/api/rent/update-rent-details/${id}`
+        const res = await axios.put(url,formData)
+        
+        console.log(res);
+      }
+      
+    }catch(err){
+      console.log(err)
+    }
+   
   };
 
   return (

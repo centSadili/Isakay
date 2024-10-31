@@ -95,6 +95,7 @@ router.put('/update-rent-details/:rentId', async (req, res) => {
             },
             { new: true }
         );
+        console.log("Rent details updated successfully")
 
         res.status(200).json({ message: 'Rent details updated successfully' });
 

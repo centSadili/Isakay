@@ -3,7 +3,9 @@
   width: 100vw;
   padding: 10px 5%;
   display: flex;
-  align-items: center; /* Ensures vertical alignment of header items */
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 
 .logo {
@@ -11,82 +13,103 @@
   color: #fff;
   text-decoration: none;
   font-weight: 700;
-  display: flex;
-  align-items: center; /* Vertically center the logo */
 }
 
 .navbarcarlist {
-  flex: 1; /* Allows the navbar to take available space */
+  flex: 1;
   display: flex;
-  justify-content: center; /* Centers the navigation links */
+  justify-content: center; /* Center the navigation links */
+  align-items: center;
+  position: relative; /* Allows the profile section to be aligned on the far right */
 }
 
 .navigationlinks {
-  margin-left: 300px;
-  display: flex; 
-  gap: 2.1rem; 
-}
-
-.navbarcarlist span {
-  padding: 0 1rem; 
-}
-
-.navbarcarlist a {
-  position: relative;
-  font-size: 1rem;
-  color: #fff;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.navbarcarlist a::before {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: orange;
-  transition: .3s;
-}
-
-.navbarcarlist a:hover::before {
-  width: 100%;
+  display: flex;
+  gap: 2.1rem;
+  align-items: center; /* Centers links within the navigation container */
 }
 
 .profile {
-  height: 1%;
-  width: 8.5%;
   display: flex;
-  align-items: center; 
-  margin-left: auto; 
+  align-items: center;
+  flex-direction: column; /* Stack profile info and logout button vertically */
+  position: absolute;
+  right: 0;
 }
 
 .prof-container {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center align the profile items */
+  align-items: center; /* Aligns avatar and username in a row */
+  gap: 10px; /* Adds space between the avatar and the username */
 }
 
 .name {
-  color: white;
-  text-align: center;
-  margin-left: 5px; /* Maintain spacing from the avatar */
+  text-align: left;
+  color: #fff;
 }
 
 .logout {
-  margin-top: 5px; /* Margin above the logout button */
+  margin-top: 5px;
   background: transparent;
   border: none;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color: #fff;
   font-size: 0.9rem;
-  transition: color 0.3s ease;
+  padding: 5px 10px;
+  width: fit-content;
 }
+
+
 
 .logout .sign {
-  margin-right: 5px; /* Space between sign and text */
+  margin-right: 5px;
 }
 
+@media (max-width: 768px) {
+  .navigationlinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    padding: 20px;
+    gap: 1rem;
+    z-index: 10;
+  }
+
+  .navigationlinks.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: auto;
+    z-index: 20;
+  }
+
+  .hamburger span {
+    background-color: white;
+    width: 25px;
+    height: 3px;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}

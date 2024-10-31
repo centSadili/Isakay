@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SearchCar.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const SearchCar = () => {
   const [searched, setSearch] = useState([]);
@@ -10,6 +12,7 @@ const SearchCar = () => {
   const dropoff = localStorage.getItem('dropoff');
   const daysAvailability = localStorage.getItem('daysAvailability');
 
+  const [category, setCategory] = useState('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +29,12 @@ const SearchCar = () => {
 
         if (response.data.cars.length > 0) {
           const searchedcars = response.data.cars;
-          setSearch(searchedcars);
+          if (category === 'all') {
+            setSearch(searchedcars);
+        } else {
+            const carByCategory = searchedcars.filter(car => car.body_type === category);
+            setSearch(carByCategory);
+        }
         } else {
           console.error('No cars found for the selected criteria.');
         }
@@ -36,27 +44,80 @@ const SearchCar = () => {
     };
 
     fetchCar();
-  }, [pickup, dropoff, daysAvailability]);
-
+  }, [pickup, dropoff, daysAvailability,category]);
+  const handleCategory = (cat) => {
+    setCategory(cat);
+};
   const handleCarClick = (carId) => {
     localStorage.setItem('carId', carId);
   };
 
   return (
     <div className="searchcontainer">
-      <div className="cars-header">
-        <a href='#'>
-          <img src="https://cdn-icons-png.flaticon.com/128/3085/3085411.png" alt="Logo Image" className="logo-img"></img>
-        </a>
-        <a href='#' className="logo">Isakay</a>
-        <nav className="navbar"> 
-           <a href='#'>Home</a>
-           <a href='#'>Vehicles</a>
-           <a href='#'>About</a>
-           <a href='#'>Contact Us</a>
-        </nav>
-      </div>
+     <Header/>
       <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Car Listings</h1>
+      <div className="carlist-filter-buttons">
+                    <button
+                        className={`carlist-filter ${category === 'all' ? 'active' : ''}`}
+                        onClick={() => handleCategory('all')}
+                    >
+                        All vehicles
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Sedan' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Sedan')}
+                    >
+                        Sedan
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Hatchback' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Hatchback')}
+                    >
+                        Hatchback
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'SUV' ? 'active' : ''}`}
+                        onClick={() => handleCategory('SUV')}
+                    >
+                        SUV
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Crossover' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Crossover')}
+                    >
+                        Crossover
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Coupe' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Coupe')}
+                    >
+                        Coupe
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Convertible' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Convertible')}
+                    >
+                        Convertible
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Pickup Truck' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Pickup Truck')}
+                    >
+                        Pickup Truck
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Station Wagon' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Station Wagon')}
+                    >
+                        Station Wagon
+                    </button>
+                    <button
+                        className={`carlist-filter ${category === 'Luxury Car' ? 'active' : ''}`}
+                        onClick={() => handleCategory('Luxury Car')}
+                    >
+                        Luxury Car
+                    </button>
+                </div>
       <div className="car-list-custom">
         {searched.map((car) => (
           <Link style={{ textDecoration: 'none' }}
@@ -90,6 +151,8 @@ const SearchCar = () => {
           </Link>
         ))}
       </div>
+
+      <Footer/>
     </div>
   );
 };

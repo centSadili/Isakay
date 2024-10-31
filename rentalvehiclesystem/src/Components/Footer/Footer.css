@@ -5,7 +5,6 @@
   color: #000;
   text-align: center;
   max-height: 300px; /* Set a maximum height for the footer */
-  overflow-y: auto; /* Enable vertical scrolling when content overflows */
 }
 
 .footer .footer-container {

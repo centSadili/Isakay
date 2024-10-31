@@ -1,13 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap');
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-y: auto;
+}
+
+
+.contact-main-container {
+  height: 100vh; /* or adjust as needed */
+  overflow-y: auto;
+}
+
+
+.contact-details {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+}
+
+.forms-container{
+    padding: 3.5rem;
+    margin-left: 2rem;
+
+    
+}
+
+.message{
+  height: 10rlh;
+}
+
+.call-us p{
+  display: inline-flex; 
+  align-items: center;
+  margin-left: 10px;
+}
+
+
+.call-us h6{
+  font-size: 1.5vw;
+  color: #141414;
+}
+
+.call-us a{
+  color: #141414;
+  font-weight: 700;
+
+}
+
+.upper-form{
+  display: flex;
+
+}
+
+.fname{
+  margin-right: 1.5vw;
+}
+
+.contact-title{
+  margin-top: 20px;
+  color: black;
+  text-align: center;
+}
+
+
+.contact-section {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #141414;
+  border: 10px solid white;
+  box-shadow: 0 4px 8px rgba(213, 122, 102, 0.5);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.contact-profile-img {
+  display: block;
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-h1, .contact-h2 {
+  color: #E0BF00;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 25px;
+  text-align: center;
+}
+
+.contact-name {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.contact-title2 {
+  font-size: 20px;
+  text-align: center;
+  color: #E0BF00;
+  margin-top: 10px;
+}
+
+.contact-text {
+  color: white;
+  font-family: "Kode Mono", monospace;
+  font-weight: 400;
+  text-align: justify;
+  margin-top: 20px;
+}
+
+html, body {
+  height: 100%;
+  overflow-y: auto;
+}
+
 .contact-main-container {
   max-width: 100%;
   margin: 0;
   padding: 0;
+  
+
+  
 }
 
-.contact-container {
 
-  color: white;
+.contact-container{
+  padding-bottom: 3rem;
+
+
 }
+
+.main-content{
+  margin-bottom: 5rem;
+}
+
+
+.contact-container h1{
+
+  color: black;
+  font-family: "Oswald", sans-serif;
+  font-size: 2.5vw;
+  font-weight: 500;
+}
+
+.contact-container span {
+  color: grey;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.3vw;
+  font-weight: 500;
+}
+
 
 
 .contact-title{
@@ -64,3 +212,115 @@
   text-align: justify;
   margin-top: 20px;
 }
+
+.all-cards{
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+
+
+}
+
+/* From Uiverse.io by gharsh11032000 */ 
+.card-container {
+  width: 18vw;
+  min-height: 40vh;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.card .front-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-end; /* Aligns text at the bottom */
+  text-align: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  background-image: url('/src/images/pogi.png'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  padding: 1rem;
+  background-color: orange;
+  
+}
+
+.card .front-content p {
+  font-size: 1vw;
+  font-weight: 700;
+  opacity: 1;
+  background: linear-gradient(to left, #ffffff 0%, #ffffff 100% );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+.card .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  background: linear-gradient(-45deg, #d18f00 58%, orange 100% );
+  color: #e8e8e8;
+  padding: 20px;
+  line-height: 1.5;
+  border-radius: 5px;
+  pointer-events: none;
+  transform: translateY(96%);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card .content .heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card:hover .content {
+  transform: translateY(0);
+}
+
+.card:hover .front-content {
+  transform: translateY(-30%);
+}
+
+.card:hover .front-content p {
+  opacity: 0;
+}
+
+.submit {
+  margin-top: 3rem;
+  padding: 15px 20px;
+  border: none;
+  outline: none;
+  background-color: #151515;
+  color: #eee;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+.submit:hover {
+  transform: translateY(-3px);
+}
+

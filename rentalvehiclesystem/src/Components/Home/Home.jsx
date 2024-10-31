@@ -5,6 +5,7 @@ import { Avatar} from 'antd';
 import './Home.css'
 import Footer from '../Footer/Footer';
 import Error500 from '../Error Pages/Error500';
+import Header from '../Header/Header';
 
 
 
@@ -94,38 +95,7 @@ const logOut = () =>{
   return (
     <div className='main-container'>
       
-      <div className='header'>
-        <nav className="navbar">
-          <ul>
-            <li><Link to ='/about_us'><a href="#about">About</a></Link></li>
-            <li><Link to="/vehicles"><a href="#vehicles">Vehicles</a></Link></li>
-            <li><a href="#booking">Booking</a></li>
-            <li><Link to='/contact'><a href="#contacts">Contacts</a></Link></li>
-          </ul>
-          <div className="profile">
-          <Link to="/profile">
-          <div className='prof-container'>
-          <div><Avatar size={64} icon={<img src={user && user.image ? `http://localhost:3000/api/car_img/${user.image}` : "default_profile_img.png"} alt="Profile" />} /></div>
-          <div className='name'><span> {user ? `${user.firstName} ${user.lastName}` : "Guest User"}
-             <br /> 
-          <p>New User</p></span>
-          <Link to="/login">
-          {/* Log out Button Added */}
-          <button className='logout' onClick={logOut}>
-            <div className="sign"><svg viewBox="0 0 512 512">
-              <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
-              <div className="text">{user ? 'Logout':"Sign up"}</div>
-  </button>
-          </Link>
-          </div>
-          </div>
-            
-            </Link>
-          
-            
-          </div>
-        </nav>
-      </div>
+    <Header/>
 
 
       <div className='home-container'>

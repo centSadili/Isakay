@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from '../../Footer/Footer';
+import { useMediaQuery } from 'react-responsive';
 
 const CarPage = () => {
   const id = localStorage.getItem("carId") || "ID Not Found"; // Get the user ID from the URL
@@ -10,16 +11,20 @@ const CarPage = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const cardContainerStyle = {
     display: "flex",
+    flexDirection: isMobile ? "column" : "row",
     width: "90%",
-    padding: "30px",
+    padding: isMobile ? "15px" : "30px",
     borderRadius: "12px",
     alignItems: "center",
+    maxHeight: '80vh',
+    overflowY: 'auto',
   };
 
   const imageContainerStyle = {
-    flex: "3",
+    flex: isMobile ? "100%" : "3",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -35,22 +40,22 @@ const CarPage = () => {
   };
 
   const descriptionContainerStyle = {
-    flex: "1",
-    padding: "0 30px",
+    flex: isMobile ? "100%" : "1",
+    padding: isMobile ? "0 15px" : "0 30px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
   };
 
   const titleStyle = {
-    fontSize: "2rem",
+    fontSize: isMobile ? "1.5rem" : "2rem",
     fontWeight: "bold",
     color: "#333",
     marginBottom: "10px",
   };
 
   const subtitleStyle = {
-    fontSize: "1rem",
+    fontSize: isMobile ? "0.9rem" : "1rem",
     color: "#888",
     textTransform: "uppercase",
     letterSpacing: "1px",
@@ -58,19 +63,19 @@ const CarPage = () => {
   };
 
   const descriptionStyle = {
-    fontSize: "1rem",
+    fontSize: isMobile ? "0.9rem" : "1rem",
     color: "#666",
     margin: "15px 0",
   };
 
   const priceStyle = {
-    fontSize: "1.5rem",
+    fontSize: isMobile ? "1.2rem" : "1.5rem",
     fontWeight: "bold",
     color: "#333",
   };
 
   const actionContainerStyle = {
-    flex: "1",
+    flex: isMobile ? "100%" : "1",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -83,7 +88,7 @@ const CarPage = () => {
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
-    fontSize: "1rem",
+    fontSize: isMobile ? "0.9rem" : "1rem",
     color: "#fff",
     backgroundColor: "#00b894",
     transition: "background-color 0.3s ease",

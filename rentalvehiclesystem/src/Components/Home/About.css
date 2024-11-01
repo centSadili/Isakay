@@ -13,8 +13,9 @@ body, html {
 .about-main-container {
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden; /* Additional overflow-x hidden */
   background-color: black;
-  height: 100vh; 
+  height: 100vh;
 }
 
 .about-title {
@@ -24,22 +25,23 @@ body, html {
 }
 
 .about-container {
-  overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: hidden; /* Ensure no horizontal overflow */
   background-color: whitesmoke;
   width: 100%;
-  max-width: 100vw;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 20px;
 }
 
 .contact-section {
-  max-width: 800px;
+  max-width: 100%;
+  width: 100%;
   margin: 20px auto;
   padding: 20px;
   background-color: black;
   border-radius: 20px;
-  transition: 0.3s;
+  overflow: hidden;
 }
 
 .contact-profile-img {
@@ -67,11 +69,13 @@ body, html {
 }
 
 .gallery {
+  max-width: 100%;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
   margin-top: 20px;
+  overflow: hidden;
 }
 
 .gallery img {
@@ -80,6 +84,12 @@ body, html {
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+}
+
+/* Ensuring no grid item overflows */
+.gallery img,
+.gallery div {
+  min-width: 0; /* Avoid unintended overflow */
 }
 
 .abouts {

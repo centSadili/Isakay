@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import { Avatar, Card} from 'antd';
 const Adminlist = () => {
+    const [allUsers,setAllUsers]=useState([])
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
+    const [search,setSearch]=useState('all')
     useEffect(() => {
         const fetchUsers = async () => {
-            setLoading(true); // Set loading to true at the start of the fetch
+            setLoading(true); 
             try {
                 const response = await axios.get('http://localhost:3000/api/users');
                 const users = response.data;
     
-                // Assuming response.data is an array of users
+              
                 if (users && users.length > 0) {
-                    // Filter users that are admin
                     const adminUsers = users.filter(user => user.admin);
-                    setUsers(adminUsers); // Only set admin users
+                    setAllUsers(adminUsers); 
+                    setUsers(adminUsers); 
                 } else {
-                    setUsers([]); // If no users found, clear the users state
+                    setUsers([]); 
                 }
     
                 console.log(users);
@@ -28,30 +30,48 @@ const Adminlist = () => {
                 setError('Error fetching users. Please try again.');
                 console.error(err);
             } finally {
-                setLoading(false); // Set loading to false after fetch
+                setLoading(false);
             }
         };
     
         fetchUsers();
     }, []);
     
+    useEffect(()=>{
+        if(search==='all' || search ===''){
+            setUsers(allUsers);
+        }else{
+            const filteredUsers = allUsers.filter(
+                user => 
+                    user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+                    user.lastName.toLowerCase().includes(search.toLowerCase())  ||
+                    user.email.toLowerCase().includes(search.toLowerCase())     ||
+                    `${user.firstName} ${user.lastName}`.toLowerCase().includes(search.toLowerCase())
+            );
+            setUsers(filteredUsers);
+        }
+    },[search, allUsers])
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
 
     const handleUserClick = (userId) => {
-        localStorage.setItem('userId', userId); // Fixed to use userId instead of usersId
+        localStorage.setItem('userId', userId); 
         console.log(userId);
     }; 
-
+    const handleSearch = (cat) => {
+        setSearch(cat);
+    };
     return (
         <div>
             <Link to='/admin/user/add'>Sign up User</Link>
+            <label htmlFor="">Search User</label>
+            <input type="text" onChange={(e) => handleSearch(e.target.value)}/>
             {users.map((user) => (
                 
                 <Link 
                     style={{ textDecoration: 'none' }} 
-                    key={user._id} // Use user._id as the key
+                    key={user._id} 
                     to={`/admin/user/profile`} 
                     onClick={() => handleUserClick(user._id)}
                 >

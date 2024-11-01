@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from '../../Footer/Footer';
-import "./CarPage.css";
+
 const CarPage = () => {
   const id = localStorage.getItem("carId") || "ID Not Found"; // Get the user ID from the URL
   const [car, setCar] = useState(null);

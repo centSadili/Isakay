@@ -14,19 +14,37 @@ html, body {
   overflow-y: auto;
 }
 
+.upper-content{
+ margin-top: 4rem;
+  
+}
+
+.upper-content h1{
+  font-size: 4vw;
+}
+
+
+
 
 .contact-details {
     display: flex;
     justify-content: center;
     padding: 2rem 1rem;
     margin-bottom: 3rem;
+    flex-wrap: wrap;
 }
 
 .forms-container{
     padding: 3.5rem;
-    margin-left: 2rem;
+    margin-left: 3.5rem;
+    background-color: #c4c4c442;
+    color: rgb(77, 77, 77);
+    border-radius: 20px;
 
     
+}
+.forms-container h6{
+  font-size: 1vw;
 }
 
 .message{
@@ -37,6 +55,7 @@ html, body {
   display: inline-flex; 
   align-items: center;
   margin-left: 10px;
+  font-size: 1vw;
 }
 
 
@@ -223,7 +242,8 @@ html, body {
 
 }
 
-/* From Uiverse.io by gharsh11032000 */ 
+/* Elijah*/ 
+
 .card-container {
   width: 18vw;
   min-height: 40vh;
@@ -249,19 +269,19 @@ html, body {
   justify-content: center;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
   background-image: url('/src/images/pogi.png'); 
-  background-size: cover; 
+  background-size: 130% 100%; 
   background-position: center; 
   background-repeat: no-repeat;
   padding: 1rem;
-  background-color: orange;
+  background-color: rgb(39, 38, 38);
   
 }
 
 .card .front-content p {
   font-size: 1vw;
-  font-weight: 700;
+  font-weight: 800;
   opacity: 1;
-  background: linear-gradient(to left, #ffffff 0%, #ffffff 100% );
+  background: linear-gradient(to left,  rgb(219, 219, 219) 0%, rgb(255, 255, 254) 100% );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -280,8 +300,8 @@ html, body {
   justify-content: center;
   text-align: center;
   gap: 10px;
-  background: linear-gradient(-45deg, #d18f00 58%, orange 100% );
-  color: #e8e8e8;
+  background: linear-gradient(-45deg, #a8a8a7 60%, rgb(56, 56, 56) 100% );
+  color: #252525;
   padding: 20px;
   line-height: 1.5;
   border-radius: 5px;
@@ -307,6 +327,155 @@ html, body {
   opacity: 0;
 }
 
+/* Stibb */
+
+.card .front-content4 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-end; /* Aligns text at the bottom */
+  text-align: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  background-image: url('/src/images/stib-pic.png'); 
+  background-size: 100% 85% ; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 1rem;
+  background-color: rgb(39, 38, 38);  
+}
+
+.card .front-content4 p {
+  font-size: 1vw;
+  font-weight: 700;
+  opacity: 1;
+  background: linear-gradient(to left, #ffffff 0%, #ffffff 100% );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+
+.card .content .heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card:hover .content {
+  transform: translateY(0);
+}
+
+.card:hover .front-content4 {
+  transform: translateY(-30%);
+}
+
+.card:hover .front-content4 p {
+  opacity: 0;
+}
+
+/* Vincent */
+
+.card .front-content3 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-end; /* Aligns text at the bottom */
+  text-align: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  background-image: url('/src/images/daddy.png'); 
+  background-size: 100% 80% ; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 1rem;
+  background-color: rgb(39, 38, 38);
+}
+
+.card .front-content3 p {
+  font-size: 1vw;
+  font-weight: 700;
+  opacity: 1;
+  background: linear-gradient(to left, #ffffff 0%, #ffffff 100% );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+
+
+.card .content .heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card:hover .content {
+  transform: translateY(0);
+}
+
+.card:hover .front-content3 {
+  transform: translateY(-30%);
+}
+
+.card:hover .front-content3 p {
+  opacity: 0;
+}
+
+/* Spencer */
+
+.card .front-content2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-end; /* Aligns text at the bottom */
+  text-align: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  background-image: url('/src/images/pogimyidol-clean.png'); 
+  background-size: 120% 85% ; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 1rem;
+  background-color: rgb(39, 38, 38);   
+}
+
+.card .front-content2 p {
+  font-size: 1vw;
+  font-weight: 700;
+  opacity: 1;
+  background: linear-gradient(to left, #ffffff 0%, #ffffff 100% );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+
+
+.card .content .heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card:hover .content {
+  transform: translateY(0);
+}
+
+.card:hover .front-content2 {
+  transform: translateY(-30%);
+}
+
+.card:hover .front-content2 p {
+  opacity: 0;
+}
+
 .submit {
   margin-top: 3rem;
   padding: 15px 20px;
@@ -323,4 +492,34 @@ html, body {
 .submit:hover {
   transform: translateY(-3px);
 }
+
+.input {
+  max-width: 2vw;
+  height: 44px;
+  background-color: #05060f0a;
+  border-radius: .5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+.label {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: .9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+.input:hover, .input:focus, .input-group:hover .input {
+  outline: none;
+  border-color: #05060f;
+}
+
+.input-group:hover .label, .input:focus {
+  color: #05060fc2;
+}
+
 

@@ -4,14 +4,18 @@
   padding: 40px 0;
   color: #000;
   text-align: center;
-  max-height: 300px; /* Set a maximum height for the footer */
+  width: 100vw;
+  max-width: 1200px; /* Added max-width for better centering on larger screens */
+  margin: 0 auto; /* Centers the footer */
 }
 
 .footer .footer-container {
   display: flex;
-  justify-content: space-between; /* Adjust to space-between for closer alignment */
+  justify-content: center; /* Changed to center */
   flex-wrap: wrap;
-  gap: 10px; /* Reduced gap for closer spacing on smaller screens */
+  gap: 10px; 
+  padding-left: 0; /* Removed left padding */
+  padding-right: 0; /* Added to remove right padding */
 }
 
 .footer-column {
@@ -22,7 +26,7 @@
 
 .footer-column h3 {
   color: orange;
-  font-size: 18px;
+  font-size: 18px; /* Fixed font size */
   margin-bottom: 10px;
 }
 
@@ -40,7 +44,7 @@
 .footer-column ul li a {
   color: orange;
   text-decoration: none;
-  font-size: 0.8vw;
+  font-size: 16px; /* Fixed font size */
 }
 
 .footer-column ul li a:hover {
@@ -54,7 +58,7 @@
 }
 
 .footer-social a {
-  font-size: 24px;
+  font-size: 24px; /* Fixed font size */
   color: #000;
   text-decoration: none;
 }
@@ -65,13 +69,14 @@
 
 /* Wrapper for Icons */
 .wrapper {
+  margin-left: 15px;
   display: flex;
   list-style: none;
   height: auto; /* Allow flexible height */
   width: 100%;
   padding-top: 40px;
   font-family: "Poppins", sans-serif;
-  justify-content: center;
+  justify-content: center; /* Centers icons */
 }
 
 .wrapper .icon {
@@ -81,7 +86,7 @@
   margin: 5px; /* Reduced margin for closer alignment */
   width: 40px;
   height: 40px;
-  font-size: 18px;
+  font-size: 18px; /* Fixed font size */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +100,7 @@
 .wrapper .tooltip {
   position: absolute;
   top: 0;
-  font-size: 14px;
+  font-size: 14px; /* Fixed font size */
   background: #fff;
   color: #fff;
   padding: 5px 8px;
@@ -164,15 +169,15 @@
   }
 
   .footer-column h3 {
-    font-size: 16px;
+    font-size: 18px; /* Fixed font size */
   }
 
   .footer-column ul li a {
-    font-size: 14px;
+    font-size: 16px; /* Fixed font size */
   }
 
   .footer-social a {
-    font-size: 20px;
+    font-size: 24px; /* Fixed font size */
   }
 
   .wrapper {
@@ -182,28 +187,28 @@
   }
 
   .wrapper .icon {
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
+    width: 40px; /* Fixed size */
+    height: 40px; /* Fixed size */
+    font-size: 18px; /* Fixed font size */
   }
 }
 
 @media (max-width: 480px) {
   .footer-column h3 {
-    font-size: 14px;
+    font-size: 18px; /* Fixed font size */
   }
 
   .footer-column ul li a {
-    font-size: 12px;
+    font-size: 16px; /* Fixed font size */
   }
 
   .footer-social a {
-    font-size: 18px;
+    font-size: 24px; /* Fixed font size */
   }
 
   .wrapper .icon {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
+    width: 40px; /* Fixed size */
+    height: 40px; /* Fixed size */
+    font-size: 18px; /* Fixed font size */
   }
 }

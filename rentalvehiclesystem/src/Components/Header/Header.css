@@ -16,31 +16,31 @@
 }
 
 .navbarcarlist {
-  flex: 1;
   display: flex;
-  justify-content: center; /* Center the navigation links */
+  justify-content: center; /* Centers the nav links */
   align-items: center;
-  position: relative; /* Allows the profile section to be aligned on the far right */
+  flex: 1;
+  position: relative;
 }
 
 .navigationlinks {
   display: flex;
   gap: 2.1rem;
-  align-items: center; /* Centers links within the navigation container */
+  align-items: center;
 }
 
 .profile {
   display: flex;
   align-items: center;
-  flex-direction: column; /* Stack profile info and logout button vertically */
+  color: white;
   position: absolute;
-  right: 0;
+  right: 0; /* Positions profile on the far right */
 }
 
 .prof-container {
   display: flex;
-  align-items: center; /* Aligns avatar and username in a row */
-  gap: 10px; /* Adds space between the avatar and the username */
+  align-items: center;
+  gap: 10px;
 }
 
 .name {
@@ -61,13 +61,18 @@
   width: fit-content;
 }
 
-
-
 .logout .sign {
   margin-right: 5px;
 }
 
+.hamburger {
+  display: none;
+}
+
 @media (max-width: 768px) {
+
+
+  
   .navigationlinks {
     display: none;
     flex-direction: column;
@@ -111,5 +116,16 @@
 
   .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
+  }
+  
+  /* Center profile below nav links in mobile view */
+  .navbarcarlist {
+    flex-direction: column;
+  }
+
+  .profile {
+    align-self: center;
+    margin-top: 20px; /* Adds space between profile and navigation links */
+    position: static; /* Removes absolute positioning for mobile view */
   }
 }

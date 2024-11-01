@@ -12,7 +12,7 @@ const Footer = () => {
     <span className="tooltip">Facebook</span>
     <svg
       viewBox="0 0 320 512"
-      height="1em"
+      height="1.2em"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -24,7 +24,7 @@ const Footer = () => {
   <li className="icon twitter">
     <span className="tooltip">Twitter</span>
     <svg
-      height="1.8em"
+      height="1.6em"
       fill="currentColor"
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"

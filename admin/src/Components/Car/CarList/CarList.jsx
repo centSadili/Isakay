@@ -119,7 +119,7 @@ const CarList = () => {
                             style={{ textDecoration: 'none' }}
                             key={car._id}
                             to={"/admin/car/detail"}
-                            onClick={() => car.status && localStorage.setItem('carId', car._id)}
+                            onClick={() =>localStorage.setItem('carId', car._id)}
                         >
                             <div className={`carlist-car-card ${!car.status ? 'carlist-car-unavailable' : ''}`}>
                                 <div className="picholder">

@@ -1,19 +1,20 @@
+/* Base styles for general layout and elements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.about-main-container {
+body, html {
   width: 100%;
-  max-width: 100vw; 
-  overflow-y: auto; /* Allow scrolling only on the main container */
-  background-color: black;
-  height: 100vh; 
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-.contact-text p {
-  margin-top: 20px; 
+.about-main-container {
+  width: 100%;
+  overflow-y: auto;
+  background-color: black;
+  height: 100vh; 
 }
 
 .about-title {
@@ -23,60 +24,38 @@
 }
 
 .about-container {
+  overflow-x: hidden;
+  background-color: whitesmoke;
   width: 100%;
   max-width: 100vw;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: whitesmoke;
   padding: 20px;
-  /* Remove overflow settings from this container */
 }
 
 .contact-section {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #000000;
-  border-radius: 50px;
+  background-color: black;
+  border-radius: 20px;
   transition: 0.3s;
 }
 
 .contact-profile-img {
   display: block;
-  max-width: 200px;
+  max-width: 150px;
+  width: 100%;
   margin: 0 auto;
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.contact-h1, .contact-h2 {
+.contact-title2, .get {
   color: white;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-size: 25px;
+  font-size: 1.5em;
   text-align: center;
-}
-
-.get {
-  color: white;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-size: 25px;
-  text-align: center;
-}
-
-.contact-name {
-  font-size: 30px;
-  margin-top: 20px;
-}
-
-.contact-title2 {
-  font-size: 20px;
-  text-align: center;
-  color: #E0BF00;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 .contact-text {
@@ -88,6 +67,7 @@
 }
 
 .gallery {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
@@ -96,21 +76,68 @@
 
 .gallery img {
   width: 100%;
-  height: 95%;
+  height: auto;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-}
-
-.gallery img:hover {
-  transform: scale(1.05);
 }
 
 .abouts {
   margin-top: 40px;
   color: #E0BF00;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-optical-sizing: auto;
   font-style: italic;
   text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 15px;
+  }
+
+  .contact-section {
+    padding: 15px;
+  }
+
+  .contact-title2, .get {
+    font-size: 1.3em;
+  }
+
+  .contact-profile-img {
+    max-width: 120px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+  }
+
+  .abouts {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-title, .contact-title2, .get {
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+
+  .contact-profile-img {
+    max-width: 100px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .contact-text {
+    font-size: 0.9em;
+    padding: 0 5px;
+  }
+
+  .abouts {
+    font-size: 1em;
+  }
 }

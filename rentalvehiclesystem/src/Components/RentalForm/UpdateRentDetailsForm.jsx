@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
+import './UpdateForm.css';  
 import axios from "axios";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const UpdateRentDetailsForm = () => {
   const { id } = useParams();
@@ -130,33 +133,67 @@ const UpdateRentDetailsForm = () => {
   };
 
   return (
-    <div>
+    <div className="update-container">
+      <Header></Header>
+      <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h1>Personal Details</h1>
-        <label htmlFor="firstName">First Name:</label>
-        <input type="text" name="firstname" value={formData.firstname} onChange={handleInputChange} />
+        <div className="names">
+          <div>
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" name="firstname" value={formData.firstname} onChange={handleInputChange} />
+          </div>
+        
 
-        <label htmlFor="middleInitial">Middle Initial:</label>
-        <input type="text" name="middleinitial" maxLength="2" value={formData.middleinitial} onChange={handleInputChange} />
-
+        <div>
         <label htmlFor="lastName">Last Name:</label>
         <input type="text" name="lastname" value={formData.lastname} onChange={handleInputChange} />
+        </div>
+        
+        </div>
 
-        <label htmlFor="suffix">Suffix:</label>
-        <input type="text" name="suffix" value={formData.suffix} onChange={handleInputChange} />
+        <div className="names">
 
+            <div>
+            <label htmlFor="middleInitial">Middle Initial:</label>
+                    <input type="text" name="middleinitial" maxLength="2" value={formData.middleinitial} onChange={handleInputChange} />
+
+            </div>
+       
+        
+          <div>
+          <label htmlFor="suffix">Suffix:</label>
+          <input type="text" name="suffix" value={formData.suffix} onChange={handleInputChange} />  
+          </div>
+        
+
+        </div>
+        
+      <div className="name">
+        <div>
         <label htmlFor="gender">Gender:</label>
         <select name="gender" value={formData.gender} onChange={handleInputChange}>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
+        </div>
 
+        <div>
         <label>Birthday:</label>
         <input type="date" name="birthday" value={formData.birthday ? new Date(formData.birthday).toISOString().split("T")[0] : ""} onChange={handleInputChange} />
 
-        <h1>Address</h1>
-        <label>Street:</label>
+        </div>
+      
+
+      </div>
+      <br />
+
+      <h1>Address</h1>
+
+      <div className="names">
+            <div>
+            <label>Street:</label>
         <input type="text" name="street" value={formData.street} onChange={handleInputChange} />
 
         <label>City:</label>
@@ -167,14 +204,31 @@ const UpdateRentDetailsForm = () => {
           value={cities.find((city) => city.name === formData.city) || null}
           onChange={(event, newValue) => setFormData({ ...formData, city: newValue ? newValue.name : "" })}
         />
+            </div>
 
-        <label>State:</label>
+
+            <div>
+            <label>State:</label>
         <Autocomplete
           options={region}
           renderInput={(params) => <TextField {...params} label="State" />}
           value={formData.state}
           onChange={(event, newValue) => setFormData({ ...formData, state: newValue || "" })}
         />
+            </div>
+
+
+
+      </div>
+        
+
+       
+
+        
+
+       
+
+        
 
         <label>Country:</label>
         <Autocomplete
@@ -234,6 +288,10 @@ const UpdateRentDetailsForm = () => {
         />
         <button type="submit">Update</button>
       </form>
+      </div>  
+
+      <Footer></Footer>
+      
     </div>
   );
 };

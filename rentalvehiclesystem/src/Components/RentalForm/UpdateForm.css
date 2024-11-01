@@ -1,0 +1,24 @@
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+
+.names{
+    display: flex;
+}
+
+.update-container{
+    color: red;
+    height: 100vh; /* or adjust as needed */
+    overflow-y: auto;
+  }
+
+.form-container{
+    overflow-y: scroll;
+}

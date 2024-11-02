@@ -2,33 +2,42 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Link,useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import { Upload, message, Col, Row, Button, Input, Image } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { useMediaQuery } from "react-responsive";
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 
 const Profile = () => {
-  const id = localStorage.getItem("userId") || "ID Not Found"; // Get the user ID from the localStorage
+  const id = localStorage.getItem("userId") || "ID Not Found"; // Get the user ID from localStorage
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    image: null,
   });
-  
-  const [image, setImage] = useState(null);
+
+  const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [ctrdelete, setDelete] = useState(0);
+  const [previewImage, setPreviewImage] = useState(null);
 
-  // Retrieve token if using authentication
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]); // Store the selected image file
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    if (newFileList.length > 0) {
+      const file = newFileList[0].originFileObj;
+      setUser({ ...user, image: file });
+    } else {
+      setUser({ ...user, image: null });
+    }
   };
 
-  const handleChange = ({ currentTarget: input }) => {
-    setUser({ ...user, [input.name]: input.value });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
 
   useEffect(() => {
@@ -37,15 +46,13 @@ const Profile = () => {
         const config = {
           headers: {
             "Content-Type": "application/json",
-            // Include the token in headers if required
             Authorization: token ? `Bearer ${token}` : "",
           },
         };
 
-        const response = await axios.get(
-          `http://localhost:3000/api/user/${id}`
-        );
+        const response = await axios.get(`http://localhost:3000/api/user/${id}`, config);
         setUser(response.data.user);
+        setPreviewImage(`http://localhost:3000/api/car_img/${response.data.user.image}`);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching user:", err);
@@ -57,132 +64,145 @@ const Profile = () => {
     fetchUser();
   }, [id, token]);
 
-  useEffect(()=>{
-    if(ctrdelete > 0){
-      if(confirm("Are you sure you want to delete this user?")){
-        axios.delete(`http://localhost:3000/api/user/delete/${id}`)
-        .then((res)=>{
-          alert("User Deleted")
-          console.log(res.data)
-          location = '/admin/user/list'
-        })
-        .catch((error)=> console.error(error))
-      }
-    }     
-  }, [ctrdelete])
-
-  // const deleteUser = async ()=>{
-  //   const deleteUser=()=>{
-  //     axios.delete(`http://localhost:3000/api/user/delete/${id}`)
-  //     .then((res)=>{
-  //       console.log()
-  //     })
-  //   }
-  // }
-
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       if (window.confirm("Are you sure you want to update your details?")) {
-        const url = `http://localhost:3000/api/user/update/${id}`; // Update URL
-
-        // Create FormData to include both user data and image
+        const url = `http://localhost:3000/api/user/update/${id}`;
         const formData = new FormData();
         formData.append("firstName", user.firstName);
         formData.append("lastName", user.lastName);
         formData.append("email", user.email);
-        
-        // Append the image if it exists
-        if (image) {
-          formData.append("image", image);
+
+        if (user.image) {
+          formData.append("image", user.image);
         }
-        
-        console.log("Sending data:", user); // Log the data being sent
 
         const res = await axios.put(url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data", // Set the content type
+            "Content-Type": "multipart/form-data",
             Authorization: token ? `Bearer ${token}` : "",
           },
-        }); // Use PUT method
+        });
 
-        console.log(res.data.message);
+        message.success(res.data.message);
+        setPreviewImage(`http://localhost:3000/api/car_img/${res.data.user.image}`);
         navigate("/Home");
-        // Optionally, you might want to update the state or redirect after successful update
       }
     } catch (error) {
-      if (error.response) {
-        if (error.response.status >= 400 && error.response.status <= 500) {
-          setError(error.response.data.message || "An error occurred.");
-        } else {
-          setError("An unexpected error occurred.");
-        }
-      } else {
-        setError("Network error or request failed. Please try again.");
-      }
-      console.error("Error response:", error);
+      const errorMsg = error.response ? error.response.data.message : "Error updating profile.";
+      message.error(errorMsg);
     }
+  };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Change Image</div>
+    </div>
+  );
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const cardContainerStyle = {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    width: "90%",
+    padding: "30px",
+    borderRadius: "12px",
+    backgroundColor: "#ffffff",
+    gap: "20px",
+    maxHeight: "80vh",
+    overflowY: "auto",
+  };
+
+  const imageContainerStyle = {
+    flex: 2,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+    borderRadius: "12px",
+    width: isMobile ? "100%" : "auto",
+    height: isMobile ? "auto" : "400px",
   };
 
   if (loading) {
     return <div>Loading user details...</div>;
   }
 
-  if (!user) {
-    return <div>Error loading user details.</div>;
-  }
-
   return (
-    <div className="profile-container">
-      <form onSubmit={handleUpdate}>
-        <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile" />
-        
-        <label htmlFor="image">Change Picture:</label><br />
-        <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} />
-                      
-        <label>First Name:</label>
-        <input
-          type="text"
-          placeholder="Enter your First Name"
-          name="firstName"
-          value={user.firstName}
-          onChange={handleChange}
-          required
-        />
+    <div style={{ textAlign: "center", overflowY: "auto", maxHeight: "80vh" }}>
+      <h2>User Profile</h2>
+      <div style={cardContainerStyle}>
+        <form onSubmit={handleUpdate} style={{ flex: 1 }}>
+          <Row gutter={16} style={{ alignItems: "center" }}>
+            <Col span={12}>
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                onChange={handleChange}
+                maxCount={1}
+              >
+                {fileList.length < 1 && uploadButton}
+              </Upload>
 
-        <label>Last Name:</label>
-        <input
-          type="text"
-          placeholder="Enter your Last Name"
-          name="lastName"
-          value={user.lastName}
-          onChange={handleChange}
-          required
-        />
+              <label htmlFor="firstName">First Name:</label>
+              <Input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={user.firstName}
+                onChange={handleInputChange}
+                required
+              />
 
-        <label>Email:</label>
-        <input
-          type="email"
-          placeholder="Enter your Email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-          required
-        />
+              <label htmlFor="lastName">Last Name:</label>
+              <Input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={user.lastName}
+                onChange={handleInputChange}
+                required
+              />
+            </Col>
 
-        {error && <div className="error">{error}</div>}
+            <Col span={12}>
+              <label htmlFor="email">Email:</label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={user.email}
+                onChange={handleInputChange}
+                required
+              />
+            </Col>
+          </Row>
 
-        <button type="submit">Update</button>
-      </form>
+          {error && <div className="error">{error}</div>}
+
+          <Button type="primary" htmlType="submit" style={{ width: "100%", marginTop: "20px" }}>
+            Update
+          </Button>
+        </form>
+
+        {previewImage && (
+          <div style={imageContainerStyle}>
+            <Image src={previewImage} alt="Profile" width={550} height={400} />
+          </div>
+        )}
+      </div>
+
       <Link to="/Home">
-        <button>Go Home</button>
+        <Button type="link">Go Home</Button>
       </Link>
-      <button type="button" onClick={()=> setDelete(ctrdelete+1)}>Delete User</button>
 
       <UserRentalDashboard />
     </div>
   );
 };
-
 
 export default Profile;

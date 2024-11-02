@@ -55,6 +55,8 @@ const SearchCar = () => {
   return (
     <div className="searchcontainer">
      <Header/>
+
+     <div className="search-container">
       <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Car Listings</h1>
       <div className="carlist-filter-buttons">
                     <button
@@ -151,7 +153,7 @@ const SearchCar = () => {
           </Link>
         ))}
       </div>
-
+      </div>
       <Footer/>
     </div>
   );

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Autocomplete, TextField } from '@mui/material';
 import {useNavigate} from 'react-router-dom'
+import './RentalForm.css';
+
+
 const RentalForm = () => {
   const userId = localStorage.getItem('id');
   const carId = localStorage.getItem('carId');

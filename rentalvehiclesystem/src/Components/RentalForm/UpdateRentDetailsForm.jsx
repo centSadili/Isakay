@@ -5,6 +5,7 @@ import './UpdateForm.css';
 import axios from "axios";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Head from '../Head';
 
 const UpdateRentDetailsForm = () => {
   const { id } = useParams();
@@ -134,6 +135,7 @@ const UpdateRentDetailsForm = () => {
 
   return (
     <div className="urdf-container">
+      <Head title="Update Rent Details"/>
       <Header></Header>
       <div className="update-form-container">
       <form onSubmit={handleSubmit}>

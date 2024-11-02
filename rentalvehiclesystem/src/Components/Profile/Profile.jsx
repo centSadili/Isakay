@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 import './Profile.css'
 import Header from "../Header/Header";
+import Head from '../Head';
 
 
 const Profile = () => {
@@ -114,7 +115,7 @@ const Profile = () => {
 
   return (
     <div className="profile-container"> 
-
+      <Head title="User Profile"/>
     <Header></Header>
     <div>
       

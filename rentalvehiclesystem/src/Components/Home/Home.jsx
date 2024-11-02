@@ -6,6 +6,7 @@ import './Home.css'
 import Footer from '../Footer/Footer';
 import Error500 from '../Error Pages/Error500';
 import Header from '../Header/Header';
+import Head from '../Head';
 
 
 
@@ -94,7 +95,7 @@ const logOut = () =>{
 
   return (
     <div className='main-container'>
-      
+      <Head title="Home"/>
     <Header/>
 
 

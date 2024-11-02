@@ -4,6 +4,7 @@ import RentalForm from '../RentalForm/RentalForm';
 import './CarPage.css';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Head from '../Head';
 
 const CarPage = () => {
   const id = localStorage.getItem("carId") || 'ID Not Found'; // Get the user ID from the URL
@@ -48,6 +49,7 @@ const CarPage = () => {
   return (
 
     <div className="cars-page-container">
+      <Head title={car.car_name}/>
          <Header/>
         <div className="car-page-container"> 
       <div key={car._id} className="car-page-card" >

@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import './Login.css';
+import Head from '../Head';
 
 const ForgotPassword = () => {
 
@@ -30,6 +31,7 @@ const ForgotPassword = () => {
     }
   return (
     <div className="container">
+      <Head title="Forgot Password"/>
       <div className="form-container">
         <div className="welcome-text">
           <h1>ISAKAY</h1>

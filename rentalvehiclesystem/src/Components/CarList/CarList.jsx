@@ -5,6 +5,7 @@ import './CarList.css';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Head from '../Head';
 
 const CarList = () => {
     const [activeFilter, setActiveFilter] = useState('');
@@ -44,6 +45,7 @@ const CarList = () => {
 
     return (
         <div className="carlist-main-container">
+            <Head title="List of Cars"/>
            <Header/>
 
             <div className="carlists-container">

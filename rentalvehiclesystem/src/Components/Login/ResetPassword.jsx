@@ -1,6 +1,8 @@
 import React, {useState, useEffect}from 'react'
 import axios from 'axios'
 import { Link, useSearchParams } from 'react-router-dom'
+import Head from '../Head';
+
 const ResetPassword = () => {
   const [codeval, setCodeVal] = useState("")
   const [retype, setRetype] = useState("")
@@ -43,6 +45,7 @@ const ResetPassword = () => {
 
   return (
     <div className="container">
+      <Head title="Reset Password"/>
       <div className="form-container">
         <div className="welcome-text">
           <h1>ISAKAY</h1>

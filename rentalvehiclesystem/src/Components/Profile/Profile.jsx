@@ -5,6 +5,8 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 import './Profile.css'
+import Header from "../Header/Header";
+
 
 const Profile = () => {
   const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from the localStorage
@@ -30,6 +32,7 @@ const Profile = () => {
   const handleChange = ({ currentTarget: input }) => {
     setUser({ ...user, [input.name]: input.value });
   };
+  
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -110,12 +113,16 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-container"> 
+
+    <Header></Header>
+    <div>
+      
+    </div>
       <div className ="info-update">
       
         
       <form onSubmit={handleUpdate}>
-      <h1>Welcome to your account!</h1>
       <div className="main-picture">
       <img src={`http://localhost:3000/api/car_img/${user.image}`} alt="Profile"  />
      

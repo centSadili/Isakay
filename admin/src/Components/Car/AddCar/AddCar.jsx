@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Upload, Image, message, Col, Row, Button, Input, Select } from "antd";
-import Footer from "../../Footer/Footer";
 import { useMediaQuery } from 'react-responsive';
 
 const { Option } = Select;
@@ -311,7 +310,6 @@ const AddCar = () => {
           </div>
         )}
       </div>
-      <Footer/>
     </div>
   );
   

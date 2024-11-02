@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, Input, Avatar, Button } from 'antd';
+import { Table, Input, Avatar, Button, Modal, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Userlist = () => {
@@ -27,6 +27,23 @@ const Userlist = () => {
 
     fetchUsers();
   }, []);
+
+  const handleDelete = async (userId) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this user?',
+      onOk: async () => {
+        try {
+          await axios.delete(`http://localhost:3000/api/user/delete/${userId}`);
+          setUsers((prevUsers) => prevUsers.filter(user => user._id !== userId));
+          setAllUsers((prevAllUsers) => prevAllUsers.filter(user => user._id !== userId));
+          message.success('User deleted successfully');
+        } catch (err) {
+          console.error('Error deleting user:', err);
+          message.error('Error deleting user. Please try again.');
+        }
+      },
+    });
+  };
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -82,9 +99,14 @@ const Userlist = () => {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => (
-        <Button type="link" onClick={() => handleUserClick(record._id)}>
-          View Profile
-        </Button>
+        <>
+          <Button type="link" onClick={() => handleUserClick(record._id)}>
+            View Profile
+          </Button>
+          <Button type="link" danger onClick={() => handleDelete(record._id)}>
+            Delete
+          </Button>
+        </>
       ),
     },
   ];
@@ -107,9 +129,6 @@ const Userlist = () => {
         dataSource={users}
         rowKey="_id"
         pagination={{ pageSize: 5 }}
-        onRow={(record) => ({
-          onClick: () => handleUserClick(record._id),
-        })}
       />
     </div>
   );

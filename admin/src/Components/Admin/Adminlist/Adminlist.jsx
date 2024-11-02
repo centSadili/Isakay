@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, Input, Avatar, Button } from 'antd';
+import { Table, Input, Avatar, Button, Modal, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Adminlist = () => {
@@ -16,7 +16,6 @@ const Adminlist = () => {
       try {
         const response = await axios.get('http://localhost:3000/api/users');
         const users = response.data;
-
         if (users && users.length > 0) {
           const adminUsers = users.filter(user => user.admin);
           setAllAdmins(adminUsers);
@@ -34,6 +33,23 @@ const Adminlist = () => {
 
     fetchAdmins();
   }, []);
+
+  const handleDelete = async (userId) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this user?',
+      onOk: async () => {
+        try {
+          await axios.delete(`http://localhost:3000/api/user/delete/${userId}`);
+          setAdmins((prevAdmins) => prevAdmins.filter(admin => admin._id !== userId));
+          setAllAdmins((prevAllAdmins) => prevAllAdmins.filter(admin => admin._id !== userId));
+          message.success('User deleted successfully');
+        } catch (err) {
+          console.error('Error deleting user:', err);
+          message.error('Error deleting user. Please try again.');
+        }
+      },
+    });
+  };
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -83,9 +99,14 @@ const Adminlist = () => {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => (
-        <Button type="link" onClick={() => handleUserClick(record._id)}>
-          View Profile
-        </Button>
+        <>
+          <Button type="link" onClick={() => handleUserClick(record._id)}>
+            View Profile
+          </Button>
+          <Button type="link" danger onClick={() => handleDelete(record._id)}>
+            Delete
+          </Button>
+        </>
       ),
     },
   ];
@@ -109,9 +130,6 @@ const Adminlist = () => {
         dataSource={admins}
         rowKey="_id"
         pagination={{ pageSize: 5 }}
-        onRow={(record) => ({
-          onClick: () => handleUserClick(record._id),
-        })}
       />
     </div>
   );

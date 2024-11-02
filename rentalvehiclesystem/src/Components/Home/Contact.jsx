@@ -7,17 +7,13 @@ import Footer from '../Footer/Footer'
 const Contact = () => {
   return (
     <div className="contact-main-container">
-      <div>
           <Header />
-      </div>
-      
-
       <div className="contact-container">
-        <div className="upper-content">
+        
         <h1 className="contact-title">We've got an entire team dedicated to supporting you and your inquiries <br />
           <span>Get help 24/7, with our experts and employees here at Isakay Rental Services</span>
         </h1><br />
-        </div>
+        
 
         <div className="main-content">
 
@@ -144,7 +140,7 @@ const Contact = () => {
        
 
       </div>
-      <Footer></Footer>
+      <Footer/>
     </div>
   )
 }

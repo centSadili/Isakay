@@ -1,0 +1,61 @@
+/* General container styling to contain overflow */
+.rental-form {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  
+  /* Adjust layout for smaller screens */
+  @media (max-width: 768px) {
+    .rental-form {
+      padding: 10px;
+      overflow-y: auto;
+    }
+  
+    /* Stack form items vertically */
+    .rental-form .form-row {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    /* Set each input to full width */
+    .rental-form input,
+    .rental-form select,
+    .rental-form .MuiAutocomplete-root,
+    .rental-form .form-item {
+      width: 100% !important;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+  
+    /* Label adjustments for spacing */
+    .rental-form label {
+      margin-bottom: 5px;
+    }
+  
+    /* Adjust heading size */
+    .rental-form h1 {
+      font-size: 1.5em;
+      text-align: center;
+    }
+  }
+  
+  /* Further adjustments for very small screens */
+  @media (max-width: 480px) {
+    .rental-form {
+      padding: 5px;
+    }
+  
+    .rental-form h1 {
+      font-size: 1.2em;
+    }
+  
+    .rental-form button {
+      width: 100%;
+      font-size: 1em;
+    }
+  }
+  

@@ -21,8 +21,10 @@ html, body {
     
 }
 
+
 .info-update{
   padding: .3rem;
+  height: 100vh;
     width: 25%;
     height: auto;
     display: flex;
@@ -30,7 +32,6 @@ html, body {
     justify-content: start;
     font-weight: bold;
     padding-left: 30px;
-    background: linear-gradient(to left, rgb(230, 134, 26),rgb(223, 147, 6));
     color: black;
     border-right: solid 2px black;
 
@@ -43,6 +44,7 @@ html, body {
 
 .main-picture{
     padding-left: 2rem;
+    padding-top: 1rem;
     margin-bottom: 2rlh;
 }
 
@@ -103,6 +105,7 @@ html, body {
   width: 75%;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   max-height: 920px; /* Set a max height to allow scrolling */
   overflow-y: auto;
 }
@@ -157,3 +160,5 @@ html, body {
     box-shadow: none;
     transform: scale(0.98);
   }
+
+  

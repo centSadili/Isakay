@@ -1,3 +1,4 @@
+/* Container styling */
 .carlist-header {
   background-color: black;
   width: 100vw;
@@ -8,81 +9,112 @@
   position: relative;
 }
 
+/* Logo styling */
 .logo {
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
   color: #fff;
+  font-size: 2rem;
   text-decoration: none;
   font-weight: 700;
-}
-
-.navbarcarlist {
-  display: flex;
-  justify-content: center; /* Centers the nav links */
-  align-items: center;
-  flex: 1;
-  position: relative;
-}
-
-.navigationlinks {
-  display: flex;
-  gap: 2.1rem;
-  align-items: center;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  color: white;
-  position: absolute;
-  right: 0; /* Positions profile on the far right */
-}
-
-.prof-container {
-  display: flex;
-  align-items: center;
   gap: 10px;
 }
 
-.name {
-  text-align: left;
-  color: #fff;
+.logo-img {
+  width: 50px;
 }
 
-.logout {
-  margin-top: 5px;
-  background: transparent;
+/* Navigation Links */
+.navigationlinks {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  gap: 2rem;
+  margin-right: 20px; /* Pushes links to the left */
+}
+
+.navigationlinks a {
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+
+.profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  margin-top: 10px;
+  text-align: center;
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  transform: translateX(50%); /* Center the dropdown under the profile icon */
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  width: 150px;
+  flex-direction: column;
+}
+
+.profile:hover .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-menu .name {
+  color: #fff;
+  font-size: 1rem;
+  padding-bottom: 5px;
+}
+
+.dropdown-menu .logout {
+  color: white;
+  background: none;
   border: none;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  color: #fff;
-  font-size: 0.9rem;
-  padding: 5px 10px;
-  width: fit-content;
+  width: 100%; /* Ensures the button takes the full width */
+  text-align: center; /* Centers the text */
+  padding: 5px 0; /* Adds some vertical padding */
 }
 
-.logout .sign {
-  margin-right: 5px;
-}
-
+/* Hamburger styling for mobile */
 .hamburger {
   display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-right: 50px; /* Adds space between hamburger and profile */
 }
 
+.hamburger span {
+  background-color: white;
+  width: 25px;
+  height: 3px;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+
+.logout{
+  text-align: center;
+  justify-content: center;
+}
+
+/* Show/hide navigation links in mobile */
 @media (max-width: 768px) {
-
-
-  
   .navigationlinks {
     display: none;
     flex-direction: column;
+    background-color: black;
     position: absolute;
     top: 60px;
-    left: 0;
+    right: 0;
     width: 100%;
-    background-color: black;
-    padding: 20px;
-    gap: 1rem;
+    padding: 10px 0;
+    text-align: center;
     z-index: 10;
   }
 
@@ -92,40 +124,12 @@
 
   .hamburger {
     display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    margin-left: auto;
-    z-index: 20;
-  }
-
-  .hamburger span {
-    background-color: white;
-    width: 25px;
-    height: 3px;
-    margin: 4px 0;
-    transition: all 0.3s ease;
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    margin-right: auto; /* Align hamburger to the left */
   }
   
-  /* Center profile below nav links in mobile view */
-  .navbarcarlist {
-    flex-direction: column;
-  }
-
   .profile {
-    align-self: center;
-    margin-top: 20px; /* Adds space between profile and navigation links */
-    position: static; /* Removes absolute positioning for mobile view */
+    position: absolute;
+    top: 15px;
+    right: 10px;
   }
 }

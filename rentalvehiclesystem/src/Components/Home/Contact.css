@@ -5,13 +5,19 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 
 .contact-main-container {
-  height: 100vh; /* or adjust as needed */
+  width: 100%;
+  height: 100vh; 
   overflow-y: auto;
+  overflow-x: hidden; 
+  background-color: black;
+  
 }
 
 .upper-content{
@@ -36,13 +42,14 @@ html, body {
 
 .forms-container{
     padding: 3.5rem;
-    margin-left: 3.5rem;
+    margin: 1rem;
     background-color: #c4c4c442;
     color: rgb(77, 77, 77);
     border-radius: 20px;
-
-    
+    max-width: 90%;
+   
 }
+
 .forms-container h6{
   font-size: 1vw;
 }
@@ -60,7 +67,7 @@ html, body {
 
 
 .call-us h6{
-  font-size: 1.5vw;
+  font-size: 2vw;
   color: #141414;
 }
 
@@ -72,6 +79,7 @@ html, body {
 
 .upper-form{
   display: flex;
+  flex-wrap: wrap;
 
 }
 
@@ -149,10 +157,14 @@ html, body {
 }
 
 
-.contact-container{
-  padding-bottom: 3rem;
+.contact-container {
+  max-width: 100%;
+  overflow-x: hidden; /* Ensure no horizontal overflow */
+  background-color: whitesmoke;
 
-
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
 }
 
 .main-content{
@@ -164,14 +176,14 @@ html, body {
 
   color: black;
   font-family: "Oswald", sans-serif;
-  font-size: 2.5vw;
+  font-size: 3vw;
   font-weight: 500;
 }
 
 .contact-container span {
   color: grey;
   font-family: "Oswald", sans-serif;
-  font-size: 1.3vw;
+  font-size: 1.5vw;
   font-weight: 500;
 }
 

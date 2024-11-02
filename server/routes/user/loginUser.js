@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User} = require('../../models/user'); // Ensure you're importing 'validate'
 const Joi = require('joi');
 const bcrypt = require('bcryptjs');
+const authToken = require('../../middleware/auth')
 
 router.post('/', async (req, res) => {
     try {
@@ -20,7 +21,7 @@ router.post('/', async (req, res) => {
             return res.status(400).send({ message: 'Invalid Password' });
         }
 
-        const token = user.generateAuthToken();
+        const token = authToken.generateAuthToken();
         return res.status(200).send({ message: 'Logged In Successfully!',token:token, userId:user._id,admin:user.admin });
 
     } catch (error) {

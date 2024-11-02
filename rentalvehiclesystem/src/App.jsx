@@ -9,6 +9,7 @@ import Contact from './Components/Home/Contact'
 import Home from './Components/Home/Home'
 import ForgotPassword from './Components/Login/ForgotPassword'
 import LogIn from './Components/Login/LogIn'
+import ResetPassword from './Components/Login/ResetPassword'
 import Profile from './Components/Profile/Profile'
 import UpdateRentDetailsForm from './Components/RentalForm/UpdateRentDetailsForm'
 import SearchCar from './Components/SearchCar/SearchCar'
@@ -32,16 +33,16 @@ function App() {
         <Route path='/vehicles' element={<CarList />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/signup' element={<SignUp />} />
-        
         <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path='/update/rent/:id' element={<PrivateRoute><UpdateRentDetailsForm /></PrivateRoute>} />
         <Route path='/search' element={<PrivateRoute><SearchCar /></PrivateRoute>} />
         <Route path='/carpage' element={<PrivateRoute><CarPage /></PrivateRoute>} />
-
-        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/forgot-password' exact element={<ForgotPassword/>}/>
+        <Route path='/resetPassword' element={<ResetPassword/>}/>
         <Route path='/' element={<Navigate replace to='/login' />} />
         <Route path='/error' element={<Error500 />} />
       </Routes>
+      
     </>
   );
 }

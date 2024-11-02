@@ -5,31 +5,40 @@ import './Login.css';
 
 const ForgotPassword = () => {
 
-    const [email,setEmail]=useState()
-    const [error,setError]=useState("")
+    const [email,setEmail]=useState("")
+    const [msg,setMsg]=useState("")
+    const [success, setSuccess] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const navigate=useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/api/user/forgot-password', {email})
+        setLoading(true)
+        axios.post('http://localhost:3000/api/resetpassword', {email})
         .then(res => {
-            if(res.data.Status === "Success") {
-                // navigate('/login')
-                alert(`message sent on your email!`)
-               
-            }
+              if(res.data.status == "Success"){
+                setMsg(res.data.status)
+                console.log(res.data)
+              }
+              else if(res.data.status == "User not found"){
+                setMsg(res.data.status)
+              }
+              setSuccess(true)
+              setLoading(false)
         }).catch(err => console.log(err))
     }
   return (
     <div className="container">
-  <div className="form-container">
-    <div className="welcome-text">
-        <h1>ISAKAY</h1>
-        <p>Forgot your Password?</p>
-    </div>
-    <form onSubmit={handleSubmit}>
-    <div className="input-group">
+      <div className="form-container">
+        <div className="welcome-text">
+          <h1>ISAKAY</h1>
+          <p>Forgot your Password</p>
+        </div>
+        
+      <form onSubmit={handleSubmit}>
+      {!success && 
+      <div className="input-group">
         <input
             type="email"
             className="input"
@@ -40,16 +49,19 @@ const ForgotPassword = () => {
             required
         />
         <label className="user-label">Email</label>
-    </div>
-    {error && <div className="error">{error}</div>}
-    
+      </div>
+      }
+      {isLoading && 
+      <div>
+        <img src="" alt="LoadingLogo" />
+        <div>Loading...</div>
+      </div>}
+    {success && (
+      <div className="msg">{msg}</div>
+    )}
     <button className='butt' type="submit">Send</button>
-    <Link to="/login"><button className='butt'>Back to Login</button></Link>
-</form>
-
-
-
-    
+    <Link to="/login"><button className='butt' type='button'>Back to Login</button></Link>
+    </form>
   </div>
   <div className="image-container"></div>
 </div>

@@ -1,116 +1,166 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Table, Input, Button, Popconfirm, message } from "antd";
+import dayjs from "dayjs";
 
 const Rentlist = () => {
   const [allRents, setAllRents] = useState([]);
   const [rents, setRents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const [search, setSearch] = useState("all");
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      // Fixed the function name to be more descriptive
+    const fetchRentDetails = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/rents/user-rent-details/"
-        );
+        const response = await axios.get("http://localhost:3000/api/rents/user-rent-details/");
         setAllRents(response.data.rentDetails);
         setRents(response.data.rentDetails);
-        console.log(response.data.rentDetails);
       } catch (err) {
-        setError("Error fetching users. Please try again.");
+        setError("Error fetching rent details. Please try again.");
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
-  }, [rents]);
+    fetchRentDetails();
+  }, []);
 
-  useEffect(() => {
-    if (search === "all" || search === "") {
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setSearch(searchTerm);
+    if (searchTerm === "") {
       setRents(allRents);
     } else {
       const filteredRents = allRents.filter(
         (rent) =>
-          rent.renterID.firstname
-            .toLowerCase()
-            .includes(search.toLowerCase()) ||
-          rent.renterID.lastname.toLowerCase().includes(search.toLowerCase()) ||
+          rent.renterID.firstname.toLowerCase().includes(searchTerm) ||
+          rent.renterID.lastname.toLowerCase().includes(searchTerm) ||
           `${rent.renterID.firstname} ${rent.renterID.lastname}`
             .toLowerCase()
-            .includes(search.toLowerCase())
+            .includes(searchTerm)
       );
       setRents(filteredRents);
     }
-  }, [search, allRents]);
+  };
 
   const deleteRentDetails = async (rentId, carId) => {
     try {
-      if (window.confirm("Are you sure you want to Cancel your Rent?")) {
-        const response = await axios.delete(
-          `http://localhost:3000/api/rent/delete-rent-details/${rentId}`
-        );
-        alert(response.data.message);
-        if (response.status === 200) {
-          alert("Rent CANCELLED successfully");
+      const response = await axios.delete(
+        `http://localhost:3000/api/rent/delete-rent-details/${rentId}`
+      );
+      message.success(response.data.message);
 
-          // Update the car status to 'false'
-          await axios.put(`http://localhost:3000/api/updatecar/${carId}`, {
-            status: true,
-          });
-        }
-      }
+      await axios.put(`http://localhost:3000/api/updatecar/${carId}`, {
+        status: true,
+      });
+
+      setRents((prevRents) => prevRents.filter((rent) => rent._id !== rentId));
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.error || "Error deleting rent details."); // Notify user of error
+        message.error(error.response.data.error || "Error deleting rent details.");
       } else {
-        alert("An error occurred. Please try again.");
+        message.error("An error occurred. Please try again.");
       }
     }
   };
+
   const handleRentClick = (rentId) => {
     localStorage.setItem("rentId", rentId);
+    navigate(`/admin/rent/details/${rentId}`);
   };
 
-  const handleSearch = (cat) => {
-    setSearch(cat);
-  };
+  const columns = [
+    {
+      title: "Renter",
+      dataIndex: "renterID",
+      key: "renter",
+      render: (renter) => `${renter.firstname} ${renter.lastname}`,
+      sorter: (a, b) => a.renterID.firstname.localeCompare(b.renterID.firstname),
+    },
+    {
+      title: "Car",
+      dataIndex: "carID",
+      key: "car",
+      render: (car) => car.car_name,
+    },
+    {
+      title: "Pick Up",
+      dataIndex: "carID",
+      key: "pickup",
+      render: (car) => car.pickup,
+    },
+    {
+      title: "Drop Off",
+      dataIndex: "carID",
+      key: "dropoff",
+      render: (car) => car.dropoff,
+    },
+    {
+      title: "Pick Up Date",
+      dataIndex: "pickUpDate",
+      key: "pickUpDate",
+      render: (date) => dayjs(date).format("YYYY-MM-DD"),
+    },
+    {
+      title: "Days Available",
+      dataIndex: "carID",
+      key: "days_availability",
+      render: (car) => car.days_availability,
+    },
+    {
+      title: "Price",
+      dataIndex: "carID",
+      key: "price",
+      render: (car) => `$${car.price}`,
+      sorter: (a, b) => a.carID.price - b.carID.price,
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, rent) => (
+        <div>
+          <Button type="link" onClick={() => handleRentClick(rent._id)}>
+            View Details
+          </Button>
+          <Popconfirm
+            title="Are you sure you want to cancel this rent?"
+            onConfirm={() => deleteRentDetails(rent._id, rent.carID._id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="link" danger>
+              Cancel
+            </Button>
+          </Popconfirm>
+        </div>
+      ),
+    },
+  ];
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+
   return (
     <div>
-      <Link to="/admin/rent/add">Rent Car</Link>
       <br />
-      <label htmlFor="">Search User</label>
-      <input type="text" onChange={(e) => handleSearch(e.target.value)} />
-      {rents.map((rent) => (
-        <Link
-          style={{ textDecoration: "none" }}
-          key={rent._id}
-          onClick={() => handleRentClick(rent._id)}
-        >
-          <div key={rent._id}>
-            <h2>
-              Name: {rent.renterID.firstname} {rent.renterID.lastname}
-            </h2>
-            <h2>Car: {rent.carID.car_name}</h2>
-            <h2>Pick Up: {rent.carID.pickup}</h2>
-            <h2>Drop Off: {rent.carID.dropoff}</h2>
-            <h2>Pick up date:{rent.pickUpDate}</h2>
-            <h2>Days: {rent.carID.days_availability}</h2>
-            <h2>Price: {rent.carID.price}</h2>
-            <button onClick={() => deleteRentDetails(rent._id, rent.carID._id)}>
-              Cancel
-            </button>
-            <button>View Details</button>
-          </div>
-        </Link>
-      ))}
+      <label>Search Renter:</label>
+      <Input
+        placeholder="Search by renter's name"
+        value={search}
+        onChange={handleSearch}
+        style={{ width: 300, marginBottom: 20 }}
+      />
+      <Table
+        columns={columns}
+        dataSource={rents}
+        rowKey="_id"
+        pagination={{ pageSize: 5 }}
+        loading={loading}
+      />
     </div>
   );
 };

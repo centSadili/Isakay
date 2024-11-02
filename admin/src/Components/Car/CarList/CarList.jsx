@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Table, Tag ,Avatar} from 'antd';
 import { TbManualGearboxFilled, TbAirConditioning } from "react-icons/tb";
-import './CarList.css';
 import { Link } from 'react-router-dom';
-import Footer from '../../Footer/Footer';
-
-
+import './CarList.css';
 
 const CarList = () => {
-    const [activeFilter, setActiveFilter] = useState('');
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [category, setCategory] = useState('all');
 
     useEffect(() => {
         const fetchCars = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/cars');
-                const cars = response.data;
-                if (category === 'all') {
-                    setCars(cars);
-                } else {
-                    const carByCategory = cars.filter(car => car.body_type === category);
-                    setCars(carByCategory);
-                }
+                setCars(response.data.map(car => ({ ...car, key: car._id })));
             } catch (err) {
                 setError('Error fetching cars. Please try again.');
                 console.error(err);
@@ -34,123 +24,106 @@ const CarList = () => {
         };
 
         fetchCars();
-    }, [category]);
+    }, []);
 
-    const handleCategory = (cat) => {
-        setCategory(cat);
-    };
+    const columns = [
+        {
+            title: 'Car ID',
+            dataIndex: '_id',
+            sorter: (a, b) => a._id.localeCompare(b._id),
+        },
+        {
+            title: 'Car Image',
+            dataIndex: 'image',
+            key: 'image',
+            render: (image) => (
+                <Avatar shape="square" src={`http://localhost:3000/api/car_img/${image}`} alt="User Avatar" />
+              ),
+        },
+        {
+            title: 'Car Name',
+            dataIndex: 'car_name',
+            sorter: (a, b) => a.car_name.localeCompare(b.car_name),
+        },
+        {
+            title: 'Price ($)',
+            dataIndex: 'price',
+            sorter: (a, b) => a.price - b.price,
+        },
+        {
+            title: 'Transmission',
+            dataIndex: 'transmission',
+            sorter: (a, b) => a.transmission.localeCompare(b.transmission),
+            render: (text) => (
+                <span>
+                    <TbManualGearboxFilled /> {text}
+                </span>
+            ),
+        },
+        {
+            title: 'Air Conditioning',
+            dataIndex: 'air_conditioning',
+            render: () => (
+                <span>
+                    <TbAirConditioning /> Air Conditioner
+                </span>
+            ),
+        },
+        {
+            title: 'Body Type',
+            dataIndex: 'body_type',
+            filters: [
+                { text: 'Sedan', value: 'Sedan' },
+                { text: 'Hatchback', value: 'Hatchback' },
+                { text: 'SUV', value: 'SUV' },
+                { text: 'Crossover', value: 'Crossover' },
+                { text: 'Coupe', value: 'Coupe' },
+                { text: 'Convertible', value: 'Convertible' },
+                { text: 'Pickup Truck', value: 'Pickup Truck' },
+                { text: 'Station Wagon', value: 'Station Wagon' },
+                { text: 'Luxury Car', value: 'Luxury Car' },
+            ],
+            onFilter: (value, record) => record.body_type === value,
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            render: (status) => (
+                <Tag color={status ? 'green' : 'volcano'}>
+                    {status ? 'Available' : 'Unavailable'}
+                </Tag>
+            ),
+        },
+        {
+            title: 'Actions',
+            render: (_, car) => (
+                <Link
+                    to="/admin/car/detail"
+                    onClick={() => localStorage.setItem('carId', car._id)}
+                >
+                    View Details
+                </Link>
+            ),
+        },
+    ];
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+    const rowClassName = (record) => (!record.status ? 'carlist-row-unavailable' : '');
 
     return (
         <div className="carlist-main-container">
-
             <div className="carlists-container">
                 <h1 className="carlist-title">Select a vehicle group</h1>
-                <Link to='/admin/car/add'>Add Car Page</Link>
-
-                <div className="carlist-filter-buttons">
-                    <button
-                        className={`carlist-filter ${category === 'all' ? 'active' : ''}`}
-                        onClick={() => handleCategory('all')}
-                    >
-                        All vehicles
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Sedan' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Sedan')}
-                    >
-                        Sedan
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Hatchback' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Hatchback')}
-                    >
-                        Hatchback
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'SUV' ? 'active' : ''}`}
-                        onClick={() => handleCategory('SUV')}
-                    >
-                        SUV
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Crossover' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Crossover')}
-                    >
-                        Crossover
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Coupe' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Coupe')}
-                    >
-                        Coupe
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Convertible' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Convertible')}
-                    >
-                        Convertible
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Pickup Truck' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Pickup Truck')}
-                    >
-                        Pickup Truck
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Station Wagon' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Station Wagon')}
-                    >
-                        Station Wagon
-                    </button>
-                    <button
-                        className={`carlist-filter ${category === 'Luxury Car' ? 'active' : ''}`}
-                        onClick={() => handleCategory('Luxury Car')}
-                    >
-                        Luxury Car
-                    </button>
-                </div>
-
-                <div className="carlist-car-list">
-                    {cars.map((car) => (
-                        <Link
-                            style={{ textDecoration: 'none' }}
-                            key={car._id}
-                            to={"/admin/car/detail"}
-                            onClick={() =>localStorage.setItem('carId', car._id)}
-                        >
-                            <div className={`carlist-car-card ${!car.status ? 'carlist-car-unavailable' : ''}`}>
-                                <div className="picholder">
-                                    <img src={`http://localhost:3000/api/car_img/${car.image}`} alt={car.car_name} className="carlist-car-img" />
-                                </div>
-                                <div className="carlist-car-info">
-                                    <h2 className="carlist-car-name">{car.car_name}</h2>
-                                    
-                                    <p className="carlist-car-price">${car.price}</p>
-
-                                    <div className="carlist-car-details">
-                                        <p className="carlist-icon1">
-                                            <TbManualGearboxFilled />
-                                            {car.transmission}
-                                        </p>
-                                        <p>
-                                            <TbAirConditioning />
-                                            Air Conditioner
-                                        </p>
-                                    </div>
-                                </div>
-                                <button className="carlist-button-check">
-                                   View Details
-                                </button>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+                
+                <Table
+                    columns={columns}
+                    dataSource={cars}
+                    loading={loading}
+                    rowClassName={rowClassName}
+                    pagination={{ pageSize: 10 }}
+                    scroll={{ x: true }}
+                    style={{ marginTop: '20px' }}
+                />
             </div>
-
-            <Footer />
         </div>
     );
 };

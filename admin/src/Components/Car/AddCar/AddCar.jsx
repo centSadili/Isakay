@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Upload, Image, message, Col, Row, Button, Input, Select } from "antd";
-import Footer from "../../Footer/Footer";
+import { useMediaQuery } from 'react-responsive';
 
 const { Option } = Select;
 
@@ -146,30 +146,32 @@ const AddCar = () => {
       <div style={{ marginTop: 8 }}>Upload Image</div>
     </div>
   );
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const cardContainerStyle = {
-    display: "flex",
-    flexDirection: window.innerWidth > 768 ? "row" : "column", 
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    width: "90%",
-    padding: "30px",
-    borderRadius: "12px",
-    backgroundColor: "#ffffff",
-    gap: "20px",
+    display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    width: '90%',
+    margin: '0 auto',
+    padding: isMobile ? '15px' : '30px',
+    borderRadius: '12px',
+    gap: '20px',
+    maxHeight: '80vh',
+    overflowY: 'auto',
   };
-  
+
   const imageContainerStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    borderRadius: "12px",
-    maxWidth: window.innerWidth > 1200 ? "600px" : window.innerWidth > 768 ? "250px" : "100%",
+    flex: isMobile ? '100%' : '3',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    borderRadius: '12px',
   };
   
   return (
     <div>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Car Listing Form</h2>
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Car Details Form</h2>
       <div style={cardContainerStyle}>
         
         {/* Form Section */}
@@ -303,11 +305,11 @@ const AddCar = () => {
                 onVisibleChange: (visible) => setPreviewOpen(visible),
               }}
               src={previewImage}
+              height={400}
             />
           </div>
         )}
       </div>
-      <Footer/>
     </div>
   );
   

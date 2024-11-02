@@ -64,7 +64,7 @@ const AddRent = () => {
 
             <Form.Item>
                 <Button type="primary" htmlType="submit">
-                    Book Now
+                    Search Now
                 </Button>
             </Form.Item>
         </Form>

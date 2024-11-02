@@ -151,7 +151,7 @@ const Home = () => {
       case 'add_admins':
         return <Signup />;
       default:
-        return <div>Select an option from the menu</div>;
+        return <Profile />;
     }
   };
 

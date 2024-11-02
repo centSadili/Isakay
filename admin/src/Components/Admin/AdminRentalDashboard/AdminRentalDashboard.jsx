@@ -1,87 +1,141 @@
-import React, { useState ,useEffect} from 'react'
-import {Link,useNavigate} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Table, Button, Popconfirm, message } from 'antd';
+import dayjs from 'dayjs';
 
 const AdminRentalDashboard = () => {
-    const userId = localStorage.getItem('id')
-    
-    const [rents,setRents] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const userId = localStorage.getItem('id');
+  const [rents, setRents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate() 
-    useEffect(() => {
-      const fetchCars = async () => {
-          try {
-              const response = await axios.get(`http://localhost:3000/api/user/user-rent-details/${userId}`);
-              console.log(response.data); // Log response data for debugging
+  useEffect(() => {
+    const fetchRentDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/user/user-rent-details/${userId}`);
+        if (Array.isArray(response.data.rentDetails)) {
+          setRents(response.data.rentDetails);
+        } else {
+          setRents([]);
+        }
+      } catch (err) {
+        setError('Error fetching rents. Please try again.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
   
-              // Check if rentDetails exists and is an array
-              if (Array.isArray(response.data.rentDetails)) {
-                  setRents(response.data.rentDetails);
-              } else {
-                  setRents([]); // Set rents to an empty array if no rentDetails found
-              }
-          } catch (err) {
-              setError('Error fetching rents. Please try again.');
-              console.error(err);
-          } finally {
-              setLoading(false);
-          }
-      };
-  
-      fetchCars();
+    fetchRentDetails();
   }, [userId]);
 
-    const deleteRentDetails = async (rentId,carId) => {
-        try {
-          if (window.confirm("Are you sure you want to Cancel your Rent?")){
-            const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
-            alert(response.data.message);
-            if (response.status === 200) {
-              alert('Rent CANCELLED successfully');
-      
-               // Update the car status to 'false'
-            await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
-      
-            } 
-          }
+  const deleteRentDetails = async (rentId, carId) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
+      message.success(response.data.message);
 
-        } catch (error) {
-          if (error.response) {
-            alert(error.response.data.error || 'Error deleting rent details.'); // Notify user of error
-          } else {
-            alert('An error occurred. Please try again.');
-          }
-        }
-      };
+      await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
+      setRents((prevRents) => prevRents.filter((rent) => rent._id !== rentId));
+    } catch (error) {
+      if (error.response) {
+        message.error(error.response.data.error || 'Error deleting rent details.');
+      } else {
+        message.error('An error occurred. Please try again.');
+      }
+    }
+  };
 
-    if (loading) return <div>Loading...</div>;
-  
-    return (
+  const handleRentClick = (rentId) => {
+    localStorage.setItem("rentId", rentId);
+    navigate(`/admin/rent/details/${rentId}`);
+  };
+
+  const columns = [
+    {
+      title: "Renter Name",
+      dataIndex: "renterID",
+      key: "renterName",
+      render: (renter) => `${renter.firstname} ${renter.lastname}`,
+    },
+    {
+      title: "Car",
+      dataIndex: "carID",
+      key: "car",
+      render: (car) => car.car_name,
+    },
+    {
+      title: "Pick Up Location",
+      dataIndex: "carID",
+      key: "pickup",
+      render: (car) => car.pickup,
+    },
+    {
+      title: "Drop Off Location",
+      dataIndex: "carID",
+      key: "dropoff",
+      render: (car) => car.dropoff,
+    },
+    {
+      title: "Pick Up Date",
+      dataIndex: "pickUpDate",
+      key: "pickUpDate",
+      render: (date) => dayjs(date).format("YYYY-MM-DD"),
+    },
+    {
+      title: "Days Available",
+      dataIndex: "carID",
+      key: "days_availability",
+      render: (car) => car.days_availability,
+    },
+    {
+      title: "Price",
+      dataIndex: "carID",
+      key: "price",
+      render: (car) => `$${car.price}`,
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, rent) => (
         <div>
-            <h1>Dashboard</h1>
-            {/* irerender lahat ng nasa console.log sa console modify nyo nlng*/}
-          {rents.length > 0 ? (
-            rents.map((rent) => (
-              <div key={rent._id}>
-                <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
-                <h2>Car: {rent.carID.car_name}</h2>
-                <h2>Pick Up: {rent.carID.pickup}</h2>
-                <h2>Drop Off: {rent.carID.dropoff}</h2>
-                <h2>Pick up date:{rent.pickUpDate}</h2>
-                <h2>Days: {rent.carID.days_availability}</h2>
-                <h2>Price: {rent.carID.price}</h2>
-                <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
-                <button>View Details</button>
-              </div>
-              
-            ))
-          ) : (
-            <p>No rent details available.</p>
-          )}
+          <Button type="link" onClick={() => handleRentClick(rent._id)}>
+            View Details
+          </Button>
+          <Popconfirm
+            title="Are you sure you want to cancel this rent?"
+            onConfirm={() => deleteRentDetails(rent._id, rent.carID._id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="link" danger>
+              Cancel
+            </Button>
+          </Popconfirm>
         </div>
-      );
-}
+      ),
+    },
+  ];
 
-export default AdminRentalDashboard
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div>
+      <h1>Admin Rental Dashboard</h1>
+      {rents.length > 0 ? (
+        <Table
+          columns={columns}
+          dataSource={rents}
+          rowKey="_id"
+          pagination={{ pageSize: 5 }}
+        />
+      ) : (
+        <p>No rent details available.</p>
+      )}
+    </div>
+  );
+};
+
+export default AdminRentalDashboard;

@@ -104,7 +104,7 @@ const UserRentalDashboard = () => {
             <div className="modal">
               <div className="overlay" onClick={viewdetails}></div>
               <div className="content">
-                  <h1>Car Details</h1>
+                  <h1>Rent Details</h1>
                  
                     <div key={rentDetail._id}>
                       <h1>Personal Details</h1>

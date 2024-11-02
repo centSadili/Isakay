@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
+import './UpdateForm.css';  
 import axios from "axios";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const UpdateRentDetailsForm = () => {
   const { id } = useParams();
@@ -130,101 +133,220 @@ const UpdateRentDetailsForm = () => {
   };
 
   return (
-    <div>
+    <div className="urdf-container">
+      <Header></Header>
+      <div className="update-form-container">
       <form onSubmit={handleSubmit}>
-        <h1>Personal Details</h1>
-        <label htmlFor="firstName">First Name:</label>
-        <input type="text" name="firstname" value={formData.firstname} onChange={handleInputChange} />
+      <h1>Personal Details</h1>
+        <div className="personal-part">
+        
+        <div className="grouped-form2">
+          <div className="first-div">
+          <label htmlFor="firstName">First Name</label> <br />
+          <input className='field-input' type="text" name="firstname" value={formData.firstname} onChange={handleInputChange} />
+          </div>
+        
 
-        <label htmlFor="middleInitial">Middle Initial:</label>
-        <input type="text" name="middleinitial" maxLength="2" value={formData.middleinitial} onChange={handleInputChange} />
+        <div>
+        <label htmlFor="lastName">Surname</label><br />
+        <input className='field-input' type="text" name="lastname" value={formData.lastname} onChange={handleInputChange} />
+       
+        </div>
+        <div>
+            <label htmlFor="middleInitial">Middle Name</label><br />
+            <input  className='middle-input' type="text" name="middleinitial" maxLength="2" value={formData.middleinitial} onChange={handleInputChange} />
 
-        <label htmlFor="lastName">Last Name:</label>
-        <input type="text" name="lastname" value={formData.lastname} onChange={handleInputChange} />
-
-        <label htmlFor="suffix">Suffix:</label>
-        <input type="text" name="suffix" value={formData.suffix} onChange={handleInputChange} />
-
-        <label htmlFor="gender">Gender:</label>
-        <select name="gender" value={formData.gender} onChange={handleInputChange}>
+            </div>
+       
+        
+          <div>
+          <label htmlFor="suffix">Suffix</label><br />
+          <input className='middle-input'type="text" name="suffix" value={formData.suffix} onChange={handleInputChange} />  
+          
+          </div>       
+        </div>
+        <br />
+      <div className="grouped-form2">
+        <div className="grouped-form">
+        <label htmlFor="gender" className="label-drop">Gender</label>
+        <select name="gender" className="select-box" value={formData.gender} onChange={handleInputChange}>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
+        </div>
 
-        <label>Birthday:</label>
-        <input type="date" name="birthday" value={formData.birthday ? new Date(formData.birthday).toISOString().split("T")[0] : ""} onChange={handleInputChange} />
+        <div style={{ marginRight: '2rem' }}>
+        <label>Birthday:</label><br />
+        <input className="field-input2" type="date" name="birthday" value={formData.birthday ? new Date(formData.birthday).toISOString().split("T")[0] : ""} onChange={handleInputChange} />
 
+        </div>
+      
+
+      </div>
+      <br />
+        </div>
+
+        <br />
         <h1>Address</h1>
-        <label>Street:</label>
-        <input type="text" name="street" value={formData.street} onChange={handleInputChange} />
 
-        <label>City:</label>
-        <Autocomplete
-          options={cities}
-          getOptionLabel={(option) => option.name}
-          renderInput={(params) => <TextField {...params} label="City" />}
-          value={cities.find((city) => city.name === formData.city) || null}
-          onChange={(event, newValue) => setFormData({ ...formData, city: newValue ? newValue.name : "" })}
-        />
+        <div className="address-container">
+        
 
-        <label>State:</label>
-        <Autocomplete
-          options={region}
-          renderInput={(params) => <TextField {...params} label="State" />}
-          value={formData.state}
-          onChange={(event, newValue) => setFormData({ ...formData, state: newValue || "" })}
-        />
+        <div className="name-container2">
+    <div className="grouped-form2">
+    <div>
+    <label >Country</label>
+      <label style={{ color: '#f9f9f900' }}>Country</label> <br />
+      <Autocomplete style={{ width: '280px', minWidth: '180px', background:'white' }} 
+        options={countries}
+        renderInput={(params) => <TextField {...params} />}
+        value={formData.country}
+        onChange={(event, newValue) => setFormData({ ...formData, country: newValue || "" })}
+      />
+    </div>
+      
+     
+<div>
+  <label >City</label>
+<label style={{ color: '#f9f9f900' }}> City:
+      <Autocomplete style={{ width: '280px', minWidth: '180px', background:'white' }}
+        options={cities}
+        getOptionLabel={(option) => option.name}
+        renderInput={(params) => <TextField {...params}  />}
+        value={cities.find((city) => city.name === formData.city) || null}
+        onChange={(event, newValue) => setFormData({ ...formData, city: newValue ? newValue.name : "" })}
+      />
+        </label> 
+</div>
+      
+      <div>
+      <label >State</label>
+      <label  style={{color: '#f9f9f900' }}> city
 
-        <label>Country:</label>
-        <Autocomplete
-          options={countries}
-          renderInput={(params) => <TextField {...params} label="Country" />}
-          value={formData.country}
-          onChange={(event, newValue) => setFormData({ ...formData, country: newValue || "" })}
-        />
+<Autocomplete style={{ width: '280px', minWidth: '180px', background:'white' }}
+  options={region}
+  renderInput={(params) => <TextField {...params} />}
+  value={formData.state}
+  onChange={(event, newValue) => setFormData({ ...formData, state: newValue || "" })}
+/>
+  </label><br />
+      </div>
+        
+    </div>
+    
+  </div>
 
-        <label>Zip Code:</label>
-        <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} />
+  <div className="grouped-form2">
+  <div>
+      <label>Street <br></br> <input className="field-input" type="text" name="street" value={formData.street} onChange={handleInputChange} /></label><br />
+ 
+      </div>
 
-        <label>Nationality:</label>
-        <input type="text" name="nationality" value={formData.nationality} onChange={handleInputChange} />
+    <div>
+    <label>Zip Code</label> <br />
+  <input className="middle-input" type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} />
 
+    </div>
+
+    <div>
+    <label>Nationality</label> <br />
+  <input className="middle-input" type="text" name="nationality" value={formData.nationality} onChange={handleInputChange} />
+
+    </div>
+
+  </div>
+  
+        </div>
+        <br />
+        
         <h1>Contact Details</h1>
-        <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
 
-        <label>Phone:</label>
-        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} />
+<div className="contact-details-container">
 
-        <label>Telephone:</label>
-        <input type="tel" name="telno" value={formData.telno} onChange={handleInputChange} />
+    <div className="grouped-form2">
+    <div>
+      <label>Email</label><br />
+        <input className='field-input' type="email" name="email" value={formData.email} onChange={handleInputChange} />
 
-        <label>Emergency Contact Name:</label>
-        <input type="text" name="emergencyname" value={formData.emergencyname} onChange={handleInputChange} />
+      </div>
+      
+      
+      <div>
+      <label>Phone #</label><br />
+        <input className="field-input2" type="tel" name="phone" value={formData.phone} onChange={handleInputChange} />
 
-        <label>Emergency Contact Number:</label>
-        <input type="tel" name="emergencyno" value={formData.emergencyno} onChange={handleInputChange} />
+      </div>
 
-        <h1>Payment Details</h1>
-        <label>Card Holder:</label>
-        <input type="text" name="cardHolder" value={formData.cardHolder} onChange={handleInputChange} readOnly/>
+      <div>
+      <label>Telephone #</label><br />
+        <input className="field-input2" type="tel" name="telno" value={formData.telno} onChange={handleInputChange} />
 
-        <label>Card Number:</label>
-        <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleInputChange} readOnly/>
+      </div>
 
-        <label>Expiration Date:</label>
-        <input type="date" name="expDate" value={formData.expDate} onChange={handleInputChange} readOnly/>
+    </div>
+      <br />
 
-        <label>CVC:</label>
-        <input type="number" name="cvc" value={formData.cvc} onChange={handleInputChange} readOnly/>
+      <div className="grouped-form2">
+        <div>
+        <label>Emergency Contact Name</label>
+        <input className="field-input" type="text" name="emergencyname" value={formData.emergencyname} onChange={handleInputChange} />
 
-        <label>Pick Up Date:</label>
-        <input type="date" name="pickUpDate" value={formData.pickUpDate ? new Date(formData.pickUpDate).toISOString().split("T")[0] : ""} onChange={handleInputChange} readOnly/>
+        </div>
+
+        <div>
+        <label>Emergency Contact #</label> <br />
+        <input className="field-input2" type="tel" name="emergencyno" value={formData.emergencyno} onChange={handleInputChange} />
+
+        </div>
+      </div> 
+        
+</div>
+<br />
+
+<h1>Payment Details</h1> <br />
+        <div className="payment-container">
+          <div className="grouped-form2">
+            <div>
+            <label>Card Holder</label> <br />
+             <input className="field-input" type="text" name="cardHolder" value={formData.cardHolder} onChange={handleInputChange} readOnly/>
+
+            </div>
+
+            <div>
+            <label>Card Number</label> <br />
+        <input className='field-input'type="text" name="cardNumber" value={formData.cardNumber} onChange={handleInputChange} readOnly/>
+
+            </div>
+
+            <div>
+            <label>CVC</label> <br />
+        <input className='field-input3'type="number" name="cvc" value={formData.cvc} onChange={handleInputChange} readOnly/>
+
+            </div>
+
+            <div>
+            <label>Expiration Date</label><br />
+        <input className='field-input2' type="date" name="expDate" value={formData.expDate} onChange={handleInputChange} readOnly/>
+
+            </div>
+
+          </div>
+          <br />
+        
+       <div className="grouped-form2">
+        <div>
+        <label> Car Pick Up Date:</label><br />
+        <input className='field-input2' type="date" name="pickUpDate" value={formData.pickUpDate ? new Date(formData.pickUpDate).toISOString().split("T")[0] : ""} onChange={handleInputChange} readOnly/>
+
+        </div>
 
 
-        <label>Price:</label>
+        <div>
+        
+        <label>Price:</label> <br />
         <input
+        className='field-input2'
           type="number"
           name="amountOfPayment"
           value={rentDetail?.rentDetails?.carID?.price}
@@ -232,8 +354,23 @@ const UpdateRentDetailsForm = () => {
           readOnly
           required
         />
-        <button type="submit">Update</button>
+        </div>
+       </div><br />
+        
+       
+        
+       
+
+        
+
+        </div>
+        
+        <button className='submit-update'type="submit">Update</button>
       </form>
+      </div>  
+
+      <Footer></Footer>
+      
     </div>
   );
 };

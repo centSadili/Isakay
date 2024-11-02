@@ -1,133 +1,170 @@
-import React, { useState ,useEffect} from 'react'
-import {Link,useNavigate} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './dashboard.css'
+import { Table, Button, Popconfirm, message, Modal } from 'antd';
+import dayjs from 'dayjs';
 
 const UserRentalDashboard = () => {
-    const userId = localStorage.getItem('userId')
-    
-    const [rents,setRents] = useState([]);
+    const userId = localStorage.getItem('userId');
+    const [rents, setRents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [rentDetail, setRentDetail] = useState(null);
+    const [isModalVisible, setModalVisible] = useState(false);
+    const navigate = useNavigate();
 
-    const [isActive, setActive] = useState(false);
-
-    const [rentDetail,setRentDetail]= useState(null);
-
-    const navigate = useNavigate() 
     useEffect(() => {
-      const fetchCars = async () => {
-          try {
-              const response = await axios.get(`http://localhost:3000/api/user/user-rent-details/${userId}`);
-              console.log(response.data); // Log response data for debugging
-  
-              // Check if rentDetails exists and is an array
-              if (Array.isArray(response.data.rentDetails)) {
-                  setRents(response.data.rentDetails);
-              } else {
-                  setRents([]); // Set rents to an empty array if no rentDetails found
-              }
-          } catch (err) {
-              setError('Error fetching rents. Please try again.');
-              console.error(err);
-          } finally {
-              setLoading(false);
-          }
-      };
-  
-      fetchCars();
-  }, [userId]);
+        const fetchRentDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/user/user-rent-details/${userId}`);
+                setRents(Array.isArray(response.data.rentDetails) ? response.data.rentDetails : []);
+            } catch (err) {
+                setError('Error fetching rents. Please try again.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchRentDetails();
+    }, [userId]);
 
-    const deleteRentDetails = async (rentId,carId) => {
+    const deleteRentDetails = async (rentId, carId) => {
         try {
-          if (window.confirm("Are you sure you want to Cancel this Rent?")){
-            //Palagay ng Validation Dito
             const response = await axios.delete(`http://localhost:3000/api/rent/delete-rent-details/${rentId}`);
-            alert(response.data.message);
-            if (response.status === 200) {
-              alert('Rent CANCELLED successfully');
-      
-               // Update the car status to 'false'
+            message.success(response.data.message);
+
             await axios.put(`http://localhost:3000/api/updatecar/${carId}`, { status: true });
-      
-            } 
-          }
-
+            setRents((prevRents) => prevRents.filter((rent) => rent._id !== rentId));
         } catch (error) {
-          if (error.response) {
-            alert(error.response.data.error || 'Error deleting rent details.'); // Notify user of error
-          } else {
-            alert('An error occurred. Please try again.');
-          }
+            message.error(error.response ? error.response.data.error : 'Error deleting rent details.');
         }
-      };
+    };
 
-      const viewdetails = (rent)=>{
-        setRentDetail(rent)
-        setActive(!isActive);
-      }
+    const viewDetails = (rent) => {
+        setRentDetail(rent);
+        setModalVisible(true);
+    };
 
-    if (loading) return <div>Loading...</div>;
-  
+    const closeModal = () => {
+        setModalVisible(false);
+        setRentDetail(null);
+    };
+
+    const columns = [
+        {
+            title: "Renter Name",
+            dataIndex: "renterID",
+            key: "renterName",
+            render: (renter) => `${renter.firstname} ${renter.lastname}`,
+        },
+        {
+            title: "Car",
+            dataIndex: "carID",
+            key: "car",
+            render: (car) => car.car_name,
+        },
+        {
+            title: "Pick Up",
+            dataIndex: "carID",
+            key: "pickup",
+            render: (car) => car.pickup,
+        },
+        {
+            title: "Drop Off",
+            dataIndex: "carID",
+            key: "dropoff",
+            render: (car) => car.dropoff,
+        },
+        {
+            title: "Pick Up Date",
+            dataIndex: "pickUpDate",
+            key: "pickUpDate",
+            render: (date) => dayjs(date).format("YYYY-MM-DD"),
+        },
+        {
+            title: "Days Available",
+            dataIndex: "carID",
+            key: "days_availability",
+            render: (car) => car.days_availability,
+        },
+        {
+            title: "Price",
+            dataIndex: "carID",
+            key: "price",
+            render: (car) => `$${car.price}`,
+        },
+        {
+            title: "Actions",
+            key: "actions",
+            render: (_, rent) => (
+                <div>
+                    <Button type="link" onClick={() => viewDetails(rent)}>View Details</Button>
+                    <Popconfirm
+                        title="Are you sure you want to cancel this rent?"
+                        onConfirm={() => deleteRentDetails(rent._id, rent.carID._id)}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button type="link" danger>Cancel</Button>
+                    </Popconfirm>
+                </div>
+            ),
+        },
+    ];
+
     return (
         <div>
-            <h1>Dashboard</h1>
-            {/* irerender lahat ng nasa console.log sa console modify nyo nlng*/}
-          {rents.length > 0 ? (
-            rents.map((rent) => (
-              <div key={rent._id}>
-                <h2>Name: {rent.renterID.firstname} {rent.renterID.lastname}</h2>
-                <h2>Car: {rent.carID.car_name}</h2>
-                <h2>Pick Up: {rent.carID.pickup}</h2>
-                <h2>Drop Off: {rent.carID.dropoff}</h2>
-                <h2>Pick up date:{rent.pickUpDate}</h2>
-                <h2>Days: {rent.carID.days_availability}</h2>
-                <h2>Price: {rent.carID.price}</h2>
-                <button onClick={() => deleteRentDetails(rent._id,rent.carID._id)}>Cancel</button>
-                <button onClick={()=>viewdetails(rent)}>View Details</button>
-              </div>
-              
-            ))
-          ) : (
-            <p>No rent details available.</p>
-          )}
+            <h1>User Rental Dashboard</h1>
+            {error ? <div>{error}</div> : (
+                <Table
+                    columns={columns}
+                    dataSource={rents}
+                    rowKey="_id"
+                    loading={loading}
+                    pagination={{ pageSize: 5 }}
+                />
+            )}
 
-          {/* View details */}
-          <div>
-          {isActive && (
-            <div className="modal">
-              <div className="overlay" onClick={viewdetails}></div>
-              <div className="content">
-                  <h1>Car Details</h1>
-                 
-                    <div key={rentDetail._id}>
-                      <h1>Personal Details</h1>
-                      <h2>First Name: {rentDetail.renterID.firstname} </h2>
-                      <h2>Last Name: {rentDetail.renterID.lastname}</h2>
-                      <h2>Suffix: {rentDetail.renterID.suffix}</h2>
-                      <h2>Gender: {rentDetail.renterID.gender}</h2>
-                      <h2>Birthday: {rentDetail.renterID.birthday}</h2>
-                      <h2>Address: {rentDetail.renterID.address.street} {rentDetail.renterID.address.city}, {rentDetail.renterID.address.state}</h2>
-                      <h2>Car: {rentDetail.carID.car_name}</h2>
-                      <h2>Pick Up: {rentDetail.carID.pickup}</h2>
-                      <h2>Drop Off: {rentDetail.carID.dropoff}</h2>
-                      <h2>Pick up date:{rentDetail.pickUpDate}</h2>
-                      <h2>Days: {rentDetail.carID.days_availability}</h2>
-                      <h2>Price: {rentDetail.carID.price}</h2>
-                      <h1>Specifications</h1>
-                      <img src={`http://localhost:3000/api/car_img/${rentDetail.carID.image}`} alt='Rented Car' className='img-spec'/>
-                      <h2>Body type: {rentDetail.carID.body_type}</h2>
-                      <h2>Seat Capacity: {rentDetail.carID.seats}</h2>
-                      <h2>Transmission: {rentDetail.carID.transmission}</h2>
-                    </div>
-                
-                  <button onClick={()=>viewdetails()}>Close</button>
-              </div>
-            </div>
-          )}
-          </div>
+            {rentDetail && (
+                <Modal
+                    title="Rent Details"
+                    visible={isModalVisible}
+                    onCancel={closeModal}
+                    footer={[
+                        <Button key="close" onClick={closeModal}>
+                            Close
+                        </Button>,
+                        <Link to={`/update/rent/${rentDetail._id}`} key="update">
+                            <Button type="primary">Update</Button>
+                        </Link>,
+                    ]}
+                >
+                    <h2>Personal Details</h2>
+                    <p>First Name: {rentDetail.renterID.firstname} Last Name: {rentDetail.renterID.lastname}</p>
+                    <p>Suffix: {rentDetail.renterID.suffix} Gender: {rentDetail.renterID.gender}</p>
+                    <p>Birthday: {rentDetail.renterID.birthday}</p>
+                    <p>Address: {rentDetail.renterID.address.street}, {rentDetail.renterID.address.city}, {rentDetail.renterID.address.state}</p>
+
+                    <h2>Car Details</h2>
+                    <p>Car: {rentDetail.carID.car_name}</p>
+                    <p>Pick Up: {rentDetail.carID.pickup}</p>
+                    <p>Drop Off: {rentDetail.carID.dropoff}</p>
+                    <p>Days Available: {rentDetail.carID.days_availability} Price: ${rentDetail.carID.price}</p>
+                    <p>Pick up date: {rentDetail.pickUpDate}</p>
+
+                    <h2>Specifications</h2>
+                    <img
+                        src={`http://localhost:3000/api/car_img/${rentDetail.carID.image}`}
+                        alt="Rented Car"
+                        style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '10px' }}
+                    />
+                    <p>Body Type: {rentDetail.carID.body_type}</p>
+                    <p>Seat Capacity: {rentDetail.carID.seats}</p>
+                    <p>Transmission: {rentDetail.carID.transmission}</p>
+                </Modal>
+            )}
         </div>
-      );
-}
+    );
+};
 
-export default UserRentalDashboard
+export default UserRentalDashboard;

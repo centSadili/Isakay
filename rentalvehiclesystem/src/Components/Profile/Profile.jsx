@@ -141,7 +141,8 @@ const Profile = () => {
     <div>
       
     </div>
-      <div className ="info-update">
+    <div className="scrollable-cont">
+    <div className ="info-update">
       
         
       <form onSubmit={handleUpdate}>
@@ -196,20 +197,21 @@ const Profile = () => {
                     required
                   />
 
+<button  type="button" onClick={()=> setActive(!isActive)} className="ChangePass">Change Password</button>
+
 
 
 {error && <div className="error">{error}</div>}
+
           </div>
 
-        <div className="form-group">
-        <button className="update" type="submit">Update</button> 
         
-        <Link to="/Home">
-      <button className="return"> Return
-      </button>
-      </Link>
-      <button type="button" onClick={()=> setActive(!isActive)} className="ChangePass">Change Password</button>
-        </div>
+  <div className="button-container">
+    <button className="update" type="submit">Update</button>
+    <Link to="/Home">
+      <button className="return1">Return</button>
+    </Link>
+  </div>
               
       </form>
         
@@ -272,6 +274,7 @@ const Profile = () => {
       </div>
       } */}
       
+    </div>
       
     </div>
     

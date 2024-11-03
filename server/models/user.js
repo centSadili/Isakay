@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
 
@@ -42,29 +41,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '1hr' });
-    return token;
-};
-userSchema.methods.generateResetToken = ()=>{
-    return jwt.sign({email: this.email}, process.env.JWT_SECRET, {expiresIn: '1hr'});
-}
-
-
-// verifies Reset Token
-userSchema.methods.verifyResetToken = (token)=>{
-    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-        if(err){
-            return false;
-        }
-        try {
-            return decoded.email
-
-        } catch (error) {
-            return false
-        }
-    })
-}
 
 const User = mongoose.model('User', userSchema);
 

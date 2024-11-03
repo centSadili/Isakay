@@ -3,10 +3,11 @@ import Header from '../Header/Header'
 import './About.css';
 import Footer from '../Footer/Footer';
 import Logo from "../../images/main.png"
-
+import Head from '../Head';
 const About = () => {
   return (
     <div className="about-main-container">
+      <Head title="About Us"/>
       <Header/>
       <div className="about-container">
       <h1 className="about-title">About Us</h1>

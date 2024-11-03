@@ -2,11 +2,12 @@ import React from 'react'
 import Header from '../Header/Header'
 import './Contact.css';
 import Footer from '../Footer/Footer'
-
+import Head from '../Head';
 
 const Contact = () => {
   return (
     <div className="contact-main-container">
+      <Head title="Contact Us"/>
           <Header />
       <div className="contact-container">
         

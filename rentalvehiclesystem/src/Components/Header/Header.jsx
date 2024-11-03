@@ -79,9 +79,9 @@ const Header = () => {
                 />
                 <div className="dropdown-menu">
                     <div className="name">
-                        {user ? `${user.firstName} ${user.lastName}` : "Guest User"}
+                      <Link to='/profile'>{user ? `${user.firstName} ${user.lastName}` : "Guest User"}</Link>  
                     </div>
-                    <button className="logout" onClick={logOut}>Logout</button>
+                    <button className="logout" onClick={logOut}>{user? 'Logout':'SignUp'}</button>
                 </div>
             </div>
         </div>

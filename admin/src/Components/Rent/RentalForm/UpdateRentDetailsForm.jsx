@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
+import { Popconfirm, message} from "antd";
 import './UpdateForm.css';  
 import axios from "axios";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Head from '../Head';
+
 
 const UpdateRentDetailsForm = () => {
   const { id } = useParams();
@@ -15,7 +14,7 @@ const UpdateRentDetailsForm = () => {
   const [cities, setCity] = useState([]);
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState([]);
-
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     firstname: "",
     middleinitial: "",
@@ -125,6 +124,8 @@ const UpdateRentDetailsForm = () => {
         const res = await axios.put(url,formData)
         
         console.log(res);
+        message.success("Rental booking updated successfully!");
+        navigate('/Home')
       }
       
     }catch(err){
@@ -135,8 +136,6 @@ const UpdateRentDetailsForm = () => {
 
   return (
     <div className="urdf-container">
-      <Head title="Update Rent Details"/>
-      <Header></Header>
       <div className="update-form-container">
       <form onSubmit={handleSubmit}>
       <h1>Personal Details</h1>
@@ -371,8 +370,6 @@ const UpdateRentDetailsForm = () => {
       </form>
       </div>  
 
-      <Footer></Footer>
-      
     </div>
   );
 };

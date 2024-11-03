@@ -3,6 +3,7 @@ import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import './SignUp.css';
 import { FaUser, FaLock } from 'react-icons/fa';
+import Head from '../Head';
 
 const SignUp = () => {
     const [data, setData] = useState({
@@ -56,6 +57,7 @@ const SignUp = () => {
     };
   return (
     <div className="container">
+        <Head title="Sign Up"/>
             <div className="image-section"></div>
             <div className="form-section">
                 <div className="wrapper">

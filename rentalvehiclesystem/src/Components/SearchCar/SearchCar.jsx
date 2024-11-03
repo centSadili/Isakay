@@ -4,6 +4,7 @@ import './SearchCar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Head from '../Head';
 
 const SearchCar = () => {
   const [searched, setSearch] = useState([]);
@@ -54,6 +55,7 @@ const SearchCar = () => {
 
   return (
     <div className="searchcontainer">
+      <Head title="Search"/>
      <Header/>
 
      <div className="search-container">

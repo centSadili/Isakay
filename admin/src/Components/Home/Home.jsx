@@ -8,7 +8,7 @@ import {
   UserOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-import { Avatar, Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Avatar, Breadcrumb, Layout, Menu, theme, Grid } from 'antd';
 import AdminProfile from '../Admin/AdminProfile/AdminProfile'
 
 //Cars
@@ -28,6 +28,7 @@ import Signup from '../User/Signup/SignUp'
 import Footer from '../Footer/Footer';
 
 const { Header, Content, Sider } = Layout;
+const { useBreakpoint } = Grid;
 
 const Profile = () => <AdminProfile/>;
 const Cars = () => <Carlist/>;
@@ -48,6 +49,7 @@ const Home = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [collapsed, setCollapsed] = useState(false);
+  const screens = useBreakpoint();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -72,6 +74,10 @@ const Home = () => {
     fetchUser();
   }, [id, token,user]);
 
+  useEffect(() => {
+      setCollapsed(!screens.md);
+    }, [screens]);
+    
   const logOut = () => {
     if (
       window.confirm(
@@ -157,46 +163,27 @@ const Home = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div style={{ padding: '16px', textAlign: 'center' }}>
-          <Avatar
-            size={64}
-            src={`http://localhost:3000/api/car_img/${user?.image}`}
-            alt="Profile"
-          />
-          <div style={{ color: 'white', marginTop: '8px' }}>
-            {user?.firstName} {user?.lastName}
-          </div>
+    <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <div style={{ padding: '16px', textAlign: 'center' }}>
+        <Avatar size={64} src={`http://localhost:3000/api/car_img/${user?.image}`} alt="Profile" />
+        <div style={{ color: 'white', marginTop: '8px' }}>{user?.firstName} {user?.lastName}</div>
+      </div>
+      <Menu theme="dark" defaultSelectedKeys={['profile']} mode="inline" items={menuItems} onClick={(e) => setSelectedKey(e.key)} />
+    </Sider>
+    <Layout>
+      <Header style={{ padding: screens.md ? '0 16px' : '0 8px', background: colorBgContainer }} />
+      <Content style={{ margin: screens.md ? '0 16px' : '0 8px' }}>
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>{selectedKey.charAt(0).toUpperCase() + selectedKey.slice(1)}</Breadcrumb.Item>
+        </Breadcrumb>
+        <div style={{ padding: screens.md ? 24 : 16, minHeight: 360, background: colorBgContainer, borderRadius: borderRadiusLG }}>
+          {renderContent()}
         </div>
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={['profile']}
-          mode="inline"
-          items={menuItems}
-          onClick={(e) => setSelectedKey(e.key)}
-        />
-      </Sider>
-      <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>{selectedKey.charAt(0).toUpperCase() + selectedKey.slice(1)}</Breadcrumb.Item>
-          </Breadcrumb>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            {renderContent()}
-          </div>
-        </Content>
-        <Footer/>
-      </Layout>
+      </Content>
+      <Footer />
     </Layout>
+  </Layout>
   );
 };
 

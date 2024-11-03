@@ -57,6 +57,25 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     res.status(500).send({ message: "Update Server Error" });
   }
 });
+router.post('/changePass', async (req,res)=>{
+  try {
+    const {CurrentPass,NewPass, email} = req.body
+    const user = await User.findOne({email: email})
+    const currentPass = await bcrypt.compare(CurrentPass, user.password);
+    if(!currentPass){
+      return res.status(401).send({message: "Invalid Current Password!"})
+    }
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const hashedPass = await bcrypt.hash(NewPass, salt);
+    user.password = hashedPass;
+    await user.save();
+    return res.status(200).send({message: "Password Changed Successfully"})
+  } catch (error) {
+    res.status(400).send(error)
+    console.error(error)
+  }
+  
+})
 
 const validate = (data) => {
   const schema = Joi.object({

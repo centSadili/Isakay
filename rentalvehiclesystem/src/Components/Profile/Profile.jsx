@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
 import './Profile.css'
+import {Modal, Button} from 'antd'
 import Header from "../Header/Header";
 import Head from '../Head';
 
@@ -17,10 +18,17 @@ const Profile = () => {
     email: "",
     password: ""
   });
+  const [userPass, setPass] = useState({
+    CurrentPass: "",
+    NewPass: "",
+    RetypeNew: ""
+  })
   
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  // const [ChangePass, setChangePass] = useState(false);
+  const [isActive, setActive] = useState(false);
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
@@ -105,6 +113,19 @@ const Profile = () => {
     }
   };
 
+  const handleChangePass = (e)=>{
+    e.preventDefault();
+    axios.post('')
+    .then()
+    .catch((err)=> console.error(err))
+  }
+  const handleCpass = ({currentTarget: input})=>{
+    setChangePass({...userPass, [input.name]: input.value});
+  }
+  const handleCancel = () => {
+    setActive(false);
+  };
+
   if (loading) {
     return <div>Loading user details...</div>;
   }
@@ -187,6 +208,7 @@ const Profile = () => {
       <button className="return"> Return
       </button>
       </Link>
+      <button type="button" onClick={()=> setActive(!isActive)} className="ChangePass">Change Password</button>
         </div>
               
       </form>
@@ -195,7 +217,64 @@ const Profile = () => {
       <div className="dashboard">
       <UserRentalDashboard/>
       </div>
+
+      <Modal
+        title="Change Password"
+        open={isActive}
+        onOk={handleChangePass}
+        okText="Submit"
+        onCancel={handleCancel}
+      >
+        <form method="post" onSubmit={handleChangePass}>
+          <label htmlFor="CurrentPass">Current Password</label>
+          <input 
+          type="password" 
+          name="CurrentPass" 
+          id=""
+          placeholder="Current Password"
+          onChange={handleCpass}
+          required />
+          <label htmlFor="NewPass">New Password</label>
+          <input type="password" 
+          name="NewPass" 
+          id=""
+          placeholder="New Password"
+          onChange={handleCpass}
+          required
+           />
+           <label htmlFor="RetypeNew">Retype Password</label>
+           <input type="password" 
+           name="RetypeNew" 
+           id=""
+           placeholder="Retype your Password"
+           onChange={handleCpass}
+           required
+            />
+        </form>
+      </Modal>
+      
+      {/* {isActive &&
+        <div className="changePass-Modal">
+          <div className="overlay" ></div>
+          <div className="changePass-Content">
+              <h3>{user.firstName} {user.lastName} || Change Password</h3>
+              <form method="post" onSubmit={handleChangePass}>
+                  <label htmlFor="CurrentPass">Current Password</label>
+                  <input 
+                  type="password" 
+                  name="CurPass" 
+                  id=""
+                  placeholder="Current Password"
+                  required/>
+              </form>
+              <button type="button" onClick={()=> setActive(!isActive)}>Close</button>
+          </div>
+      </div>
+      } */}
+      
+      
     </div>
+    
   );
 };
 

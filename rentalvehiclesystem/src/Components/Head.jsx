@@ -5,7 +5,7 @@ const Head = ({title}) => {
   return (
     <div>
         <Helmet>
-           <title>Isakay | {title}</title> 
+           <title>{title} | Isakay</title> 
         </Helmet>
     </div>
   )

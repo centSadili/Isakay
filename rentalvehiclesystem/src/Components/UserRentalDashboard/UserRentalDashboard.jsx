@@ -19,7 +19,6 @@ const UserRentalDashboard = () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/user/user-rent-details/'+userId); 
                 setRents(response.data.rentDetails);
-                console.log(response.data)
             } catch (err) {
                 setError('Error fetching rents. Please try again.');
                 console.error(err);

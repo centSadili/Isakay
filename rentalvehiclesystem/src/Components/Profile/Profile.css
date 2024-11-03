@@ -1,4 +1,3 @@
-
 *,
 *::before,
 *::after {
@@ -11,65 +10,96 @@ html, body {
   overflow: hidden; /* Prevent scrollbars from affecting layout */
 }
 
-
-.profile-container{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
-
-    
+.profile-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  background-color: rgb(20, 20, 20);
+}
+.scrollable-cont {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  height: calc(100vh - 60px); /* Adjust this value based on your header and footer heights */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 1rem; 
 }
 
 
-.info-update{
+.ChangePass {
+  margin-top: 10px;
+  width: 50%; /* Change to 50% for better responsiveness */
+  max-width: 180px;
+  height: auto; /* Adjust height */
+  padding: 0.5rem 0; /* Add padding for touch targets */
+  border: 0;
+  background: linear-gradient(to bottom, rgb(158, 158, 158), rgb(36, 36, 36));
+  color: white;
+  font-weight: bold;
+  transition: all 0.5s;
+  border-radius: 20px;
+}
+
+.ChangePass:hover {
+  background-color: rgb(158, 158, 158);
+  box-shadow: 0 0 20px rgb(158, 158, 158);
+  transform: scale(1.1);
+}
+
+.ChangePass:active {
+  background-color: rgb(158, 158, 158);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.info-update {
   padding: .3rem;
-  height: 100vh;
-    width: 25%;
-    height: auto;
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    font-weight: bold;
-    padding-left: 30px;
-    color: black;
-    border-right: solid 2px black;
-
+  width: 25%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  font-weight: bold;
+  padding-left: 30px;
+  color: black;
+  border-right: solid 2px black;
+  background-color: #cfcfcf;
+  border-radius: 20px;
 }
 
-.info-update h1{
-      font-size: 2.5vh;
-      margin-bottom: 15px;
+.info-update h1 {
+  font-size: 2rem; /* Responsive heading size */
+  margin-bottom: 15px;
 }
 
-.main-picture{
-    padding-left: 2rem;
-    padding-top: 1rem;
-    margin-bottom: 2rlh;
+.main-picture {
+  padding-left: 2rem;
+  padding-top: 1rem;
+  margin-bottom: 2rlh;
 }
 
 .main-picture img {
-    width: 200px;
-    height: 160px;
-    border-radius: 50%;
-    border: solid 5px rgb(0, 0, 0);
-
+  width: 50%; /* Responsive image */
+  height: auto;
+  max-width: 200px;
+  border-radius: 50%;
+  border: solid 5px rgb(0, 0, 0);
 }
 
-.form-group{
+.form-group {
   margin-top: 2rem;
-  
 }
 
 .input {
-  max-width: 280px;
-  height: 44px;
+  max-width: 90%; /* Use percentage for responsive input */
+  height: 44px; /* Fixed height */
   background-color: white;
   border-radius: .5rem;
   padding: 0 1rem;
   border: 2px solid transparent;
-  font-size: 1rem;
-  transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+  font-size: 1rem; /* Base font size */
+  transition: border-color .3s;
 }
 
 .label {
@@ -78,87 +108,123 @@ html, body {
   font-size: .9rem;
   font-weight: bold;
   color: black;
-  transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+  transition: color .3s;
 }
 
-.img-input{
+.img-input {
   margin-top: 0.6rem;
-  max-width: 280px;
+  max-width: 90%;
   font-size: small;
-  outline-width: 2px;
   background-color: white;
   border: solid 2px #242424;
 }
 
-.input:hover, .input:focus, .input-group:hover .input {
+.input:hover,
+.input:focus {
   outline: none;
   border-width: 2px;
   border-color: rgb(0, 0, 0);
 }
 
-.input-group:hover .label, .input:focus {
-  color: black;
-}
-
-
-.dashboard{
+.dashboard {
   width: 75%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  max-height: 920px; /* Set a max height to allow scrolling */
-  overflow-y: auto;
+  height: auto; /* Allow for scrollability */
+  max-height: 100vh; /* Limit max height */
+  overflow-y: auto; /* Enable scrolling */
+}
+
+.update{
+  padding: 0.75rem 1.5rem; /* Smaller padding for buttons */
+  border: 0;
+  border-radius: 10%;
+  color: #ffffff;
+  font-weight: bold;
+  transition: all 0.5s;
+  width: 45%; /* Adjusted width */
+  max-width: 120px; /* Smaller max width for better fit */
+}
+
+.return1{
+  padding: 0.75rem 1.5rem; /* Smaller padding for buttons */
+  border: 0;
+  border-radius: 10%;
+  color: #ffffff;
+  font-weight: bold;
+  transition: all 0.5s;
+  width: 45%; /* Adjusted width */
+  max-width: 120px; /* Smaller max width for better fit */
+}
+
+.update {
+  background-color: #242424;
+}
+
+.update:hover {
+  box-shadow: 0 0 20px #242424;
+  transform: scale(1.1);
+}
+
+.update:active {
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.return1 {
+  background-color: #c41a1a;
+}
+
+.return1:hover {
+  box-shadow: 0 0 20px #c41a1a;
+  background-color: #c41a1a;
+  transform: scale(1.1);
+}
+
+.return1:active {
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .info-update {
+    width: 100%; /* Full width on small screens */
+    border-right: none; /* Remove border */
+  }
+
+  .dashboard {
+    width: 100%; /* Full width on small screens */
+    margin-top: 20px; /* Add margin-top for mobile view */
+  }
+
+  .ChangePass,
+  .update,
+  .return {
+    width: 80%; /* Wider buttons for touch targets */
+  }
+
+  .info-update h1 {
+    font-size: 1.8rem; /* Smaller heading */
+  }
+}
+
+@media (max-width: 480px) {
+  .ChangePass,
+  .update,
+  .return {
+    font-size: 0.8rem; /* Smaller font for buttons */
+  }
+
+  .info-update h1 {
+    font-size: 1.5rem; /* Smaller heading */
+  }
+
+  .input {
+    font-size: 0.9rem; /* Smaller input text */
+  }
 }
 
 
-.update {
-    padding: 10.5px 30px;
-    border: 0;
-    border-radius: 10%;
-    background-color: #242424;
-    color: #ffffff;
-    font-weight: Bold;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-  }
-  
-  .update:hover {
-    background-color: #242424;
-    box-shadow: 0 0 20px #242424;
-    transform: scale(1.1);
-  }
-  
-  .update:active {
-    background-color: #242424;
-    transition: all 0.25s;
-    -webkit-transition: all 0.25s;
-    box-shadow: none;
-    transform: scale(0.98);
-  }
-
-  .return {
-    padding: 12.5px 30px;
-    border: 0;
-    border-radius: 10%;
-    background-color: #c41a1a;
-    color: #ffffff;
-    font-weight: Bold;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-  }
-  
-  .return:hover {
-    background-color: #c41a1a;
-    box-shadow: 0 0 20px #c41a1a;
-    transform: scale(1.1);
-  }
-  
-  .return:active {
-    background-color: #c41a1a;
-    transition: all 0.25s;
-    -webkit-transition: all 0.25s;
-    box-shadow: none;
-    transform: scale(0.98);
-  }
-
-  
+.button-container{
+  margin-top: 35px;
+}

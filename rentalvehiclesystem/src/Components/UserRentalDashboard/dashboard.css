@@ -1,134 +1,125 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-
-
-.dash-container{
+.dash-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow-y: scroll;
     color: black;
-}
-
-.spaced{
-  color: black;
-  margin-left: 25px;
-}
-span{
-  color: black;
-}
-
-.title{
-    padding: 1rem ;
     width: 100%;
-    height:80px;
+}
+
+.spaced {
+    color: black;
+    margin-left: 2rem; /* Reduced for smaller screens */
+}
+
+span {
+    color: black;
+}
+
+.title {
+    padding: 1rem;
+    width: 100%;
+    height: 10vh; /* Responsive height */
     background-color: rgb(20, 20, 20);
     text-align: center;
-    align-content: center;
     color: white; 
-    font-weight: 600;   
-
+    font-weight: 600;
+    font-size: 1.5rem; /* Smaller font size */
 }
 
-
-
- .details-container{
-    height: auto;
+.details-container {
+    flex: 1;
     padding: 1rem;
     padding-bottom: 4rem;  
-    flex: 1;
-    padding-bottom: 4rem; 
-    
- }
+}
 
- .details-container p{
-  color: #ffffff;
- }
- 
+.details-container p {
+    color: #ffffff;
+    font-size: 0.9rem; /* Smaller font size for paragraph text */
+}
 
- .divider{
+.divider {
     margin-top: 5px;
     padding: 1rem;
-    font-size: 0.8vw;
-    letter-spacing: 1px;
+    font-size: 0.7rem; /* Smaller divider font size */
     border: solid 3px rgb(255, 255, 255);
     background-color: white;
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
-    font-style: normal;
     border: solid 3px black;
-    
- }
+}
 
- .clickables{
+.clickables {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
- }
+}
 
- button{
+button {
     margin-left: 10px;
- }
+    padding: 0.5rem 1rem; /* Responsive padding */
+    font-size: 0.9rem; /* Smaller font size for buttons */
+}
 
- .dash-container{
+.dash-container {
     width: 100%;
     height: 85%;
     background-color: rgb(20, 20, 20);
     border-left: orangered;
- }
+}
 
- .view {
+.view {
     margin-right: 1em;
-    padding: 12.5px 30px;
+    padding: 10px 20px; /* Responsive padding */
     border: 0;
-    background: linear-gradient(to bottom, rgb(235, 140, 32),rgb(223, 145, 0));
+    background: linear-gradient(to bottom, rgb(235, 140, 32), rgb(223, 145, 0));
     color: black;
     font-weight: Bold;
     transition: all 0.5s;
-    -webkit-transition: all 0.5s;
     border-radius: 20px;
-  }
-  
-  .view:hover {
+    font-size: 0.9rem; /* Smaller font size */
+}
+
+.view:hover {
     background-color: orange;
     box-shadow: 0 0 20px orange;
     transform: scale(1.1);
-  }
-  
-  .view:active {
+}
+
+.view:active {
     background-color: orange;
     transition: all 0.25s;
-    -webkit-transition: all 0.25s;
     box-shadow: none;
     transform: scale(0.98);
-  }
+}
 
-  .delete {
-    padding: 12.5px 30px;
+.delete {
+    padding: 10px 20px; /* Responsive padding */
     border-radius: 20px;
     border: 0;
     background-color: #cf0606;
     color: #ffffff;
     font-weight: Bold;
     transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-  }
-  
-  .delete:hover {
+    font-size: 0.9rem; /* Smaller font size */
+}
+
+.delete:hover {
     background-color: #cf0606;
     box-shadow: 0 0 20px #cf0606;
     transform: scale(1.1);
-  }
-  
-  .delete:active {
+}
+
+.delete:active {
     background-color: #cf0606;
     transition: all 0.25s;
-    -webkit-transition: all 0.25s;
     box-shadow: none;
     transform: scale(0.98);
-  }
+}
 
-  .modal {
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -139,7 +130,6 @@ span{
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    
 }
 
 .overlay {
@@ -159,32 +149,33 @@ span{
     z-index: 1001;
     max-height: 80vh; /* Keeps content scrollable */
     overflow-y: auto;
-    width: 100vw; /* Sets the modal width to 100% of the viewport */
+    width: 90vw; /* Sets the modal width to 90% of the viewport */
     max-width: 800px; /* Increases the max width for larger screens */
-    font-size: 0.9rem; /* Smaller font size for all text inside content */
+    font-size: 0.8rem; /* Smaller font size for all text inside content */
     line-height: 1.4; /* Adds spacing for better readability */
 }
 
 .content h1 {
-    font-size: 1.2rem; /* Smaller font size for headings */
+    font-size: 1.1rem; /* Smaller font size for headings */
     margin-bottom: 10px;
 }
 
 .content h2 {
-    font-size: 1rem; /* Smaller font size for subheadings */
+    font-size: 0.9rem; /* Smaller font size for subheadings */
     margin-bottom: 8px;
 }
 
 .content img {
-    width: 280px;
-    height: 250px;
+    width: 100%; /* Full width for responsiveness */
+    max-width: 280px; /* Max width for larger screens */
+    height: auto; /* Maintains aspect ratio */
     border: solid 3px black;
 }
 
 .Specifications {
     display: flex;
     align-items: center; 
-    gap: 20px; 
+    gap: 10px; /* Reduced gap */
     text-align: left;
 }
 
@@ -195,38 +186,71 @@ span{
 .Specifications h2 {
     max-width: 60%;
     margin-top: 20px; /* Adjusts width to control text area */
+    font-size: 0.9rem; /* Smaller font size for specifications */
 }
 
-
-.close{
+.close {
     margin-top: 2em;
     margin-right: 20px;
-    padding: 12.5px 30px;
+    padding: 10px 20px; /* Responsive padding */
     border: 0;
-    background-color: rgb(209, 25, 25);;
+    background-color: rgb(209, 25, 25);
     color: #ffffff;
     font-weight: Bold;
     transition: all 0.5s;
     border-radius: 20px;
-    -webkit-transition: all 0.5s;
-  }
-  
-  .close:hover {
+    font-size: 0.9rem; /* Smaller font size */
+}
+
+.close:hover {
     background-color: rgb(209, 25, 25);
     box-shadow: 0 0 20px rgb(209, 25, 25);
     transform: scale(1.1);
-  }
-  
-  .close:active {
+}
+
+.close:active {
     background-color: rgb(209, 25, 25);
     transition: all 0.25s;
-    -webkit-transition: all 0.25s;
     box-shadow: none;
     transform: scale(0.98);
-  }
+}
 
-.close-cont{
+.close-cont {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;   
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.2rem; /* Adjust title font size for mobile */
+    }
+
+    button {
+        padding: 0.4rem; /* Reduce button padding */
+        font-size: 0.8rem; /* Smaller font size for buttons */
+    }
+
+    .view, .delete, .close {
+        padding: 10px 15px; /* Responsive button padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    .content h1 {
+        font-size: 1rem; /* Smaller heading size */
+    }
+
+    .content h2 {
+        font-size: 0.8rem; /* Smaller subheading size */
+    }
+
+    .content img {
+        width: 100%; /* Make images responsive */
+    }
+
+    .Specifications {
+        flex-direction: column; /* Stack specifications on small screens */
+        gap: 5px; /* Reduced gap */
+    }
 }

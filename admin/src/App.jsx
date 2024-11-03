@@ -15,6 +15,7 @@ import RentalDetails from './Components/Rent/RentDetails/RentDetails';
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile';
 import Adminlist from './Components/Admin/Adminlist/Adminlist';
 import Error500 from './Components/Error Pages/Error500';
+import UpdateRentDetailsForm from './Components/Rent/RentalForm/UpdateRentDetailsForm';
 
 function PrivateRoute({ children }) {
   const user = localStorage.getItem('id');
@@ -36,7 +37,8 @@ function App() {
         <Route path='/admin/user/list' element={<PrivateRoute><Userlist /></PrivateRoute>} />
         <Route path='/admin/user/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path='/admin/user/add' element={<PrivateRoute><SignUp /></PrivateRoute>} />
-        
+        <Route path='/admin/user/update/rent/:id' element={<PrivateRoute><UpdateRentDetailsForm/></PrivateRoute>} />
+
         <Route path='/admin/profile' element={<PrivateRoute><AdminProfile /></PrivateRoute>} />
         <Route path='/admin/list' element={<PrivateRoute><Adminlist /></PrivateRoute>} />
         <Route path='/admin/rent/list' element={<PrivateRoute><Rentlist /></PrivateRoute>} />

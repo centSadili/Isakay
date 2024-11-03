@@ -258,7 +258,7 @@ const AdminRentalDashboard = () => {
               >
                 Close
               </button>
-              <Link to={'/update/rent/' + rentDetail._id}>
+              <Link to={'/admin/user/update/rent/' + rentDetail._id}>
                 <button
                   style={styles.viewButton}
                   onMouseOver={(e) => e.target.style.backgroundColor = styles.viewButtonHover.backgroundColor}

@@ -1,61 +1,111 @@
-/* General container styling to contain overflow */
+/* Main form container adjustments for responsiveness */
 .rental-form {
-    max-width: 100%;
+  width: 100%;
+  max-width: 800px;
+  padding: 2vw;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem; /* Set a base font size for better scaling */
+}
+
+/* General input, select, and autocomplete styling */
+.rental-form input,
+.rental-form select,
+.rental-form .MuiAutocomplete-root,
+.rental-form .form-item {
+  width: 100% !important;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  font-size: inherit;
+}
+
+/* Larger screens (e.g., desktops) */
+@media (min-width: 1024px) {
+  .rental-form {
+    padding: 3vw;
+  }
+
+  .rental-form h1 {
+    font-size: 2em;
+  }
+}
+
+/* Medium screens (e.g., tablets) */
+@media (max-width: 1024px) {
+  .rental-form {
+    padding: 2vw;
+  }
+
+  .rental-form h1 {
+    font-size: 1.8em;
+  }
+}
+
+/* Small screens (e.g., small tablets, large phones) */
+@media (max-width: 768px) {
+  .rental-form {
+    padding: 10px;
+  }
+
+  .rental-form .form-row {
+    flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    overflow-x: hidden;
   }
-  
-  /* Adjust layout for smaller screens */
-  @media (max-width: 768px) {
-    .rental-form {
-      padding: 10px;
-      overflow-y: auto;
-    }
-  
-    /* Stack form items vertically */
-    .rental-form .form-row {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-  
-    /* Set each input to full width */
-    .rental-form input,
-    .rental-form select,
-    .rental-form .MuiAutocomplete-root,
-    .rental-form .form-item {
-      width: 100% !important;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-    }
-  
-    /* Label adjustments for spacing */
-    .rental-form label {
-      margin-bottom: 5px;
-    }
-  
-    /* Adjust heading size */
-    .rental-form h1 {
-      font-size: 1.5em;
-      text-align: center;
-    }
+
+  .rental-form label {
+    margin-bottom: 5px;
   }
-  
-  /* Further adjustments for very small screens */
-  @media (max-width: 480px) {
-    .rental-form {
-      padding: 5px;
-    }
-  
-    .rental-form h1 {
-      font-size: 1.2em;
-    }
-  
-    .rental-form button {
-      width: 100%;
-      font-size: 1em;
-    }
+
+  .rental-form h1 {
+    font-size: 1.5em;
+    text-align: center;
   }
-  
+}
+
+/* Very small screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .rental-form {
+    padding: 5px;
+  }
+
+  .rental-form h1 {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .submit-button {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  /* Reduce padding/margins for input fields */
+  .rental-form input,
+  .rental-form select,
+  .rental-form .MuiAutocomplete-root,
+  .rental-form .form-item {
+    padding: 8px;
+  }
+}
+
+/* Additional scrollbar styling for better appearance */
+.rental-form::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rental-form::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.rental-form::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}

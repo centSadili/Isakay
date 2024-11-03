@@ -233,7 +233,8 @@ const RentalForm = () => {
     marginBottom: '20px',
   };
   return (
-    <div style={formStyle}>
+
+    <div className='rental-form'>
       <form onSubmit={handleSubmit}>
         <h1 style={headerStyle}>Personal Details</h1>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -535,7 +536,7 @@ const RentalForm = () => {
   style={{ 
     marginTop: '10px',
     padding: '10px 20px', 
-    backgroundColor: 'blue', 
+    backgroundColor: 'orange', 
     color: 'white', 
     borderRadius: '10px', 
     cursor: 'pointer',

@@ -104,7 +104,7 @@
     display: flex;
     padding: 60px;
     border-radius: 10px;
-    background-color: orange;
+    background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     flex-wrap: wrap;
@@ -180,8 +180,9 @@
 }
 
 .review-carpage-custom p{
+    margin-left: 10px;
     font-weight: 500;
-    color: white;
+    color: black;
 }
 
 .ratings-carpage {
@@ -196,9 +197,13 @@
 }
 
 span{
-color: white;
+color: black;
 }
 
+
+.review{
+    color: black;
+}
 
 .separatorcarpage-custom {
     width: 100%;
@@ -226,8 +231,8 @@ color: white;
 }
 
 .button-carpage-custom {
-    background-color: black;
-    color: white;
+    background-color: orange;
+    color: black;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -238,8 +243,9 @@ color: white;
 }
 
 .button-carpage-custom:hover {
-    background-color: rgb(11, 11, 139);
+    background-color: black;
     font-weight: bold;
+    color: white;
 }
 
 

@@ -6,11 +6,11 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
 const CarPage = () => {
-  const id = localStorage.getItem("carId") || 'ID Not Found'; // Get the user ID from the URL
+  const id = localStorage.getItem("carId") || 'ID Not Found'; 
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [showRentalForm, setShowRentalForm] = useState(false); // State to toggle RentalForm visibility
+  const [showRentalForm, setShowRentalForm] = useState(false); 
   
   useEffect(() => {
     const fetchCar = async () => {
@@ -73,8 +73,8 @@ const CarPage = () => {
               </div>
             </div>
             <div className="separatorcarpage-custom"></div>
+            <p className="ratings-carpage">  8.2</p>
             <div className="review-carpage-custom">
-              <p className="ratings-carpage">  8.2</p>
               <p className="review">1000+ reviews</p>
             </div>
          

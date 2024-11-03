@@ -26,7 +26,7 @@ body, html {
 
 .about-container {
   max-width: 100%;
-  overflow-x: hidden; /* Ensure no horizontal overflow */
+  overflow-x: hidden; 
   background-color: whitesmoke;
   width: 100%;
   border-top-left-radius: 20px;

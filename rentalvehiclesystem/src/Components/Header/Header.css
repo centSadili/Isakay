@@ -47,23 +47,29 @@
 }
 
 .dropdown-menu {
-  margin-top: 10px;
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  margin-top: 10px; /* Space below the profile icon */
   text-align: center;
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 50%;
-  transform: translateX(50%); /* Center the dropdown under the profile icon */
-  background-color: #333;
+  display: none; /* Controlled by hover */
+  position: absolute; /* Position absolutely */
+  top: 100%; /* Align directly below */
+  right: 0; /* Align to the right */
+  background-color: #333; /* Background color */
   padding: 10px;
   border-radius: 8px;
-  width: 150px;
-  flex-direction: column;
+  width: auto; /* Set to auto or specify a fixed width */
+  z-index: 10; /* Ensure it sits above other elements */
 }
 
+/* Show dropdown on hover */
 .profile:hover .dropdown-menu {
-  display: flex;
+  display: flex; /* Show dropdown */
+  visibility: visible; /* Make it visible */
+  opacity: 1; /* Set opacity */
 }
+
 
 .dropdown-menu .name {
   color: #fff;
@@ -106,30 +112,43 @@
 /* Show/hide navigation links in mobile */
 @media (max-width: 768px) {
   .navigationlinks {
-    display: none;
+    display: none; /* Hidden by default */
     flex-direction: column;
     background-color: black;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
+    position: absolute; /* Position absolutely */
+    top: 60px; /* Adjust as necessary */
+    right: 0; /* Align to the right */
+    left: 0; /* Ensure it spans the full width */
+    width: 100%; /* Full width to eliminate gaps */
     padding: 10px 0;
     text-align: center;
     z-index: 10;
   }
 
   .navigationlinks.show {
-    display: flex;
+    display: flex; /* Show when active */
   }
 
   .hamburger {
-    display: flex;
+    display: flex; /* Show on mobile */
     margin-right: auto; /* Align hamburger to the left */
   }
   
   .profile {
-    position: absolute;
-    top: 15px;
-    right: 10px;
+    position: absolute; /* Positioning for mobile */
+    top: 15px; /* Adjust as needed */
+    right: 10px; /* Align to the right */
+    /* Remove margin and padding if any */
+    margin: 0; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+  }
+
+  /* Optionally add styles to ensure dropdown aligns */
+  .dropdown-menu {
+    position: absolute; /* Ensure it's positioned correctly */
+    top: 100%; /* Align it directly below */
+    right: 0; /* Align to the right */
+    width: auto; /* Adjust width to content or set a specific width */
+    z-index: 20; /* Ensure it sits above other elements */
   }
 }

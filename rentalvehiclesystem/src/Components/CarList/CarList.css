@@ -27,26 +27,22 @@ img {
   height: auto;
 }
 
-.carlist-main-container{
+.carlist-main-container {
+  overflow-y: scroll;
+  overflow-x: hidden; 
   max-width: 100vw; 
-  overflow-x: hidden;
   background-color: black;
-  overflow-y: scroll; 
-  height: 100vh; 
-  width: 100%;
+  height: 100vh;
 }
 
 .carlists-container {
-  height: 85vw;
-  max-height: 900vw;
-  width: 100%;
-  max-width: 150vw; 
-  overflow-x: hidden;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  width: 100%;
+  max-width: 100%; /* Ensure it doesn’t overflow */
+  overflow-y: scroll; /* Only scroll if needed */
   background-color: whitesmoke;
   padding: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding-bottom: 60px; /* Add some padding at the bottom */
 }
 
 .carlist-title {

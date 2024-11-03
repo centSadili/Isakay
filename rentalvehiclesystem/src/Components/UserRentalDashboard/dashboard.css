@@ -10,9 +10,12 @@
     color: black;
 }
 
-span{
+.spaced{
   color: black;
   margin-left: 25px;
+}
+span{
+  color: black;
 }
 
 .title{

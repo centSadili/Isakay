@@ -134,7 +134,7 @@ const UserRentalDashboard = () => {
                         <Button key="close" onClick={closeModal}>
                             Close
                         </Button>,
-                        <Link to={`/update/rent/${rentDetail._id}`} key="update">
+                        <Link to={`/admin/user/update/rent/${rentDetail._id}`} key="update">
                             <Button type="primary">Update</Button>
                         </Link>,
                     ]}

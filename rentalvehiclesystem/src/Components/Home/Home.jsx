@@ -191,7 +191,7 @@ const handleCancel = ()=>{
 </div>
         </section>
         <div className="chatbot">
-          <FloatButton icon={<AssistantIcon/>} type='primary' onClick={()=> setChatActive(!chatActive)}/>
+          <FloatButton icon={<AssistantIcon/>} type='primary' onClick={()=> setChatActive(!chatActive)} tooltip={<div>Chat with AI</div>}/>
           <Modal
           open={chatActive}
           onCancel={handleCancel}

@@ -7,6 +7,8 @@ import { Upload, message, Col, Row, Button, Input, Image } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useMediaQuery } from "react-responsive";
 import UserRentalDashboard from "../UserRentalDashboard/UserRentalDashboard";
+import Header from '../../Header/Header'
+import Footer from '../../Footer/Footer';
 
 const Profile = () => {
   const id = localStorage.getItem("userId") || "ID Not Found"; // Get the user ID from localStorage
@@ -134,6 +136,7 @@ const Profile = () => {
 
   return (
     <div style={{ textAlign: "center", overflowY: "auto", maxHeight: "80vh" }}>
+      <Header/>
       <h2>User Profile</h2>
       <div style={cardContainerStyle}>
         <form onSubmit={handleUpdate} style={{ flex: 1 }}>
@@ -201,6 +204,7 @@ const Profile = () => {
       </Link>
 
       <UserRentalDashboard />
+      <Footer/>
     </div>
   );
 };

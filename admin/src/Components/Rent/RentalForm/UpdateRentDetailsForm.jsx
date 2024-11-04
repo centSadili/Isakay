@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
 import { Popconfirm, message} from "antd";
+import Header from '../../Header/Header'
+import Footer from '../../Footer/Footer';
 import './UpdateForm.css';  
 import axios from "axios";
 
@@ -136,6 +138,7 @@ const UpdateRentDetailsForm = () => {
 
   return (
     <div className="urdf-container">
+      <Header/>
       <div className="update-form-container">
       <form onSubmit={handleSubmit}>
       <h1>Personal Details</h1>
@@ -369,7 +372,7 @@ const UpdateRentDetailsForm = () => {
         <button className='submit-update'type="submit">Update</button>
       </form>
       </div>  
-
+<Footer/>
     </div>
   );
 };

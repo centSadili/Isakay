@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Avatar } from 'antd';
+import { Avatar, Dropdown, Space, Button } from 'antd';
 import './Header.css';
 import Logo from "../../images/main.png"
 
@@ -38,6 +38,21 @@ const Header = () => {
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+    const dropItems = [{
+        key:'1',
+        label:(
+            <Link to='/profile'>{user ? `${user.firstName} ${user.lastName}` : "Guest User"}</Link>  
+        )
+    },
+    {
+        key:'2',
+        label:(
+            <Button type='text' onClick={logOut}>{user? 'Logout': 'SignUp'}</Button>
+        ),
+        danger:true
+
+    }
+    ]
 
     return (
         <div className="carlist-header">
@@ -68,21 +83,26 @@ const Header = () => {
 
             {/* Profile */}
             <div className="profile">
-                <Avatar
-                    size={40}
-                    icon={
-                        <img
-                            src={user && user.image ? `http://localhost:3000/api/car_img/${user.image}` : "default_profile_img.png"}
-                            alt="Profile"
+                <Dropdown
+                menu={{items: dropItems}}>
+                    <a onClick={(e)=>e.preventDefault()}>
+                        <Avatar
+                        size={40}
+                        icon={
+                            <img
+                                src={user && user.image ? `http://localhost:3000/api/car_img/${user.image}` : "default_profile_img.png"}
+                                alt="Profile"
+                            />
+                        }
                         />
-                    }
-                />
-                <div className="dropdown-menu">
+                    </a>
+                </Dropdown>
+                {/* <div className="dropdown-menu">
                     <div className="name">
                       <Link to='/profile'>{user ? `${user.firstName} ${user.lastName}` : "Guest User"}</Link>  
                     </div>
                     <button className="logout" onClick={logOut}>{user? 'Logout':'SignUp'}</button>
-                </div>
+                </div> */}
             </div>
         </div>
     );

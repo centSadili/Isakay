@@ -10,19 +10,17 @@ body, html {
   flex-direction: column; /* Stack children vertically */
 }
 
-
-.home-container{
-  background-color: black;
+.home-container {
   margin: 0;
   padding: 0;
   width: 100%;
-  max-height: calc(100vh - 80px); /* Adusted for fixed header height */
+  max-height: calc(100vh - 80px); /* Adjusted for fixed header height */
   overflow-y: auto; /* Allow scrolling only when content exceeds */
   flex: 1; 
-
+  background-color: #000;
 }
 
-.prof-container{
+.prof-container {
   display: flex;
 }
 
@@ -54,7 +52,7 @@ body, html {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px; /* Reduced font size */
 }
 
 .profile {
@@ -71,12 +69,12 @@ body, html {
 
 .profile span {
   color: white;
-  font-size: medium;
+  font-size: small; /* Reduced font size */
 }
 
 .profile p {
   color: lightgray;
-  font-size: small;
+  font-size: x-small; /* Reduced font size */
 }
 
 /* Main Section */
@@ -117,11 +115,10 @@ main {
   flex-wrap: wrap; /* Ensure responsiveness */
 }
 
-.book-container{
+.book-container {
   display: flex;
   justify-content: space-between;
 }
-
 
 /* Form Group */
 .form-group {
@@ -130,11 +127,10 @@ main {
   padding-left: 3rem;
 }
 
-
 /* Input Fields */
 input {
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 100%; /* Take full width of the form group */
@@ -148,7 +144,7 @@ button.btn {
   padding: 15px 30px;
   border: none;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 16px; /* Reduced font size */
   cursor: pointer;
   white-space: nowrap; /* Prevent text wrapping inside the button */
 }
@@ -157,7 +153,7 @@ button.btn:hover {
   background-color: #2e2e2e;
 }
 
-/* From Uiverse.io by vinodjangid07 */ 
+/* From Uiverse.io by vinodjangid07 */
 .logout {
   display: flex;
   align-items: center;
@@ -190,6 +186,7 @@ button.btn:hover {
 .sign svg path {
   fill: white;
 }
+
 /* text */
 .text {
   position: absolute;
@@ -197,7 +194,7 @@ button.btn:hover {
   width: 0%;
   opacity: 0;
   color: white;
-  font-size: 1.2em;
+  font-size: 1em; /* Reduced font size */
   font-weight: 600;
   transition-duration: .3s;
 }
@@ -215,6 +212,7 @@ button.btn:hover {
   padding-left: 20px;
   background-color: rgb(199, 7, 7);
 }
+
 /* hover effect button's text */
 .logout:hover .text {
   opacity: 1;
@@ -223,28 +221,26 @@ button.btn:hover {
   padding-right: 10px;
   background-color: rgb(199, 7, 7);
 }
-/* button click effect*/
+
+/* button click effect */
 .logout:active {
   transform: translate(2px ,2px);
   background-color: rgb(199, 7, 7);
 }
 
-.Features{
+.Features {
   background-color: #1b1919;
   padding: 1.5rem;
- 
 }
 
-.all-features{
-  
+.all-features {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: white;
-
 }
 
-.all-features svg{
+.all-features svg {
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px; /* Space between image and text */
@@ -252,43 +248,37 @@ button.btn:hover {
   height: 90px;
 }
 
-.promo{
+.promo {
   width: 100%;
   height: 550px;
   background-color: white;
   text-align: center;
-  background-image: url("/src/images/promo-pic.png") ;
+  background-image: url("/src/images/promo-pic.png");
   background-size: cover;
   background-position: center;
 }
 
-
-.Fleet{
+.Fleet {
   width: 100%;
   height: auto;
   background: linear-gradient(to bottom,  #4F4A4A, #181818);
   color: white;
   padding: 1rem;
-
 }
 
-.Fleet h1{  
-  font-size: 5rem;
-
-}
-.Fleet span{
-  font-size: 1rem;
-  font-weight: 400;
-
+.Fleet h1 {  
+  font-size: 4rem; /* Reduced heading size */
 }
 
-.slider{
+.Fleet span {
+  font-size: 0.8rem; /* Adjusted span size */
+}
+
+.slider {
   padding: 2rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  
-  
 }
 
 .slider-cards {
@@ -310,7 +300,6 @@ button.btn:hover {
   user-select: none;
   font-weight: bolder;
   color: black;
-  
 }
 
 .slider-cards img {
@@ -327,76 +316,83 @@ button.btn:hover {
   transform: scale(0.95) rotateZ(1.7deg);
 }
 
+.sponsors { 
+  width: 100%;
+  background: whitesmoke;
+  overflow: hidden;
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  z-index: 10;
+  white-space: nowrap;
+}
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .header {
-    height: 10vh; /* Adjust height for smaller screens */
-    padding: 10px; /* Reduce padding for smaller header */
+.logos {
+  display: inline-block;
+  background: rgb(245, 245, 245);
+  padding: 1em 2em;
+  justify-content: center;
+  animation: 10s slide infinite linear;
+}
+
+.logos img {
+  height: 100px; /* Logo height */
+  margin-right: 50px; /* Space between logos */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .navbar a {
+    font-size: 14px; /* Reduced font size for smaller screens */
   }
 
-  .navbar ul {
-    flex-direction: column; /* Stack navigation items */
-    gap: 10px; /* Adjust gap between items */
+  .Fleet h1 {
+    font-size: 3rem; /* Adjusted heading size */
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar a {
+    font-size: 12px; /* Further reduced font size */
   }
 
-  .hero {
-    height: 300px; /* Reduce hero height for smaller screens */
+  .Fleet h1 {
+    font-size: 2.5rem; /* Adjusted heading size */
   }
 
   .booking-form {
     flex-direction: column; /* Stack form elements */
-    align-items: stretch; /* Stretch items to fill the width */
-  }
-
-  .form-group {
-    min-width: 100%; /* Allow full width for form groups */
-    padding-left: 0; /* Remove left padding */
-  }
-
-  .slider-cards {
-    width: 90%; /* Make slider cards responsive */
-    height: auto; /* Allow height to adjust based on content */
-  }
-
-  .Fleet h1 {
-    font-size: 3rem; /* Reduce heading size for smaller screens */
-  }
-
-  .Fleet span {
-    font-size: 0.9rem; /* Adjust span size */
+    align-items: stretch; /* Full width for form groups */
   }
 }
 
-@media (max-width: 480px) {
-  .header {
-    height: 8vh; /* Further reduce height for very small screens */
-  }
-
+@media (max-width: 320px) {
   .navbar a {
-    font-size: 16px; /* Slightly reduce font size */
+    font-size: 10px; /* Smaller font size for very small screens */
   }
 
-  .hero {
-    height: 200px; /* Further reduce hero height */
+  .profile span {
+    font-size: x-small; /* Smaller font size */
   }
 
-  .booking-form {
-    padding: 10px; /* Reduce padding */
-  }
-
-  .slider-cards {
-    width: 95%; /* Make slider cards more responsive */
-    height: auto; /* Allow height to adjust based on content */
+  .profile p {
+    font-size: xx-small; /* Smaller font size */
   }
 
   button.btn {
-    width: 100%; /* Make buttons full width */
-    font-size: 16px; /* Adjust font size */
+    font-size: 14px; /* Smaller button font size */
   }
 
-  .logout {
-    width: 35px; /* Adjust logout button size */
-    height: 35px;
+  .Fleet h1 {
+    font-size: 2rem; /* Adjusted heading size */
   }
 }

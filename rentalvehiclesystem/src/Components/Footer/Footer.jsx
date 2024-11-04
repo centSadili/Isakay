@@ -61,11 +61,11 @@ const Footer = () => {
       </ul>
     </div>
     <div className="footer-column">
-      <h3>Explore</h3>
+      <h3>Partnerships</h3>
       <ul>
-        <li><a href="#">Design</a></li>
-        <li><a href="#">Prototyping</a></li>
-        <li><a href="#">Collaboration features</a></li>
+        <li><a href="#">Sponsors</a></li>
+        <li><a href="#">Partners</a></li>
+  
       </ul>
     </div>
     <div className="footer-column">

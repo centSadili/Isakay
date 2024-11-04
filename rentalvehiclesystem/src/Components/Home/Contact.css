@@ -43,10 +43,11 @@ html, body {
 .forms-container{
     padding: 3.5rem;
     margin: 1rem;
-    background-color: #c4c4c442;
+    background-color: #3838382c;
     color: rgb(77, 77, 77);
     border-radius: 20px;
     max-width: 90%;
+    color: rgb(43, 42, 42);
    
 }
 
@@ -84,7 +85,7 @@ html, body {
 }
 
 .fname{
-  margin-right: 1.5vw;
+  margin-bottom: 1rem;
 }
 
 .contact-title{
@@ -160,8 +161,7 @@ html, body {
 .contact-container {
   max-width: 100%;
   overflow-x: hidden; /* Ensure no horizontal overflow */
-  background-color: whitesmoke;
-
+  background: linear-gradient(90deg, rgb(228, 228, 228) 0%, rgb(194, 194, 194) 100%);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 20px;
@@ -181,7 +181,7 @@ html, body {
 }
 
 .contact-container span {
-  color: grey;
+  color: rgb(70, 70, 70);
   font-family: "Oswald", sans-serif;
   font-size: 1.5vw;
   font-weight: 500;

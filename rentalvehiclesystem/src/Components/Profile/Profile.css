@@ -92,6 +92,7 @@ html, body {
 }
 
 .input {
+  margin-bottom: 20px;
   max-width: 90%; /* Use percentage for responsive input */
   height: 44px; /* Fixed height */
   background-color: white;

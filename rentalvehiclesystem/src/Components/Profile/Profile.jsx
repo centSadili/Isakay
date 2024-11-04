@@ -235,7 +235,6 @@ const Profile = () => {
     <Link to="/Home">
       <button className="return1">Return</button>
     </Link>
-    <button type="button" onClick={()=> setActive(!isActive)} className="ChangePass">Change Password</button>
   </div>    
       </form>
     </div>

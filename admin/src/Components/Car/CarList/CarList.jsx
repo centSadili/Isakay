@@ -47,7 +47,7 @@ const CarList = () => {
             sorter: (a, b) => a.car_name.localeCompare(b.car_name),
         },
         {
-            title: 'Price ($)',
+            title: 'Price (₱)',
             dataIndex: 'price',
             sorter: (a, b) => a.price - b.price,
         },

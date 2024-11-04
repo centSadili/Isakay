@@ -23,23 +23,23 @@ const UpdateCar = () => {
     Hatchback: 5,
     SUV: 7,
     Crossover: 5,
-    Coupe: 4,
+    Coupe: 5,
     Convertible: 4,
     'Pickup Truck': 5,
     'Station Wagon': 5,
-    'Luxury Car': 5,
+    'Luxury Car': 2,
   };
 
   const basePricePerDay = {
-    Sedan: 50,
-    Hatchback: 40,
-    SUV: 80,
-    Crossover: 60,
-    Coupe: 70,
-    Convertible: 90,
-    'Pickup Truck': 75,
-    'Station Wagon': 65,
-    'Luxury Car': 120,
+    Sedan: 550,
+    Hatchback:620,
+    SUV: 705,
+    Crossover: 715,
+    Coupe: 819,
+    Convertible: 945,
+    'Pickup Truck': 780,
+    'Station Wagon': 985,
+    'Luxury Car': 1200,
   };
 
   const [formData, setFormData] = useState({
@@ -278,7 +278,7 @@ const UpdateCar = () => {
           </Row>
 
           <div style={{ marginTop: '20px' }}>
-            <label htmlFor="price">Price (in $):</label>
+            <label htmlFor="price">Price (in ₱):</label>
             <Input
               type="number"
               id="price"

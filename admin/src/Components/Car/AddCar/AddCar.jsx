@@ -276,7 +276,7 @@ const AddCar = () => {
           </Row>
   
           <div style={{ marginTop: "20px" }}>
-            <label htmlFor="price">Price (in php):</label>
+            <label htmlFor="price">Price (in ₱):</label>
             <Input
               type="number"
               id="price"

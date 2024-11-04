@@ -230,6 +230,7 @@ const Profile = () => {
         />      
         {error && <div className="error">{error}</div>}
       </div>
+      <button type="button" onClick={()=> setActive(!isActive)} className="ChangePass">Change Password</button>
         
   <div className="button-container">
     <button className="update" type="submit">Update</button>

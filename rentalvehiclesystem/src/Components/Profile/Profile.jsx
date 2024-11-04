@@ -187,7 +187,7 @@ const Profile = () => {
        
       <div className="">
         <label htmlFor="image">Change Picture:</label> <br />
-        <input className="img-input" type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} required />
+        <input className="img-input" type="file" id="image" name="image" accept="image/*" onChange={handleImageChange}  />
             
       </div>
       <br />   

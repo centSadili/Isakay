@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,useNavigate} from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
 import './UpdateForm.css';  
 import axios from "axios";
@@ -16,6 +16,7 @@ const UpdateRentDetailsForm = () => {
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState([]);
 
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     firstname: "",
     middleinitial: "",
@@ -123,7 +124,8 @@ const UpdateRentDetailsForm = () => {
       if (window.confirm("Are you sure you want to Update your rental booking? This action cannot be undone.")){
         const url = `http://localhost:3000/api/rent/update-rent-details/${id}`
         const res = await axios.put(url,formData)
-        
+        alert('Update Successful')
+        navigate('/profile')
         console.log(res);
       }
       

@@ -4,7 +4,8 @@ import { Table, Tag ,Avatar} from 'antd';
 import { TbManualGearboxFilled, TbAirConditioning } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import './CarList.css';
-
+import Header from '../../Header/Header'
+import Footer from '../../Footer/Footer';
 const CarList = () => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -111,6 +112,7 @@ const CarList = () => {
 
     return (
         <div className="carlist-main-container">
+            <Header/>
             <div className="carlists-container">
                 <h1 className="carlist-title">Select a vehicle group</h1>
                 

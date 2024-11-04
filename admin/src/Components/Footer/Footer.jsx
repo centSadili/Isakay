@@ -12,7 +12,7 @@ const Footer = () => {
     <span className="tooltip">Facebook</span>
     <svg
       viewBox="0 0 320 512"
-      height="1em"
+      height="1.2em"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -24,7 +24,7 @@ const Footer = () => {
   <li className="icon twitter">
     <span className="tooltip">Twitter</span>
     <svg
-      height="1.8em"
+      height="1.6em"
       fill="currentColor"
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
@@ -61,11 +61,11 @@ const Footer = () => {
       </ul>
     </div>
     <div className="footer-column">
-      <h3>Explore</h3>
+      <h3>Partnerships</h3>
       <ul>
-        <li><a href="#">Design</a></li>
-        <li><a href="#">Prototyping</a></li>
-        <li><a href="#">Collaboration features</a></li>
+        <li><a href="#">Sponsors</a></li>
+        <li><a href="#">Partners</a></li>
+  
       </ul>
     </div>
     <div className="footer-column">
@@ -76,11 +76,7 @@ const Footer = () => {
         <li><a href="#">Office Hours: Monday – Friday, 8:00 AM – 6:00 PM (PHT)</a></li>
       </ul>
     </div>
-    <div className="footer-column footer-social">
-      <a href="#"><i className="fab fa-facebook"></i></a>
-      <a href="#"><i className="fab fa-twitter"></i></a>
-      <a href="#"><i className="fab fa-linkedin"></i></a>
-    </div>
+   
   </div>
     </div>
   

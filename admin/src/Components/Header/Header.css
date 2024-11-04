@@ -1,0 +1,132 @@
+/* Header Container */
+.carlist-header {
+  background-color: #222;
+  width: 100vw;
+  padding: 10px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+/* Logo styling */
+.logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1.8rem;
+  text-decoration: none;
+  font-weight: 700;
+  gap: 10px;
+}
+
+.logo-img {
+  width: 40px;
+}
+
+/* Profile Section */
+.profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  width: 150px;
+}
+
+.profile.show .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+}
+
+.dropdown-menu .name {
+  color: #fff;
+  font-size: 1rem;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.dropdown-menu .logout {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* Hamburger Menu for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  background-color: white;
+  width: 25px;
+  height: 3px;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .profile {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
+
+  .carlist-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  /* Show the dropdown menu when hamburger is clicked */
+  .profile.show .dropdown-menu {
+    position: static;
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    background-color: #222;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 0;
+    margin-top: 10px;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  .dropdown-menu {
+    flex-direction: column;
+  }
+}
+.hide-avatar {
+  display: none;
+}

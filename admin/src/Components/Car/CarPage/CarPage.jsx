@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer';
 import { useMediaQuery } from 'react-responsive';
 
@@ -143,6 +144,7 @@ const CarPage = () => {
   }
   return (
     <div>
+      <Header/>
     <div key={car._id} className="car-card" style={cardContainerStyle}>
       <div style={imageContainerStyle}>
         <img

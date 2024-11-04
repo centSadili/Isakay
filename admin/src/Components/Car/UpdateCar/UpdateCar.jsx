@@ -4,7 +4,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Upload, message, Col, Row, Button, Input, Select,Image } from "antd";
 import { useMediaQuery } from 'react-responsive';
 import Footer from '../../Footer/Footer';
-
+import Header from '../../Header/Header'
 const { Option } = Select;
 
 const getBase64 = (file) =>
@@ -178,6 +178,7 @@ const UpdateCar = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
+      <Header/>
       <h2>Update Car Details</h2>
       <div style={cardContainerStyle}>
         <form onSubmit={handleSubmit} style={{ flex: 1 }}>

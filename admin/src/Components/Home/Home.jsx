@@ -26,8 +26,9 @@ import AddRent from '../Rent/AddRent/AddRent'
 import Adminlist from '../Admin/Adminlist/Adminlist'
 import Signup from '../User/Signup/SignUp'
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header'
 
-const { Header, Content, Sider } = Layout;
+const {Content, Sider } = Layout;
 const { useBreakpoint } = Grid;
 
 const Profile = () => <AdminProfile/>;

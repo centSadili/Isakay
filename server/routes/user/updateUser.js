@@ -73,6 +73,7 @@ router.post('/changePass', async (req,res)=>{
   } catch (error) {
     res.status(400).send(error)
     console.error(error)
+    console.log("Hello")
   }
   
 })

@@ -1,6 +1,7 @@
 // import { useState } from 'react'
 
 
+import AiChatBot from './Components/AiChatBot/AiChatBot'
 import CarList from './Components/CarList/CarList'
 import CarPage from './Components/CarPage/CarPage'
 import Error500 from './Components/Error Pages/Error500'
@@ -39,6 +40,7 @@ function App() {
         <Route path='/carpage' element={<PrivateRoute><CarPage /></PrivateRoute>} />
         <Route path='/forgot-password' exact element={<ForgotPassword/>}/>
         <Route path='/resetPassword' element={<ResetPassword/>}/>
+        <Route path='/aichat' element={<AiChatBot />} />
         <Route path='/' element={<Navigate replace to='/login' />} />
         <Route path='/error' element={<Error500 />} />
       </Routes>

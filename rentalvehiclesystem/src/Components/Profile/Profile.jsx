@@ -32,8 +32,6 @@ const Profile = () => {
   const [isActive, setActive] = useState(false);
   const [loadingpass, setLoadingPass] = useState(false);
   const [passForm] = Form.useForm();
-  const curpass = Form.useWatch('CurrentPass', passForm)
-  const newpass = Form.useWatch('NewPass', passForm)
 
   // Retrieve token if using authentication
   const token = localStorage.getItem("token");
@@ -237,6 +235,7 @@ const Profile = () => {
     <Link to="/Home">
       <button className="return1">Return</button>
     </Link>
+    <button type="button" onClick={()=> setActive(!isActive)} className="ChangePass">Change Password</button>
   </div>    
       </form>
     </div>

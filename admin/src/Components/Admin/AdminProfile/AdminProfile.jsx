@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Upload, message, Col, Row, Button, Input, Image } from "antd";
+import { Upload, message, Col, Row, Button, Input, Image, Form, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useMediaQuery } from 'react-responsive';
 import Footer from '../../Footer/Footer';
@@ -24,7 +24,10 @@ const AdminProfile = () => {
 
   const [previewImage, setPreviewImage] = useState(null);
   const [previewOpen, setPreviewOpen] = useState(false);
-
+  const [PassMsg, contextHolder] = message.useMessage();
+  const [isActive, setActive] = useState(false);
+  const [loadingpass, setLoadingPass] = useState(false);
+  const [passForm] = Form.useForm();
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -42,6 +45,10 @@ const AdminProfile = () => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
+  const handleCancel = () => {
+    setActive(false);
+  };
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -101,6 +108,45 @@ const AdminProfile = () => {
       message.error(errorMsg);
     }
   };
+  const handleChangePass = (value)=>{
+    setLoadingPass(true);
+    
+    if(value.NewPass != value.RetypeNew){
+      PassMsg.open({
+        type:"error",
+        content:"Passwords do not match. Make sure both passwords are identical."
+      })
+    }
+    else if(value.CurrentPass == "" || value.NewPass == "" || value.RetypeNew == ""){
+      PassMsg.open({
+        type:"warning",
+        content:"Enter all the required fields!"
+      })
+    }
+    else{
+      console.log({CurrentPass:value.CurrentPass, NewPass:value.NewPass, email: user.email})
+      axios.post('http://localhost:3000/api/user/update/changePass', {CurrentPass:value.CurrentPass, NewPass:value.NewPass, email: user.email})
+    .then((res)=>{
+      console.log(res.data)
+      PassMsg.open({
+        type:"success",
+        content:res.data.message,
+        duration:5
+      });
+      setActive(false)
+    })
+    .catch((err)=> {
+      console.error(err)
+      PassMsg.open({
+        type:"error",
+        content:"Error",
+        duration:5
+      })
+    })
+    .finally(()=> setLoadingPass(false));
+    }
+    setLoadingPass(false)
+  }
 
   const uploadButton = (
     <div>
@@ -194,6 +240,7 @@ const AdminProfile = () => {
           <Button type="primary" htmlType="submit" style={{ width: '100%', marginTop: '20px' }}>
             Update
           </Button>
+          <Button type="primary" htmlType="button" style={{width:"100%", marginTop: '1em'}} onClick={()=> setActive(!isActive)}>Change Password</Button>
         </form>
         {previewImage && (
           <div style={imageContainerStyle}>
@@ -205,6 +252,55 @@ const AdminProfile = () => {
             />
           </div>
         )}
+        {contextHolder}
+      <Modal
+      title="Change Password"
+      open={isActive}
+      okText="Submit"
+      onCancel={handleCancel}
+      okButtonProps={{htmlType:'submit'}}
+      loading={loadingpass}
+      destroyOnClose
+      modalRender={(dom)=>
+      <Form
+        layout="vertical"
+        form={passForm}
+        name="ChangePassword"
+        clearOnDestroy
+        autoComplete="off"
+        onFinish={handleChangePass}
+        >
+          {dom}
+        </Form>}
+    >
+      <Form.Item
+        name="CurrentPass"
+        label="Current Password"
+        rules={[{
+          required:true,
+          message:"Please Input your Current Password"
+        }]}>
+          <Input type="password" placeholder="Current Password"/>
+        </Form.Item>
+        <Form.Item
+        name="NewPass"
+        label="New Password"
+        rules={[{
+          required:true,
+          message:"Please Input your New Password"
+        }]}>
+          <Input type="password" placeholder="New Password"/>
+        </Form.Item>
+        <Form.Item
+        name="RetypeNew"
+        label="Retype Your Password"
+        rules={[{
+          required:true,
+          message:"Please retype your Password"
+        }]}>
+          <Input type="password" placeholder="Retype Password"/>
+        </Form.Item>
+    </Modal>
       </div>
      <AdminRentalDashboard/>
     </div>

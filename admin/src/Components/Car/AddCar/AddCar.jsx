@@ -24,7 +24,7 @@ const AddCar = () => {
     Convertible: 4,
     "Pickup Truck": 5,
     "Station Wagon": 5,
-    "Luxury Car": 5,
+    "Luxury Car": 2,
   };
 
   const [formData, setFormData] = useState({
@@ -44,15 +44,15 @@ const AddCar = () => {
   const [previewImage, setPreviewImage] = useState("");
 
   const basePricePerDay = {
-    Sedan: 50,
-    Hatchback: 40,
-    SUV: 80,
-    Crossover: 60,
-    Coupe: 70,
-    Convertible: 90,
-    "Pickup Truck": 75,
-    "Station Wagon": 65,
-    "Luxury Car": 120,
+    Sedan: 550,
+    Hatchback: 620,
+    SUV: 705,
+    Crossover: 715,
+    Coupe: 819,
+    Convertible: 945,
+    "Pickup Truck": 780,
+    "Station Wagon": 985,
+    "Luxury Car": 1200
   };
 
   const handleChange = async ({ fileList: newFileList }) => {
@@ -276,7 +276,7 @@ const AddCar = () => {
           </Row>
   
           <div style={{ marginTop: "20px" }}>
-            <label htmlFor="price">Price (in $):</label>
+            <label htmlFor="price">Price (in php):</label>
             <Input
               type="number"
               id="price"

@@ -129,7 +129,7 @@ const CarList = () => {
                                 <div className="carlist-car-info">
                                     <h2 className="carlist-car-name">{car.car_name}</h2>
                                     
-                                    <p className="carlist-car-price">${car.price}</p>
+                                    <p className="carlist-car-price">PHP {car.price}</p>
 
                                     <div className="carlist-car-details">
                                         <p className="carlist-icon1">

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer';
 import { useMediaQuery } from 'react-responsive';
+import Head from "../../Head";
 
 const CarPage = () => {
   const id = localStorage.getItem("carId") || "ID Not Found"; // Get the user ID from the URL
@@ -144,6 +145,7 @@ const CarPage = () => {
   }
   return (
     <div>
+      <Head title={car.car_name}/>
       <Header/>
     <div key={car._id} className="car-card" style={cardContainerStyle}>
       <div style={imageContainerStyle}>

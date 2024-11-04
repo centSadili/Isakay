@@ -5,6 +5,7 @@ import { Popconfirm, message} from "antd";
 import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer';
 import './UpdateForm.css';  
+import Head from "../../Head";
 import axios from "axios";
 
 
@@ -138,6 +139,7 @@ const UpdateRentDetailsForm = () => {
 
   return (
     <div className="urdf-container">
+      <Head title="Update Rental Details"/>
       <Header/>
       <div className="update-form-container">
       <form onSubmit={handleSubmit}>

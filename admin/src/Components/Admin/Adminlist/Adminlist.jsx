@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Input, Avatar, Button, Modal, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import Head from '../../Head';
 
 const Adminlist = () => {
   const [allAdmins, setAllAdmins] = useState([]);
@@ -116,6 +117,7 @@ const Adminlist = () => {
 
   return (
     <div>
+      <Head title="Admin List"/>
       <Link to="/admin/user/add">Sign up User</Link>
       <br />
       <label htmlFor="search">Search Admin: </label>

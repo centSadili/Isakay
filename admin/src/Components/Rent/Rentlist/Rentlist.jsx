@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Table, Input, Button, Popconfirm, message,Modal } from "antd";
 import dayjs from "dayjs";
+import Head from "../../Head";
 
 const Rentlist = () => {
   const [allRents, setAllRents] = useState([]);
@@ -150,6 +151,7 @@ const closeModal = () => {
 
   return (
     <div>
+      <Head title="Renter List"/>
       <br />
       <label>Search Renter:</label>
       <Input

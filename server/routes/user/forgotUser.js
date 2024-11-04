@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
                     from: '"ISAKAY Support" <support@isakay.com>', // Sender info
                     to: email,
                     subject: 'Reset Password Link',
-                    text: `Here is your Reset Password Link  http://localhost:${process.env.PORT}/resetPassword?resetToken=${token}`
+                    text: `Here is your Reset Password Link  http://localhost:5173/resetPassword?resetToken=${token}`
                 };
 
                 // Send the email

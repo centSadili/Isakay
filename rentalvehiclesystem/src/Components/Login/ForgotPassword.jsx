@@ -61,7 +61,7 @@ const ForgotPassword = () => {
     {success && (
       <div className="msg">{msg}</div>
     )}
-    <button className='butt' type="submit">Send</button>
+    {!success && <button className='butt' type="submit">Send</button>}
     <Link to="/login"><button className='butt' type='button'>Back to Login</button></Link>
     </form>
   </div>

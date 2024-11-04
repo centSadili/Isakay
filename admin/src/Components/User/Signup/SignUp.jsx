@@ -4,6 +4,7 @@ import { Upload, Button, Input, Checkbox, message, Row, Col, Image } from "antd"
 import { PlusOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import Head from "../../Head";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -111,6 +112,7 @@ const SignUp = () => {
 
   return (
     <div>
+      <Head title="Sign Up"/>
       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Sign Up Here!</h2>
       <div style={formContainerStyle}>
         <form onSubmit={handleSubmit} style={{ flex: 1 }}>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Upload, Image, message, Col, Row, Button, Input, Select } from "antd";
 import { useMediaQuery } from 'react-responsive';
+import Head from "../../Head";
 
 const { Option } = Select;
 
@@ -171,6 +172,7 @@ const AddCar = () => {
   
   return (
     <div>
+      <Head title="Add Car"/>
       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Car Details Form</h2>
       <div style={cardContainerStyle}>
         

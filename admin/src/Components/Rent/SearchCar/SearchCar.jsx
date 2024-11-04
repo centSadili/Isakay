@@ -4,6 +4,7 @@ import './SearchCar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer';
+import Head from '../../Head';
 
 const SearchCar = () => {
   const [searched, setSearch] = useState([]);
@@ -54,9 +55,9 @@ const SearchCar = () => {
 
   return (
     <div className="searchcontainer">
-     <Header/>
-
-     <div className="search-container">
+      <Head title="Search Vehicle"/>
+      <Header/>
+      <div className="search-container">
       <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Car Listings</h1>
       <div className="carlist-filter-buttons">
                     <button

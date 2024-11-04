@@ -259,7 +259,7 @@ img {
 
 
 .carlist-car-unavailable {
-  background-color: orange;
+  background: linear-gradient(to top, rgb(175, 174, 174) 0%, rgb(83, 82, 82) 100%);
   color: white; 
 }
 

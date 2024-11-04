@@ -126,10 +126,10 @@ const Contact = () => {
                     <div><h6>Last Name<br /> <input type="text" placeholder='Last Name' required></input></h6> </div>
                 </div>
                 <br />
-                <h6>Email <br /> <input type="email" placeholder='you@company.com' required></input></h6>
+                <h6>Email <br /> <input type="email" placeholder='You@company.com' required></input></h6>
                 <br />
-                <h6>Phone Number <input type="number" placeholder='phone number' maxLength={11} required></input></h6> <br />
-                <h6>Message: <input className='message' type="textfield" placeholder='write a message' required></input> </h6>
+                <h6>Phone Number <input type="number" placeholder='Phone Number' maxLength={11} required></input></h6> <br />
+                <h6>Message: <input className='message' type="textfield" placeholder='Write a message' required></input> </h6>
                 <button className='submit' type='submit' >Send Message</button>
               
               </form>

@@ -161,7 +161,7 @@ html, body {
 .contact-container {
   max-width: 100%;
   overflow-x: hidden; /* Ensure no horizontal overflow */
-  background: linear-gradient(90deg, rgb(228, 228, 228) 0%, rgb(194, 194, 194) 100%);
+  background-color: whitesmoke;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 20px;

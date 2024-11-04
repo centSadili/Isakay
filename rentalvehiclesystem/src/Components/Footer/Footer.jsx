@@ -76,11 +76,7 @@ const Footer = () => {
         <li><a href="#">Office Hours: Monday – Friday, 8:00 AM – 6:00 PM (PHT)</a></li>
       </ul>
     </div>
-    <div className="footer-column footer-social">
-      <a href="#"><i className="fab fa-facebook"></i></a>
-      <a href="#"><i className="fab fa-twitter"></i></a>
-      <a href="#"><i className="fab fa-linkedin"></i></a>
-    </div>
+   
   </div>
     </div>
   

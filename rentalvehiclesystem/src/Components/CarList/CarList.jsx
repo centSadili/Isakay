@@ -47,7 +47,6 @@ const CarList = () => {
         <div className="carlist-main-container">
             <Head title="List of Cars"/>
            <Header/>
-
             <div className="carlists-container">
                 <h1 className="carlist-title">Select a vehicle group</h1>
 

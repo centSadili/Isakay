@@ -93,7 +93,7 @@ const AdminRentalDashboard = () => {
       render: (date) => dayjs(date).format("YYYY-MM-DD"),
     },
     {
-      title: "Days Available",
+      title: "Days Availed",
       dataIndex: "carID",
       key: "days_availability",
       render: (car) => car.days_availability,

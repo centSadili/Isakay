@@ -264,10 +264,10 @@ button.btn:hover {
 
 .promo {
   width: 100%;
-  height: 550px;
+  height: 610px;
   background-color: white;
   text-align: center;
-  background-image: url("/src/images/promo-pic.png");
+  background-image: url("/src/images/final_car.png");
   background-size: cover;
   background-position: center;
 }

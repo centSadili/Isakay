@@ -54,7 +54,7 @@ const AiChatBot = () => {
     return (
         <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
             <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
-                Chatbot
+                IsakayAI
             </Title>
 
             <Card

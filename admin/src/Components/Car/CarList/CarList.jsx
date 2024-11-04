@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import './CarList.css';
 import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer';
+import Head from '../../Head';
 const CarList = () => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -112,6 +113,8 @@ const CarList = () => {
 
     return (
         <div className="carlist-main-container">
+            <Head title="List of Cars"/>
+            <Header/>
             <div className="carlists-container">
                 <h1 className="carlist-title">Select a vehicle group</h1>
                 

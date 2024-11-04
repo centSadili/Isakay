@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import './Login.css';
+import Head from '../Head';
 
 const LogIn = () => {
 
@@ -56,6 +57,7 @@ const LogIn = () => {
     }
   return (
     <div className="container">
+        <Head title="Login"/>
   <div className="form-container">
     <div className="welcome-text">
         <h1>Hi there!</h1>

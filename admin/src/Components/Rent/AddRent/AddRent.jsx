@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Input, InputNumber, Button, Form, message } from 'antd';
-
+import Head from '../../Head';
 const AddRent = () => {
     const id = localStorage.getItem("id") || 'ID Not Found';
     const [pickup, setPickup] = useState(null);
@@ -27,6 +27,7 @@ const AddRent = () => {
 
     return (
         <div style={{ maxWidth: 400, margin: 'auto' }}>
+            <Head title="Add Rental Vehicle"/>
            <Form
             layout="vertical"
             onFinish={handleSubmit}

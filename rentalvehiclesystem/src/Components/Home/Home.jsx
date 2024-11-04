@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
-import { Avatar} from 'antd';
+import { Avatar, Button, FloatButton, Modal} from 'antd';
+import AssistantIcon from '@mui/icons-material/Assistant';
 import './Home.css'
 import Footer from '../Footer/Footer';
 import Error500 from '../Error Pages/Error500';
 import Header from '../Header/Header';
 import Head from '../Head';
+import AiChatBot from '../AiChatBot/AiChatBot';
 
 
 
@@ -21,6 +23,7 @@ const Home = () => {
   const [pickup,setPickup]=useState();
   const [dropoff,setDropoff]=useState();
   const [daysAvailability, setDaysAvailability] = useState(); 
+  const [chatActive, setChatActive] = useState(false);
 
   const navigate = useNavigate()
   // Retrieve token if using authentication
@@ -86,6 +89,10 @@ const logOut = () =>{
   localStorage.setItem('id',null);
   localStorage.clear()
   setUser(null)
+}
+
+const handleCancel = ()=>{
+  setChatActive(false)
 }
 
   if (loading) {
@@ -183,6 +190,21 @@ const logOut = () =>{
   </div>
 </div>
         </section>
+        <div className="chatbot">
+          <FloatButton icon={<AssistantIcon/>} type='primary' onClick={()=> setChatActive(!chatActive)} tooltip={<div>Chat with AI</div>}/>
+          <Modal
+          open={chatActive}
+          onCancel={handleCancel}
+          cancelText="Close"
+          footer={(_, {CancelBtn})=>(
+            <>
+              <CancelBtn/>
+            </>
+          )}
+          >
+            <AiChatBot/>
+          </Modal>
+        </div>
 
         <Footer/>
       </div>

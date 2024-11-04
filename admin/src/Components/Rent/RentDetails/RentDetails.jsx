@@ -4,7 +4,8 @@ import {Link,useNavigate} from 'react-router-dom'
 import RentalForm from '../RentalForm/RentalForm';
 import './RentalDetails.css'
 import Header from '../../Header/Header';
-import Footer from '../../Footer/Footer'
+import Footer from '../../Footer/Footer';
+import Head from '../../Head';
 const RentalDetails = () => {
 
     const  id  = localStorage.getItem("carId") || 'ID Not Found' // Get the user ID from the URL
@@ -45,6 +46,7 @@ const RentalDetails = () => {
       };
   return (
     <div className="cars-page-container">
+      <Head title="Vehicle Details"/>
       <Header/>
         <div className="car-page-container"> 
       <div key={car._id} className="car-page-card" >

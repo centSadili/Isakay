@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Input, Avatar, Button, Modal, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import Head from '../../Head';
 
 const Userlist = () => {
   const [allUsers, setAllUsers] = useState([]);
@@ -116,6 +117,7 @@ const Userlist = () => {
 
   return (
     <div>
+      <Head title="List of Users"/>
       <br />
       <label htmlFor="search">Search User: </label>
       <Input

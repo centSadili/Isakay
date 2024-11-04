@@ -27,6 +27,7 @@ import Adminlist from '../Admin/Adminlist/Adminlist'
 import Signup from '../User/Signup/SignUp'
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header'
+import Head from '../Head';
 
 const {Content, Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -164,6 +165,7 @@ const Home = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
+      <Head title="Home"/>
     <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
       <div style={{ padding: '16px', textAlign: 'center' }}>
         <Avatar size={64} src={`http://localhost:3000/api/car_img/${user?.image}`} alt="Profile" />

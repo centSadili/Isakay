@@ -7,6 +7,7 @@ import { Upload, message, Col, Row, Button, Input, Image, Form, Modal } from "an
 import { PlusOutlined } from "@ant-design/icons";
 import { useMediaQuery } from 'react-responsive';
 import Footer from '../../Footer/Footer';
+import Head from "../../Head";
 import AdminRentalDashboard from '../AdminRentalDashboard/AdminRentalDashboard'
 const AdminProfile = () => {
   const id = localStorage.getItem("id") || "ID Not Found"; // Get the user ID from localStorage
@@ -187,6 +188,7 @@ const AdminProfile = () => {
 
   return (
     <div style={{ textAlign: 'center',overflowY: 'auto',maxHeight: '80vh'}}>
+      <Head title={user.firstName+"'s Profile"}/>
       <h2>Update Profile</h2>
       <div style={cardContainerStyle}>
         <form onSubmit={handleUpdate} style={{ flex: 1 }}>

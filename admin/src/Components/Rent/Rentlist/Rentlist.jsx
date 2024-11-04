@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Table, Input, Button, Popconfirm, message,Modal } from "antd";
 import dayjs from "dayjs";
+import Head from "../../Head";
 
 const Rentlist = () => {
   const [allRents, setAllRents] = useState([]);
@@ -121,7 +122,7 @@ const closeModal = () => {
       title: "Price",
       dataIndex: "carID",
       key: "price",
-      render: (car) => `$${car.price}`,
+      render: (car) => `₱${car.price}`,
       sorter: (a, b) => a.carID.price - b.carID.price,
     },
     {
@@ -150,6 +151,7 @@ const closeModal = () => {
 
   return (
     <div>
+      <Head title="Renter List"/>
       <br />
       <label>Search Renter:</label>
       <Input
@@ -190,7 +192,7 @@ const closeModal = () => {
                     <p>Car: {rentDetail.carID.car_name}</p>
                     <p>Pick Up: {rentDetail.carID.pickup}</p>
                     <p>Drop Off: {rentDetail.carID.dropoff}</p>
-                    <p>Days Available: {rentDetail.carID.days_availability} Price: ${rentDetail.carID.price}</p>
+                    <p>Days Available: {rentDetail.carID.days_availability} Price: ₱{rentDetail.carID.price}</p>
                     <p>Pick up date: {rentDetail.pickUpDate}</p>
 
                     <h2>Specifications</h2>

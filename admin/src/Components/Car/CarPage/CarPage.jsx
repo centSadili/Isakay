@@ -168,7 +168,7 @@ const CarPage = () => {
           <br />
           Days Available: {car.days_availability}.
         </p>
-        <p style={priceStyle}>${car.price}</p>
+        <p style={priceStyle}>₱{car.price}</p>
       </div>
       <div style={actionContainerStyle}>
         <Link to={`/admin/car/detail/update/`}>

@@ -102,7 +102,7 @@ const AdminRentalDashboard = () => {
       title: "Price",
       dataIndex: "carID",
       key: "price",
-      render: (car) => `$${car.price}`,
+      render: (car) => `₱${car.price}`,
     },
     {
       title: "Actions",
@@ -236,7 +236,7 @@ const AdminRentalDashboard = () => {
                 <p>Birthday: {rentDetail.renterID.birthday ? new Date(rentDetail.renterID.birthday).toISOString().split("T")[0] : ""}</p>
                 <p>Address: {rentDetail.renterID.address.street} {rentDetail.renterID.address.city}, {rentDetail.renterID.address.state}</p>
                 <p>Pick Up: {rentDetail.carID.pickup} <span>Drop Off: {rentDetail.carID.dropoff}</span></p>
-                <p>Days: {rentDetail.carID.days_availability} Day/s <span>Price: ${rentDetail.carID.price}</span></p>
+                <p>Days: {rentDetail.carID.days_availability} Day/s <span>Price: ₱{rentDetail.carID.price}</span></p>
                 <p>Pick up date: {rentDetail.pickUpDate ? new Date(rentDetail.pickUpDate).toISOString().split("T")[0] : ""}</p>
 
                 <h2 style={styles.sectionTitle}>Specifications</h2>

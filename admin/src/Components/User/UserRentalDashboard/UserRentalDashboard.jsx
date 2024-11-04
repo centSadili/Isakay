@@ -91,7 +91,7 @@ const UserRentalDashboard = () => {
             title: "Price",
             dataIndex: "carID",
             key: "price",
-            render: (car) => `$${car.price}`,
+            render: (car) => `₱${car.price}`,
         },
         {
             title: "Actions",
@@ -149,7 +149,7 @@ const UserRentalDashboard = () => {
                     <p>Car: {rentDetail.carID.car_name}</p>
                     <p>Pick Up: {rentDetail.carID.pickup}</p>
                     <p>Drop Off: {rentDetail.carID.dropoff}</p>
-                    <p>Days Available: {rentDetail.carID.days_availability} Price: ${rentDetail.carID.price}</p>
+                    <p>Days Available: {rentDetail.carID.days_availability} Price: ₱{rentDetail.carID.price}</p>
                     <p>Pick up date: {rentDetail.pickUpDate}</p>
 
                     <h2>Specifications</h2>
